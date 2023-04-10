@@ -1,5 +1,5 @@
-import { participationTermsText, personalDataText } from "../../../helpers/TextCopies";
-import AppScreen from "../AppScreen"
+import { participationTermsText, personalDataText } from "../helpers/TextCopies";
+import AppScreen from "../screenobjects/android/AppScreen";
 
 class RegSummary {
   //no ids to use, improve selectors targeting (id, child of a parent)

@@ -14,7 +14,9 @@
     },
     "homepage": "https://github.com/ozzychel/wflwr_appium_test_suite#readme",
     "scripts": {
-        "demo": "wdio run wdio.conf.ts"
+        "demo": "wdio run wdio.conf.ts --suite dev",
+        "dev": "wdio run wdio.conf.ts --suite dev",
+        "nav": "wdio run wdio.conf.ts --suite nav"
     },
     "devDependencies": {
         "@wdio/cli": "^7.26.0",

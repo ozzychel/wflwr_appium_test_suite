@@ -57,6 +57,18 @@ export const config: Options.Testrunner = {
     exclude: [
         // 'path/to/excluded/files'
     ],
+    suites: {
+        nav: [
+         './appTest/specs/app.navigation.spec.ts'
+        ],
+        dev: [
+         './appTest/specs/app.dev.spec.ts'
+        ],
+        demo: [
+         './appTest/specs/app.demo.spec.ts'
+        ]
+     },
+
     //
     // ============
     // Capabilities
@@ -89,7 +101,7 @@ export const config: Options.Testrunner = {
             'appium:orientation': 'PORTRAIT',
             'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
             'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
-            'appium:app': './apps/WFLWRQA6.5.3.6.apk',
+            'appium:app': './apps/WFLWRQA6.5.3.8.apk',
             'appium:noReset': true,
             'appium:newCommandTimeout': 240,
         }

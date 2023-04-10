@@ -1,4 +1,4 @@
-import AppScreen from "../AppScreen"
+import AppScreen from "../screenobjects/android/AppScreen"
 
 class PersonalDataForm {
   //no ids to use, improve selectors targeting (id, child of a parent)
