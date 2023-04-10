@@ -1,4 +1,4 @@
-import AppScreen from "../AppScreen"
+import AppScreen from "../screenobjects/android/AppScreen"
 
 class ListPicker {
   private get customPanelOuter () {return $(`//android.widget.FrameLayout[@resource-id="android:id/customPanel"]`)};
