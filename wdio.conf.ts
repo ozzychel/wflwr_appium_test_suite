@@ -89,7 +89,7 @@ export const config: Options.Testrunner = {
             'appium:orientation': 'PORTRAIT',
             'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
             'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
-            'appium:app': './appTest/apps/WFLWRQA6.5.3.6.apk',
+            'appium:app': './apps/WFLWRQA6.5.3.6.apk',
             'appium:noReset': true,
             'appium:newCommandTimeout': 240,
         }

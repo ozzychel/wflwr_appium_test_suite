@@ -7,7 +7,7 @@ yarn-error.log*
 lerna-debug.log*
 
 # Build apk's
-./appTest/apps/
+apps/
 
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
