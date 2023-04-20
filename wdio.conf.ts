@@ -69,6 +69,9 @@ export const config: Options.Testrunner = {
         ], 
         registration: [
             './appTest/specs/app.registration.spec.ts'
+        ],
+        signup: [
+            './appTest/specs/app.signup.spec.ts'
         ]
      },
 
@@ -104,7 +107,7 @@ export const config: Options.Testrunner = {
             'appium:orientation': 'PORTRAIT',
             'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
             'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
-            'appium:app': './apps/WFLWRQA6.5.3.10.apk',
+            'appium:app': './apps/WFLWRQA6.6.0.2.apk',
             'appium:noReset': true,
             'appium:newCommandTimeout': 240,
         }
