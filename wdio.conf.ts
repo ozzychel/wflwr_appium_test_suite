@@ -1,4 +1,5 @@
-import type { Options } from '@wdio/types'
+import type { Options } from '@wdio/types';
+import { join } from 'path';
 
 export const config: Options.Testrunner = {
     //
@@ -107,7 +108,11 @@ export const config: Options.Testrunner = {
             'appium:orientation': 'PORTRAIT',
             'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
             'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
-            'appium:app': './apps/WFLWRQA6.6.0.2.apk',
+            // 'appium:app': './apps/WFLWRQA6.6.0.9.apk',
+            "appium:app": join(
+                process.cwd(),
+                "./apps/WFLWRQA6.6.0.9.apk"
+            ),
             'appium:noReset': true,
             'appium:newCommandTimeout': 240,
         }
@@ -159,7 +164,13 @@ export const config: Options.Testrunner = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['appium'],
+    services: [
+        ['appium', {
+            command: 'appium',
+            args: ['-p', '4723', '--relaxed-security', '--log-level', 'info:info'],
+            // relaxedSecurityEnabled: true
+        }]
+    ],
     
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
