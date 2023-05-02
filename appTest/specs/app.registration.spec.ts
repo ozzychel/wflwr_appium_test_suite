@@ -1,4 +1,4 @@
-import { APP_NAME, USER_BIRTH_MONTH, USER_FIRSTNAME, USER_LASTNAME, USER_BIRTH_DAY, USER_BIRTH_YEAR } from "../helpers/Constants";
+import { APP_NAME, USER_BIRTH_MONTH, USER_FIRSTNAME, USER_LASTNAME, USER_BIRTH_DAY, USER_BIRTH_YEAR, USER_NATIONALITY, USER_EMAIL, USER_COUNTRY } from "../helpers/Constants";
 import Gestures from "../helpers/Gestures";
 const HomeScreen = require('../screenobjects/android/HomeScreen');
 const WebViewScreen = require('../screenobjects/android/WebViewScreen');
@@ -185,6 +185,7 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
   it('Gender: Male option is DISPLAYED, has corrrect LABEL. SELECTED by default', async () => {
     const maleField = PersonalDataForm.genMaleField;
     const maleButton = PersonalDataForm.genMaleButton;
+    await Gestures.checkIfDisplayedWithSwipeUp(maleButton, 5);
     await expect(maleField).toBeDisplayed();
     await expect(maleButton).toHaveText("Male");
     await expect(maleButton).toHaveAttrContaining("checked", "true");
@@ -193,6 +194,7 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
   it('Gender: Female option is DISPLAYED, has corrrect LABEL. NOT SELECTED', async () => {
     const femaleField = PersonalDataForm.genFemaleField;
     const femaleButton = PersonalDataForm.genFemaleButton;
+    await Gestures.checkIfDisplayedWithSwipeUp(femaleButton, 5);
     await expect(femaleField).toBeDisplayed();
     await expect(femaleButton).toHaveText("Female");
     await expect(femaleButton).toHaveAttrContaining("checked", "false");
@@ -220,8 +222,8 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
     await ListPicker.listView.waitForDisplayed({timeout:1000});
   })
 
-  it('SELECT Nationality from Date Picker - "Albania". Panel DISMISSED.', async () => {
-    await ListPicker.selectFromTheList("Albania");
+  it(`SELECT Nationality from Date Picker - "${USER_NATIONALITY}". Panel DISMISSED.`, async () => {
+    await ListPicker.selectFromTheList(USER_NATIONALITY);
     await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000, reverse:true})
     await driver.pause(5000);
   })
@@ -230,7 +232,7 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
     const elem = PersonalDataForm.emailField;
     const prefilled = PersonalDataForm.emailInput;
     await expect(elem).toBeDisplayed();
-    await expect(prefilled).toHaveText("rbmh_test2@yahoo.com");
+    await expect(prefilled).toHaveText(USER_EMAIL.toLowerCase());
   })
 
   //TODO
@@ -247,18 +249,18 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
 
 
   it('TAP Residence field to INVOKE country picker. Panel DISPLAYED', async () => {
-    await Gestures.swipeUp(0.5);
+    await Gestures.checkIfDisplayedWithSwipeUp(PersonalDataForm.residenceField, 3);
     await PersonalDataForm.tapResidenceField();
     await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000})
     await ListPicker.listView.waitForDisplayed({timeout: 1000})
-    await driver.pause(5000);
+    await driver.pause(2000);
   })
 
 
-  it('SELECT Country from List Picker - "Albania". Panel DISMISSED.', async () => {
-    await ListPicker.selectFromTheList("Albania");
+  it(`SELECT Country from List Picker - "${USER_COUNTRY}". Panel DISMISSED.`, async () => {
+    await ListPicker.selectFromTheList(USER_COUNTRY);
     await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000, reverse:true})
-    await driver.pause(5000);
+    await driver.pause(2000);
   })
 
   //TODO: if Austria, Germany or Poland are picked additional fields appear - handle this
@@ -269,10 +271,11 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
   //   await expect(elem).toHaveText("ATHLETE TYPE")
   // })
   
-  it('Student checkbox is DISPLAYED and CHECKED BY DEFAULT.', async () => {
+  it('Student checkbox is DISPLAYED and UNCHECKED BY DEFAULT.', async () => {
     const elem = PersonalDataForm.studentCheckBox;
+    await Gestures.checkIfDisplayedWithSwipeUp(elem, 3);
     await expect(elem).toBeDisplayed();
-    await expect(elem).toHaveAttrContaining("checked", "true")
+    await expect(elem).toHaveAttrContaining("checked", "false")
   })
 
   //TODO: selector doesn't work, find solution
@@ -281,6 +284,13 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
   //   await expect(elem).toBeDisplayed();
   //   await expect(elem).toHaveText("I am a student")
   // })
+  
+  it('Student checkbox CAN BE CHECKED', async () => {
+    const elem = PersonalDataForm.studentCheckBox;
+    await PersonalDataForm.tapStudentCheckBox();
+    await expect(elem).toHaveAttrContaining("checked", "true")
+    await driver.pause(1000);
+  })
 
   it('Student checkbox CAN BE UNCHECKED', async () => {
     const elem = PersonalDataForm.studentCheckBox;
@@ -289,15 +299,9 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
     await driver.pause(1000);
   })
 
-  it('Student checkbox CAN BE CHECKED', async () => {
-    const elem = PersonalDataForm.studentCheckBox;
-    await PersonalDataForm.tapStudentCheckBox();
-    await expect(elem).toHaveAttrContaining("checked", "true")
-    await driver.pause(1000);
-  })
-
   it('"Next step" button is DISPLAYED, ENABLED and CLICKABLE', async () => {
     const btn = PersonalDataForm.nextStepButton;
+    await Gestures.checkIfDisplayedWithSwipeUp(btn, 5);
     await expect(btn).toBeDisplayed();
     await expect(btn).toHaveAttrContaining("enabled", "true")
     await expect(btn).toHaveAttrContaining("clickable", "true")
@@ -375,8 +379,8 @@ describe('REGISTER TO RUN. EXTRAS FORM', () => {
   })
 
   it('"Next step" button is DISPLAYED, ENABLED and CLICKABLE', async () => {
-    await Gestures.swipeUp(0.6);
     const btn = ExtrasForm.nextStepButton;
+    await Gestures.checkIfDisplayedWithSwipeUp(btn, 3);
     await expect(btn).toBeDisplayed();
     await expect(btn).toHaveAttrContaining("enabled", "true")
     await expect(btn).toHaveAttrContaining("clickable", "true")
@@ -384,6 +388,7 @@ describe('REGISTER TO RUN. EXTRAS FORM', () => {
 
   it('"BACK" button is DISPLAYED, ENABLED and CLICKABLE', async () => {
     const btn = ExtrasForm.backButton;
+    await Gestures.checkIfDisplayedWithSwipeUp(btn, 3);
     await expect(btn).toBeDisplayed();
     await expect(btn).toHaveAttrContaining("enabled", "true")
     await expect(btn).toHaveAttrContaining("clickable", "true")
@@ -451,8 +456,8 @@ describe('REGISTER TO RUN. PAYMENT METHODS', () => {
 
 
   it('"Next step" button is DISPLAYED, ENABLED and CLICKABLE', async () => {
-    await Gestures.swipeUp(0.5);
     const btn = PaymentMethod.nextStepButton;
+    await Gestures.checkIfDisplayedWithSwipeUp(btn, 3);
     await expect(btn).toBeDisplayed();
     await expect(btn).toHaveAttrContaining("enabled", "true")
     await expect(btn).toHaveAttrContaining("clickable", "true")
@@ -460,6 +465,7 @@ describe('REGISTER TO RUN. PAYMENT METHODS', () => {
 
   it('"BACK" button is DISPLAYED, ENABLED and CLICKABLE', async () => {
     const btn = PaymentMethod.backButton;
+    await Gestures.checkIfDisplayedWithSwipeUp(btn, 3);
     await expect(btn).toBeDisplayed();
     await expect(btn).toHaveAttrContaining("enabled", "true");
     await expect(btn).toHaveAttrContaining("clickable", "true");
@@ -483,11 +489,12 @@ describe('REGISTER TO RUN. SUMMARY.', () => {
   })
 
   it('"Participation terms" checkbox is DISPLAYED and UNCHECKED by default', async () => {
-    await Gestures.swipeUp(0.5);
-    await Gestures.swipeUp(0.5);
-    await Gestures.swipeUp(0.5);
-    await Gestures.swipeUp(0.5);
+    // await Gestures.swipeUp(0.5);
+    // await Gestures.swipeUp(0.5);
+    // await Gestures.swipeUp(0.5);
+    // await Gestures.swipeUp(0.5);
     const elem = RegSummary.termsCheckBox;
+    await Gestures.checkIfDisplayedWithSwipeUp(elem, 8);
     await expect(elem).toBeDisplayed();
     await expect(elem).toHaveAttrContaining("checked", "false");
   })
@@ -500,7 +507,8 @@ describe('REGISTER TO RUN. SUMMARY.', () => {
 
   it('"Personal data" checkbox is DISPLAYED and UNCHECKED by default', async () => {
     const elem = RegSummary.personalDataCheckBox;
-    await Gestures.swipeUp(0.3);
+    await Gestures.checkIfDisplayedWithSwipeUp(elem, 8);
+    // await Gestures.swipeUp(0.3);
     await expect(elem).toBeDisplayed();
     await expect(elem).toHaveAttrContaining("checked", "false");
   })
@@ -514,7 +522,7 @@ describe('REGISTER TO RUN. SUMMARY.', () => {
   it('"Purchase" button is DISPLAYED, ENABLED and CLICKABLE (bug)', async () => {
     //Techically should not be untill checkboxes are checked
     const btn = RegSummary.purchaseButton;
-    await Gestures.swipeUp(0.8);
+    await Gestures.checkIfDisplayedWithSwipeUp(btn, 5);
     await expect(btn).toBeDisplayed();
     await expect(btn).toHaveAttrContaining("enabled", "true");
     await expect(btn).toHaveAttrContaining("clickable", "true");
@@ -523,6 +531,7 @@ describe('REGISTER TO RUN. SUMMARY.', () => {
   it('"BACK" button is DISPLAYED, ENABLED and CLICKABLE', async () => {
     //Techically should not be untill checkboxes are checked
     const btn = RegSummary.backButton;
+    await Gestures.checkIfDisplayedWithSwipeUp(btn, 5);
     await expect(btn).toBeDisplayed();
     await expect(btn).toHaveAttrContaining("enabled", "true");
     await expect(btn).toHaveAttrContaining("clickable", "true");

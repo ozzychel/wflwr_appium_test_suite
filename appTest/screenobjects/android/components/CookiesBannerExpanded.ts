@@ -16,7 +16,6 @@ class CookiesBannerExpanded {
   //todo: implement SDK preferences validation methods:
   //-striclty, -performance, -marketing
   //implement switch getters and taps
-  
   private get settingsIdTitle () {return $(`id=dsid_title`)};
   private get settingsIdNumber () {return $(`id=dsid`)};
   private get copyIdButton () {return $(`id=text_copy`)};

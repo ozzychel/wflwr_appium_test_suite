@@ -45,7 +45,7 @@ class Gestures {
         // If the element is not displayed and we haven't scrolled the max amount of scrolls
         // then scroll and execute the method again
         if (!await element.isDisplayed() && amount <= maxScrolls) {
-            await this.swipeUp(0.85);
+            await this.swipeUp(0.6);
             await this.checkIfDisplayedWithSwipeUp(element, maxScrolls, amount + 1);
         } else if (amount > maxScrolls) {
             // If the element is still not visible after the max amount of scroll let it fail

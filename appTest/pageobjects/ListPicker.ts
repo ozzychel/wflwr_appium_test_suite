@@ -8,7 +8,7 @@ class ListPicker {
 
   async selectFromTheList (val: string) {
     const elem = await $(`android=UiSelector().className("android.widget.CheckedTextView").text("${val}")`);
-    await Gestures.checkIfDisplayedWithSwipeUp(elem, 5)
+    await Gestures.checkIfDisplayedWithSwipeUp(elem, 8)
     // await $(`android=UiSelector().className("android.widget.CheckedTextView").text("${val}")`).click();
     await elem.click();
   }

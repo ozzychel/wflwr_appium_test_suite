@@ -1,5 +1,6 @@
 import AppScreen from "./AppScreen";
 import Gestures from "../../helpers/Gestures";
+import { USER_FIRSTNAME, USER_LASTNAME } from "../../helpers/Constants";
 
 class AccountScreen extends AppScreen{
   //TODO: improve selector targeting using id etc
@@ -8,7 +9,7 @@ class AccountScreen extends AppScreen{
   }
 
   // !!! find most top element, meanwhile use name | name hardcoded
-  private get userName () {return $('//android.widget.TextView[@text="FIRST LAST"]')};
+  private get userName () {return $(`//android.widget.TextView[@text="${USER_FIRSTNAME} ${USER_LASTNAME}"]`)};
  
   private get aboutYouTab () {return $('//android.widget.TextView[@text="ABOUT YOU"]') }
   private get registrationTab () {return $('//android.widget.TextView[@text="REGISTRATION"]') }

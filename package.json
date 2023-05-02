@@ -18,7 +18,8 @@
         "dev": "wdio run wdio.conf.ts --suite dev",
         "nav": "wdio run wdio.conf.ts --suite nav",
         "registration": "wdio run wdio.conf.ts --suite registration",
-        "signup": "wdio run wdio.conf.ts --suite signup"
+        "signup": "wdio run wdio.conf.ts --suite signup",
+        "consent": "wdio run wdio.conf.ts --suite consent"
     },
     "devDependencies": {
         "@wdio/cli": "^7.26.0",
