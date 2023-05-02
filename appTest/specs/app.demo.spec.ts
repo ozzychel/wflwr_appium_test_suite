@@ -20,6 +20,7 @@ const AboutYouTab = require('../screenobjects/android/AboutYouTab');
 const RegistrationTab = require('../screenobjects/android/RegistrationTab');
 const SettingsTab = require('../screenobjects/android/SettingsTab');
 const Device = require('../screenobjects/android/Device');
+const WebCookieBanner = require('../pageobjects/WebCookieBanner');
 
 
 // test sequence (using fullReset:true)
@@ -516,6 +517,45 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     //   console.log("LOG>>>>>>>>>>>>>>>>>>>>>>>>>>")
     // })
 
+    it('Cookie Banner IS DISPLAYED and HAS correct TEXT', async () => {
+      const cont = WebCookieBanner.container;
+      const text = WebCookieBanner.policyText;
+      const flag = await expect(cont).toBeDisplayed();
+      if(flag) {
+        await expect(text).toHaveTextContaining("By continuing to use our site and services, you agree to our updated")
+      } else {
+        return true;
+      }
+    })
+
+    it(`Cookie Banner. All buttons ARE DISPLAYED and ENABLED`, async () => {
+      const cont = WebCookieBanner.container;
+      const btnGroup = WebCookieBanner.buttonGroup;
+      const acceptAllBtn = WebCookieBanner.acceptAllBtn;
+      const rejectAllBtn = WebCookieBanner.rejectAllButton;
+      const settingsBtn = WebCookieBanner.settingsButton;
+      const flag = await expect(cont).toBeDisplayed();
+      if(flag) {
+        await expect(btnGroup).toBeDisplayed();
+        await expect(acceptAllBtn).toBeDisplayed();
+        await expect(acceptAllBtn).toHaveAttrContaining("enabled", "true");
+        await expect(rejectAllBtn).toBeDisplayed();
+        await expect(rejectAllBtn).toHaveAttrContaining("enabled", "true");
+        await expect(settingsBtn).toBeDisplayed();
+        await expect(settingsBtn).toHaveAttrContaining("enabled", "true");
+      } else {}
+    })
+
+    it(`TAP on Cookie banner button DISSMISS Cookie banner`, async () => {
+      const cont = WebCookieBanner.container;
+      const flag = await expect(cont).toBeDisplayed();
+      if(flag) {
+        await WebCookieBanner.tapAcceptAllBtn();
+        await WebCookieBanner.container.waitForDisplayed({timeout: 1000, reverse:true})
+      } else {
+        return true;
+      }
+    })
 
     it('Registration screen HAS navigation menu and main body', async () => {
       await expect(RegScreenMenu.menuContainer).toBeDisplayed();

@@ -10,8 +10,13 @@ const ExtrasForm = require('../pageobjects/ExtrasForm');
 const PaymentMethod = require('../pageobjects/PaymentMethod');
 const RegSummary = require('../pageobjects/RegSummary');
 const NavBar = require('../screenobjects/android/components/NavBar');
+const WebCookieBanner = require('../pageobjects/WebCookieBanner');
 
 describe('REGISTER TO RUN. PERSONAL DATA', () => {
+  it('TAP on "Home" nav button. Redirected to Home screen', async () => {
+    await NavBar.tapHomeButton();
+  })
+
   it('"Register now" button is DISPLAYED', async () => {
     const elem = HomeScreen.registerNowButtton;
     await HomeScreen.registerNowButtton.waitForDisplayed({timeout:5000})
@@ -21,6 +26,46 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
     await HomeScreen.tapRegisterNowButton();
     await WebViewScreen.container.waitForDisplayed({timeout: 8000});
     await driver.pause(5000);
+  })
+
+  it('Cookie Banner IS DISPLAYED and HAS correct TEXT', async () => {
+    const cont = WebCookieBanner.container;
+    const text = WebCookieBanner.policyText;
+    const flag = await expect(cont).toBeDisplayed();
+    if(flag) {
+      await expect(text).toHaveTextContaining("By continuing to use our site and services, you agree to our updated")
+    } else {
+      return true;
+    }
+  })
+
+  it(`Cookie Banner. All buttons ARE DISPLAYED and ENABLED`, async () => {
+    const cont = WebCookieBanner.container;
+    const btnGroup = WebCookieBanner.buttonGroup;
+    const acceptAllBtn = WebCookieBanner.acceptAllBtn;
+    const rejectAllBtn = WebCookieBanner.rejectAllButton;
+    const settingsBtn = WebCookieBanner.settingsButton;
+    const flag = await expect(cont).toBeDisplayed();
+    if(flag) {
+      await expect(btnGroup).toBeDisplayed();
+      await expect(acceptAllBtn).toBeDisplayed();
+      await expect(acceptAllBtn).toHaveAttrContaining("enabled", "true");
+      await expect(rejectAllBtn).toBeDisplayed();
+      await expect(rejectAllBtn).toHaveAttrContaining("enabled", "true");
+      await expect(settingsBtn).toBeDisplayed();
+      await expect(settingsBtn).toHaveAttrContaining("enabled", "true");
+    } else {}
+  })
+
+  it(`TAP on Cookie banner button DISSMISS Cookie banner`, async () => {
+    const cont = WebCookieBanner.container;
+    const flag = await expect(cont).toBeDisplayed();
+    if(flag) {
+      await WebCookieBanner.tapAcceptAllBtn();
+      await WebCookieBanner.container.waitForDisplayed({timeout: 1000, reverse:true})
+    } else {
+      return true;
+    }
   })
 
   it('Registration screen HAS navigation menu and main body', async () => {
