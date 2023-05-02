@@ -1,4 +1,4 @@
-import { APP_NAME } from "../helpers/Constants";
+import { APP_NAME, USER_BIRTH_MONTH, USER_FIRSTNAME, USER_LASTNAME, USER_BIRTH_DAY, USER_BIRTH_YEAR } from "../helpers/Constants";
 import Gestures from "../helpers/Gestures";
 const HomeScreen = require('../screenobjects/android/HomeScreen');
 const WebViewScreen = require('../screenobjects/android/WebViewScreen');
@@ -31,7 +31,7 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
   it('Cookie Banner IS DISPLAYED and HAS correct TEXT', async () => {
     const cont = WebCookieBanner.container;
     const text = WebCookieBanner.policyText;
-    const flag = await expect(cont).toBeDisplayed();
+    const flag = await cont.isDisplayed();
     if(flag) {
       await expect(text).toHaveTextContaining("By continuing to use our site and services, you agree to our updated")
     } else {
@@ -45,7 +45,7 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
     const acceptAllBtn = WebCookieBanner.acceptAllBtn;
     const rejectAllBtn = WebCookieBanner.rejectAllButton;
     const settingsBtn = WebCookieBanner.settingsButton;
-    const flag = await expect(cont).toBeDisplayed();
+    const flag = await cont.isDisplayed();
     if(flag) {
       await expect(btnGroup).toBeDisplayed();
       await expect(acceptAllBtn).toBeDisplayed();
@@ -59,7 +59,7 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
 
   it(`TAP on Cookie banner button DISSMISS Cookie banner`, async () => {
     const cont = WebCookieBanner.container;
-    const flag = await expect(cont).toBeDisplayed();
+    const flag = await cont.isDisplayed();
     if(flag) {
       await WebCookieBanner.tapAcceptAllBtn();
       await WebCookieBanner.container.waitForDisplayed({timeout: 1000, reverse:true})
@@ -95,10 +95,10 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
     await expect(label).toHaveText("First name");
   })
 
-  it('INPUT user First name - "Homer"', async () => {
+  it(`INPUT user First name - "${USER_FIRSTNAME}"`, async () => {
     await PersonalDataForm.inputFirstName("");
     await driver.pause(1000);
-    await PersonalDataForm.inputFirstName("Homer");
+    await PersonalDataForm.inputFirstName(USER_FIRSTNAME);
   })
 
   it('Last name field is DISPLAYED and HAS correct LABEL', async () => {
@@ -109,10 +109,10 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
   })
 
   //TODO: handle LAtincharacters field for non latin names
-  it('INPUT user Last name - "Simpson"', async () => {
+  it(`INPUT user Last name - "${USER_LASTNAME}"`, async () => {
     await PersonalDataForm.inputLastName("");
     await driver.pause(1000);
-    await PersonalDataForm.inputLastName("Simpson");
+    await PersonalDataForm.inputLastName(USER_LASTNAME);
   })
 
   it('Birthday section is DISPLAYED and HAS correct LABEL', async () => {
@@ -148,8 +148,8 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
     await ListPicker.listView.waitForDisplayed({timeout:1000})
   })
 
-  it('SELECT month from Date Picker - "7". Panel DISMISSED.', async () => {
-    await ListPicker.selectFromTheList("7");
+  it(`SELECT month from Date Picker - "${parseInt(USER_BIRTH_MONTH, 10).toString()}". Panel DISMISSED.`, async () => {
+    await ListPicker.selectFromTheList(parseInt(USER_BIRTH_MONTH, 10).toString());
     await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000, reverse:true})
   })
 
@@ -159,9 +159,8 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
     await ListPicker.listView.waitForDisplayed({timeout:1000});
   })
 
-  it('SELECT Day from Date Picker - "25". Panel DISMISSED.', async () => {
-    await Gestures.swipeUp();
-    await ListPicker.selectFromTheList("25");
+  it(`SELECT Day from Date Picker - "${parseInt(USER_BIRTH_DAY, 10).toString()}". Panel DISMISSED.`, async () => {
+    await ListPicker.selectFromTheList(parseInt(USER_BIRTH_DAY, 10).toString());
     await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000, reverse:true})
   })
 
@@ -172,12 +171,8 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
     
   })
 
-  it('SELECT Year from Date Picker - "1986". Panel DISMISSED.', async () => {
-    //TODO: depends on viewport size, build swipeUntilElemFound()
-    await Gestures.swipeUp(0.8);
-    await Gestures.swipeUp(0.8);
-    await Gestures.swipeUp();
-    await ListPicker.selectFromTheList("1986");
+  it(`SELECT Year from Date Picker - "${parseInt(USER_BIRTH_YEAR, 10).toString()}". Panel DISMISSED.`, async () => {
+    await ListPicker.selectFromTheList(parseInt(USER_BIRTH_YEAR, 10).toString());
     await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000, reverse:true})
   })
 

@@ -1,4 +1,5 @@
-import AppScreen from "../screenobjects/android/AppScreen"
+import AppScreen from "../screenobjects/android/AppScreen";
+import Gestures from "../helpers/Gestures";
 
 class ListPicker {
   private get customPanelOuter () {return $(`//android.widget.FrameLayout[@resource-id="android:id/customPanel"]`)};
@@ -6,7 +7,10 @@ class ListPicker {
   private get listView () {return $(`//android.widget.FrameLayout[@resource-id="android:id/custom"]/android.widget.ListView`)}
 
   async selectFromTheList (val: string) {
-    await $(`android=UiSelector().className("android.widget.CheckedTextView").text("${val}")`).click();
+    const elem = await $(`android=UiSelector().className("android.widget.CheckedTextView").text("${val}")`);
+    await Gestures.checkIfDisplayedWithSwipeUp(elem, 5)
+    // await $(`android=UiSelector().className("android.widget.CheckedTextView").text("${val}")`).click();
+    await elem.click();
   }
 }
 

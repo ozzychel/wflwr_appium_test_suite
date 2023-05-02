@@ -53,11 +53,11 @@ class PersonalDataForm {
     await this.firstNameField.click();
   }
 
-  async inputFirstName (firstName) {
+  async inputFirstName (firstName: string) {
     await this.firstNameInput.setValue(firstName);
   }
   
-  async inputLastName (lastName) {
+  async inputLastName (lastName: string) {
     await this.lastNameInput.setValue(lastName);
   }
 

@@ -1,4 +1,4 @@
-import { APP_NAME, DEFAULT_PIN } from "../helpers/Constants";
+import { APP_NAME, DEFAULT_PIN, USER_BIRTH_MONTH, USER_FIRSTNAME, USER_LASTNAME, USER_BIRTH_DAY, USER_BIRTH_YEAR } from "../helpers/Constants";
 import { alertNoticeText } from "../helpers/TextCopies";
 import Gestures from "../helpers/Gestures";
 const CookiesBanner = require('../screenobjects/android/components/CookiesBanner');
@@ -54,7 +54,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     it('Cookie Banner IS DISPLAYED and HAS correct TEXT', async () => {
       const cont = WebCookieBanner.container;
       const text = WebCookieBanner.policyText;
-      const flag = await expect(cont).toBeDisplayed();
+      const flag = await cont.isDisplayed();
       if(flag) {
         await expect(text).toHaveTextContaining("By continuing to use our site and services, you agree to our updated")
       } else {
@@ -68,7 +68,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       const acceptAllBtn = WebCookieBanner.acceptAllBtn;
       const rejectAllBtn = WebCookieBanner.rejectAllButton;
       const settingsBtn = WebCookieBanner.settingsButton;
-      const flag = await expect(cont).toBeDisplayed();
+      const flag = await cont.isDisplayed();
       if(flag) {
         await expect(btnGroup).toBeDisplayed();
         await expect(acceptAllBtn).toBeDisplayed();
@@ -82,129 +82,124 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     it(`TAP on Cookie banner button DISSMISS Cookie banner`, async () => {
       const cont = WebCookieBanner.container;
-      const flag = await expect(cont).toBeDisplayed();
+      const flag = await cont.isDisplayed();
       if(flag) {
         await WebCookieBanner.tapAcceptAllBtn();
-        await WebCookieBanner.container.waitForDisplayed({timeout: 1000, reverse:true})
+        await WebCookieBanner.container.waitForDisplayed({timeout: 1500, reverse:true})
       } else {
         return true;
       }
     })
 
     
-    // it('Registration screen HAS navigation menu and main body', async () => {
-    //   await expect(RegScreenMenu.menuContainer).toBeDisplayed();
-    //   await expect(RegScreenBody.bodyContainer).toBeDisplayed();
-    // })
+    it('Registration screen HAS navigation menu and main body', async () => {
+      await expect(RegScreenMenu.menuContainer).toBeDisplayed();
+      await expect(RegScreenBody.bodyContainer).toBeDisplayed();
+    })
 
-  //   it('TODO: RegScreen menu HAS all elements', async () => {
-  //     //TODO
-  //   })
+    it('TODO: RegScreen menu HAS all elements', async () => {
+      //TODO
+    })
 
-  // //   //PERSONAL DATA FORM
-  //   it('"Personal data" TITLE is DISPLAYED on the top of the page ', async () => {
-  //     const elem = RegScreenBody.personalDataTitle;
-  //     await expect(elem).toBeDisplayed();
-  //   })
+    //PERSONAL DATA FORM
+    it('"Personal data" TITLE is DISPLAYED on the top of the page ', async () => {
+      const elem = RegScreenBody.personalDataTitle;
+      await expect(elem).toBeDisplayed();
+    })
 
-  //   it('Personal Data user Form is DISPLAYED', async () => {
-  //     const elem = PersonalDataForm.formContainer;
-  //     expect(elem).toBeDisplayed();
-  //   })
+    it('Personal Data user Form is DISPLAYED', async () => {
+      const elem = PersonalDataForm.formContainer;
+      expect(elem).toBeDisplayed();
+    })
 
-  //   it('First name field is DISPLAYED and HAS correct LABEL', async () => {
-  //     const field = PersonalDataForm.firstNameField;
-  //     const label = PersonalDataForm.firstNameLabel;
-  //     await expect(field).toBeDisplayed();
-  //     await expect(label).toHaveText("First name");
-  //   })
+    it('First name field is DISPLAYED and HAS correct LABEL', async () => {
+      const field = PersonalDataForm.firstNameField;
+      const label = PersonalDataForm.firstNameLabel;
+      await expect(field).toBeDisplayed();
+      await expect(label).toHaveText("First name");
+    })
 
-  //   it('INPUT user First name - "Homer"', async () => {
-  //     await PersonalDataForm.inputFirstName("");
-  //     await driver.pause(1000);
-  //     await PersonalDataForm.inputFirstName("Homer");
-  //   })
+    it(`INPUT user First name - "${USER_FIRSTNAME}"`, async () => {
+      await PersonalDataForm.inputFirstName("");
+      await driver.pause(1000);
+      await PersonalDataForm.inputFirstName(USER_FIRSTNAME);
+    })
 
-  //   it('Last name field is DISPLAYED and HAS correct LABEL', async () => {
-  //     const field = PersonalDataForm.lastNameField;
-  //     const label = PersonalDataForm.lastNameLabel;
-  //     await expect(field).toBeDisplayed();
-  //     await expect(label).toHaveText("Last name");
-  //   })
+    it('Last name field is DISPLAYED and HAS correct LABEL', async () => {
+      const field = PersonalDataForm.lastNameField;
+      const label = PersonalDataForm.lastNameLabel;
+      await expect(field).toBeDisplayed();
+      await expect(label).toHaveText("Last name");
+    })
 
   //   //TODO: handle LAtincharacters field for non latin names
 
-  //   it('INPUT user Last name - "Simpson"', async () => {
-  //     await PersonalDataForm.inputLastName("");
-  //     await driver.pause(1000);
-  //     await PersonalDataForm.inputLastName("Simpson");
-  //   })
+    it(`INPUT user Last name - "${USER_LASTNAME}"`, async () => {
+      await PersonalDataForm.inputLastName("");
+      await driver.pause(1000);
+      await PersonalDataForm.inputLastName(USER_LASTNAME);
+    })
 
-  //   it('Birthday section is DISPLAYED and HAS correct LABEL', async () => {
-  //     const label = PersonalDataForm.birthDayLabel;
-  //     await expect(label).toBeDisplayed();
-  //     await expect(label).toHaveText("BIRTHDAY");
-  //   })
+    it('Birthday section is DISPLAYED and HAS correct LABEL', async () => {
+      const label = PersonalDataForm.birthDayLabel;
+      await expect(label).toBeDisplayed();
+      await expect(label).toHaveText("BIRTHDAY");
+    })
 
-  //   it('Birthday Month field is DISPLAYED and HAS correct LABEL', async () => {
-  //     const field = PersonalDataForm.monthField;
-  //     const label = PersonalDataForm.monthLabel;
-  //     await expect(field).toBeDisplayed();
-  //     await expect(label).toHaveText("Month");
-  //   })
+    it('Birthday Month field is DISPLAYED and HAS correct LABEL', async () => {
+      const field = PersonalDataForm.monthField;
+      const label = PersonalDataForm.monthLabel;
+      await expect(field).toBeDisplayed();
+      await expect(label).toHaveText("Month");
+    })
 
-  //   it('Birthday Day field is DISPLAYED and HAS correct LABEL', async () => {
-  //     const field = PersonalDataForm.dayField;
-  //     const label = PersonalDataForm.dayLabel;
-  //     await expect(field).toBeDisplayed();
-  //     await expect(label).toHaveText("Day");
-  //   })
+    it('Birthday Day field is DISPLAYED and HAS correct LABEL', async () => {
+      const field = PersonalDataForm.dayField;
+      const label = PersonalDataForm.dayLabel;
+      await expect(field).toBeDisplayed();
+      await expect(label).toHaveText("Day");
+    })
 
-  //   it('Birthday Year field is DISPLAYED and HAS correct LABEL', async () => {
-  //     const field = PersonalDataForm.yearField;
-  //     const label = PersonalDataForm.yearLabel;
-  //     await expect(field).toBeDisplayed();
-  //     await expect(label).toHaveText("Year");
-  //   })
+    it('Birthday Year field is DISPLAYED and HAS correct LABEL', async () => {
+      const field = PersonalDataForm.yearField;
+      const label = PersonalDataForm.yearLabel;
+      await expect(field).toBeDisplayed();
+      await expect(label).toHaveText("Year");
+    })
 
-  //   it('TAP Month field to INVOKE month picker. Panel DISPLAYED', async () => {
-  //     await PersonalDataForm.tapMonthField();
-  //     await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000})
-  //     await ListPicker.listView.waitForDisplayed({timeout:1000})
-  //   })
+    it('TAP Month field to INVOKE month picker. Panel DISPLAYED', async () => {
+      await PersonalDataForm.tapMonthField();
+      await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000})
+      await ListPicker.listView.waitForDisplayed({timeout:1000})
+    })
 
-  //   it('SELECT month from Date Picker - "7". Panel DISMISSED.', async () => {
-  //     await ListPicker.selectFromTheList("7");
-  //     await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000, reverse:true})
-  //   })
+    it(`SELECT month from Date Picker - "${parseInt(USER_BIRTH_MONTH,10).toString()}". Panel DISMISSED.`, async () => {
+      await ListPicker.selectFromTheList(parseInt(USER_BIRTH_MONTH,10).toString());
+      await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000, reverse:true})
+      await driver.pause(5000)
+    })
 
-  //   it('TAP Day field to INVOKE day picker. Panel DISPLAYED', async () => {
-  //     await PersonalDataForm.tapDayField();
-  //     await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000});
-  //     await ListPicker.listView.waitForDisplayed({timeout:1000});
-  //   })
+    it('TAP Day field to INVOKE day picker. Panel DISPLAYED', async () => {
+      await PersonalDataForm.tapDayField();
+      await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000});
+      await ListPicker.listView.waitForDisplayed({timeout:1000});
+    })
 
-  //   it('SELECT Day from Date Picker - "25". Panel DISMISSED.', async () => {
-  //     await Gestures.swipeUp();
-  //     await ListPicker.selectFromTheList("25");
-  //     await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000, reverse:true})
-  //   })
+    it(`SELECT Day from Date Picker - "${parseInt(USER_BIRTH_DAY,10).toString()}". Panel DISMISSED.`, async () => {
+      await ListPicker.selectFromTheList(parseInt(USER_BIRTH_DAY,10).toString());
+      await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000, reverse:true})
+    })  
 
-  //   it('TAP Year field to INVOKE year picker. Panel DISPLAYED', async () => {
-  //     await PersonalDataForm.tapYearField();
-  //     await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000});
-  //     await ListPicker.listView.waitForDisplayed({timeout:1000});
-      
-  //   })
+    it('TAP Year field to INVOKE year picker. Panel DISPLAYED', async () => {
+      await PersonalDataForm.tapYearField();
+      await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000});
+      await ListPicker.listView.waitForDisplayed({timeout:1000});
+    })
 
-  //   it('SELECT Year from Date Picker - "1986". Panel DISMISSED.', async () => {
-  //     //TODO: depends on viewport size, build swipeUntilElemFound()
-  //     await Gestures.swipeUp(0.8);
-  //     await Gestures.swipeUp(0.8);
-  //     await Gestures.swipeUp();
-  //     await ListPicker.selectFromTheList("1986");
-  //     await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000, reverse:true})
-  //   })
+    it(`SELECT Year from Date Picker - "${parseInt(USER_BIRTH_YEAR,10).toString()}". Panel DISMISSED.`, async () => {
+      await ListPicker.selectFromTheList(parseInt(USER_BIRTH_YEAR,10).toString());
+      await ListPicker.customPanelOuter.waitForDisplayed({timeout: 1000, reverse:true})
+    })
 
   //   it('Gender section is DISPLAYED and HAS correct LABEL', async () => {
   //     const label = PersonalDataForm.genderLabel;
