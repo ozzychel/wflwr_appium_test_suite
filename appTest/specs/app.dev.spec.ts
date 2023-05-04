@@ -36,36 +36,36 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     }
   })
 
-  afterAll(async () => {
-    await driver.closeApp();
-  })
+  // afterAll(async () => {
+  //   await driver.closeApp();
+  // })
 
   describe('Testing', () => {
 
     it('Welcome banner IS DISPLAYED', async () => {
       const elem = AccountCreatedBanner.banner;
-      expect(elem).toBeDisplayed();
+      await expect(elem).toBeDisplayed();
     })
 
     it('Welcome banner IS NOT SCROLLABLE', async () => {
       const elem = AccountCreatedBanner.banner;
-      expect(elem).toHaveAttributeContaining('scrollable', 'false')
+      await expect(elem).toHaveAttributeContaining('scrollable', 'false')
     })
 
     it('Welcome banner title IS DISPLAYED and HAS correct TEXT', async () => {
       const elem = AccountCreatedBanner.bannerTitle;
-      expect(elem).toBeDisplayed();
+      await expect(elem).toBeDisplayed();
     })
 
     it('Welcome banner subtitle IS DISPLAYED and HAS correct TEXT', async () => {
       const elem = AccountCreatedBanner.bannerSubtitle;
-      expect(elem).toBeDisplayed();
+      await expect(elem).toBeDisplayed();
     })
 
     it('"Register Now" button IS DISPLAYED and CLICKABLE', async () => {
       const elem = AccountCreatedBanner.registerButton;
-      expect(elem).toBeDisplayed();
-      expect(elem).toHaveAttrContaining('clickable', 'true');
+      await expect(elem).toBeDisplayed();
+      await expect(elem).toHaveAttrContaining('clickable', 'true');
     })
     
     it('"Register Now" button HAS correct LABEL', async () => {
@@ -76,8 +76,8 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     it('"Dismiss" button IS DISPLAYED and CLICKABLE', async () => {
       const elem = AccountCreatedBanner.dismissButton;
-      expect(elem).toBeDisplayed();
-      expect(elem).toHaveAttrContaining('clickable', 'true');
+      await expect(elem).toBeDisplayed();
+      await expect(elem).toHaveAttrContaining('clickable', 'true');
     })
 
     it('"Dismiss" button HAS correct LABEL', async () => {

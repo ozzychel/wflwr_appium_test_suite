@@ -128,14 +128,14 @@ describe('LOGIN SCREEN. EMAIL FLOW. SIGN UP AS A NEW USER', () => {
 
   it('First Name field is DISPLAYED and CLICKABLE', async () => {
    const elem = SignupScreen.firstNameInput;
-   expect(elem).toBeDisplayed();
-   expect(elem).toHaveAttributeContaining('clickable', 'true');
+   await expect(elem).toBeDisplayed();
+   await expect(elem).toHaveAttributeContaining('clickable', 'true');
   })
 
   it('First Name input field HAS correct placeholder TEXT', async () => {
     const elem = SignupScreen.firstNameInputPlaceholderText;
-    expect(elem).toBeDisplayed();
-    expect(elem).toHaveText('FIRST NAME');
+    await expect(elem).toBeDisplayed();
+    await expect(elem).toHaveText('FIRST NAME');
   })
 
   it(`INPUT User First Name - "${USER_FIRSTNAME}"`, async () => {
@@ -147,14 +147,14 @@ describe('LOGIN SCREEN. EMAIL FLOW. SIGN UP AS A NEW USER', () => {
 
   it('Last Name field is DISPLAYED and CLICKABLE', async () => {
     const elem = SignupScreen.lastNameInput;
-    expect(elem).toBeDisplayed();
-    expect(elem).toHaveAttributeContaining('clickable', 'true');
+    await expect(elem).toBeDisplayed();
+    await expect(elem).toHaveAttributeContaining('clickable', 'true');
   })
  
   it('Last Name input field HAS correct placeholder TEXT', async () => {
     const elem = SignupScreen.lastNameInputPlaceholderText;
-    expect(elem).toBeDisplayed();
-    expect(elem).toHaveText('LAST NAME');
+    await expect(elem).toBeDisplayed();
+    await expect(elem).toHaveText('LAST NAME');
   })
  
   it(`INPUT User Last Name - "${USER_LASTNAME}"`, async () => {
@@ -166,14 +166,14 @@ describe('LOGIN SCREEN. EMAIL FLOW. SIGN UP AS A NEW USER', () => {
 
   it('Password field is DISPLAYED and CLICKABLE', async () => {
     const elem = SignupScreen.passwordInput;
-    expect(elem).toBeDisplayed();
-    expect(elem).toHaveAttributeContaining('clickable', 'true');
+    await expect(elem).toBeDisplayed();
+    await expect(elem).toHaveAttributeContaining('clickable', 'true');
   })
  
   it('Password input field HAS correct placeholder TEXT', async () => {
     const elem = SignupScreen.passwordInputPlaceholderText;
-    expect(elem).toBeDisplayed();
-    expect(elem).toHaveText('PASSWORD');
+    await expect(elem).toBeDisplayed();
+    await expect(elem).toHaveText('PASSWORD');
   })
  
   it(`INPUT User Password - "${USER_PASSWORD}"`, async () => {
@@ -213,28 +213,28 @@ describe('LOGIN SCREEN. EMAIL FLOW. SIGN UP AS A NEW USER', () => {
   
   it('Welcome banner IS DISPLAYED', async () => {
     const elem = AccountCreatedBanner.banner;
-    expect(elem).toBeDisplayed();
+    await expect(elem).toBeDisplayed();
   })
 
   it('Welcome banner IS NOT SCROLLABLE', async () => {
     const elem = AccountCreatedBanner.banner;
-    expect(elem).toHaveAttributeContaining('scrollable', 'false')
+    await expect(elem).toHaveAttributeContaining('scrollable', 'false')
   })
 
   it('Welcome banner title IS DISPLAYED and HAS correct TEXT', async () => {
     const elem = AccountCreatedBanner.bannerTitle;
-    expect(elem).toBeDisplayed();
+    await expect(elem).toBeDisplayed();
   })
 
   it('Welcome banner subtitle IS DISPLAYED and HAS correct TEXT', async () => {
     const elem = AccountCreatedBanner.bannerSubtitle;
-    expect(elem).toBeDisplayed();
+    await expect(elem).toBeDisplayed();
   })
 
   it('"Register Now" button IS DISPLAYED and CLICKABLE', async () => {
     const elem = AccountCreatedBanner.registerButton;
-    expect(elem).toBeDisplayed();
-    expect(elem).toHaveAttrContaining('clickable', 'true');
+    await expect(elem).toBeDisplayed();
+    await expect(elem).toHaveAttrContaining('clickable', 'true');
   })
   
   it('"Register Now" button HAS correct LABEL', async () => {
@@ -245,8 +245,8 @@ describe('LOGIN SCREEN. EMAIL FLOW. SIGN UP AS A NEW USER', () => {
 
   it('"Dismiss" button IS DISPLAYED and CLICKABLE', async () => {
     const elem = AccountCreatedBanner.dismissButton;
-    expect(elem).toBeDisplayed();
-    expect(elem).toHaveAttrContaining('clickable', 'true');
+    await expect(elem).toBeDisplayed();
+    await expect(elem).toHaveAttrContaining('clickable', 'true');
   })
 
   it('"Dismiss" button HAS correct LABEL', async () => {

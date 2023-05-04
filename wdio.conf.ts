@@ -2,11 +2,13 @@ import type { Options } from '@wdio/types';
 import { join } from 'path';
 
 export const config: Options.Testrunner = {
+    // 
     //
     // ====================
     // Runner Configuration
     // ====================
     port: 4723,
+    // path: '/wd/hub',
     //
     // =====================
     // ts-node Configurations
@@ -58,6 +60,7 @@ export const config: Options.Testrunner = {
     exclude: [
         // 'path/to/excluded/files'
     ],
+
     suites: {
         nav: [
          './appTest/specs/app.navigation.spec.ts'
@@ -67,6 +70,9 @@ export const config: Options.Testrunner = {
         ],
         demo: [
          './appTest/specs/app.demo.spec.ts'
+        //   ['./appTest/specs/app.cookieConsent.spec.ts',
+        //     './appTest/specs/app.signup.spec.ts',
+        //     './appTest/specs/app.navigation.spec.ts']
         ], 
         registration: [
             './appTest/specs/app.registration.spec.ts'
@@ -168,11 +174,21 @@ export const config: Options.Testrunner = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: [
-        ['appium', {
-            command: 'appium',
-            args: ['-p', '4723', '--relaxed-security', '--log-level', 'info:info'],
-            // relaxedSecurityEnabled: true
-        }]
+        [
+            "appium",
+            {
+                // This will use the globally installed version of Appium
+                command: "appium",
+                args: {
+                    // This is needed to tell Appium that we can execute local ADB commands
+                    // and to automatically download the latest version of ChromeDriver
+                    address: "localhost",
+                    relaxedSecurity: true,
+                    // Write the Appium logs to a file in the root of the directory
+                    log: "./appium.log",
+                },
+            },
+        ],
     ],
     
     // Framework you want to run your specs with.
@@ -283,7 +299,8 @@ export const config: Options.Testrunner = {
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
-    // beforeTest: function (test, context) {
+    // beforeTest: async function (test, context) {
+        
     // },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling

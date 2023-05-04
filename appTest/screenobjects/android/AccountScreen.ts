@@ -9,8 +9,7 @@ class AccountScreen extends AppScreen{
   }
 
   // !!! find most top element, meanwhile use name | name hardcoded
-  private get userName () {return $(`//android.widget.TextView[@text="${USER_FIRSTNAME} ${USER_LASTNAME}"]`)};
- 
+  private get userName () {return $(`//android.widget.TextView[@text="${USER_FIRSTNAME.toUpperCase()} ${USER_LASTNAME.toUpperCase()}"]`)};
   private get aboutYouTab () {return $('//android.widget.TextView[@text="ABOUT YOU"]') }
   private get registrationTab () {return $('//android.widget.TextView[@text="REGISTRATION"]') }
   private get settingsTab () {return $('//android.widget.TextView[@text="SETTINGS"]') }
