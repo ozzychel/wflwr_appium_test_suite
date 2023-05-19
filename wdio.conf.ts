@@ -120,7 +120,7 @@ export const config: Options.Testrunner = {
             // 'appium:app': './apps/WFLWRQA6.6.0.9.apk',
             "appium:app": join(
                 process.cwd(),
-                "./apps/WFLWRQA6.6.0.9.apk"
+                "./apps/WFLWRQA6.6.0.11.apk"
             ),
             'appium:noReset': true,
             'appium:newCommandTimeout': 240,

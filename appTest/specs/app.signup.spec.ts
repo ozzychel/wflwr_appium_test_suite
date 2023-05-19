@@ -126,7 +126,7 @@ describe('LOGIN SCREEN. EMAIL FLOW. SIGN UP AS A NEW USER', () => {
     await expect(elem).toHaveAttrContaining("enabled", "false");
   })
 
-  it('First Name field is DISPLAYED and CLICKABLE', async () => {
+  it('First Name input field is DISPLAYED and CLICKABLE', async () => {
    const elem = SignupScreen.firstNameInput;
    await expect(elem).toBeDisplayed();
    await expect(elem).toHaveAttributeContaining('clickable', 'true');
