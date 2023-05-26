@@ -8,10 +8,17 @@ class HomeScreen extends AppScreen {
   private get countdown () {return $('//android.widget.TextView[@text="SEC"]')};
   private get partnersTitle () {return $('//android.widget.TextView[@text="AND BY OUR NATIONAL PARTNERS"]')};
   private get registerNowButtton () {return $(`//android.widget.TextView[@text="REGISTER NOW"]`)};
-  private get thankYouLabel () {return $(`//android.widget.textView[@text="THANK YOU FOR REGISTERING!"]`)}
+  private get thankYouLabel () {return $(`//android.widget.textView[@text="THANK YOU FOR REGISTERING!"]`)};
+  private get turnGPSonBtn () {return $(`//android.widget.TextView[@text="TURN YOUR GPS ON"]`)};
+  private get confirmAudioBtn () {return $(`//android.widget.TextView[@text="CONFIRM AUDIO"]`)};
+  private get learnMoreBtn () {return $(`//android.widget.TextView[@text="LEARN MORE"]`)};
 
   async tapRegisterNowButton () {
-    await (await this.registerNowButtton).click();
+    await this.registerNowButtton.click();
+  }
+
+  async tapTurnGPSonBtn () {
+    await this.turnGPSonBtn.click();
   }
 }
 

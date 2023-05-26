@@ -62,18 +62,15 @@ export const config: Options.Testrunner = {
     ],
 
     suites: {
+        demo: [
+            './appTest/specs/app.demo.spec.ts'
+        ], 
         nav: [
          './appTest/specs/app.navigation.spec.ts'
         ],
         dev: [
          './appTest/specs/app.dev.spec.ts'
         ],
-        demo: [
-         './appTest/specs/app.demo.spec.ts'
-        //   ['./appTest/specs/app.cookieConsent.spec.ts',
-        //     './appTest/specs/app.signup.spec.ts',
-        //     './appTest/specs/app.navigation.spec.ts']
-        ], 
         registration: [
             './appTest/specs/app.registration.spec.ts'
         ],
