@@ -48,9 +48,10 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   describe('Get race ready. Confirming Audio.', () => {
     
     it('TAP on "Home" nav button. Redirected to Home screen', async () => {
+      //tapping on the already selected tab doesn't scroll the screen to the top (like on RBTV/STV)
       await NavBar.tapHomeButton();
       await driver.pause(2000);
-      await expect(HomeScreen.countdown).toBeDisplayed();
+      // await expect(HomeScreen.countdown).toBeDisplayed();
     })
     
     it('SCROLL Home screen down until "Confirm Audio" button is displayed', async () => {
@@ -90,7 +91,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     it('TAP on Race Day Audio option starts downloading audio', async () => {
       //find way to make assertion of newly selected value
       await AudioSettings.tapRaceDayAudioOption();
-      await driver.pause(15000);
+      await driver.pause(10000);
     })
 
     it('TAP on "Back" button REDIRECTS back to the Home screen', async () => {

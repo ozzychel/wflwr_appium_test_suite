@@ -1,4 +1,4 @@
-import { DEFAULT_PIN } from "../helpers/Constants";
+import { DEFAULT_PIN, USER_UOM } from "../helpers/Constants";
 import Gestures from "../helpers/Gestures";
 const HomeScreen = require('../screenobjects/android/HomeScreen');
 const NavBar = require('../screenobjects/android/components/NavBar');
@@ -7,6 +7,10 @@ const TurnOnLocationBanner = require('../screenobjects/android/components/TurnOn
 const PermissionsDialog = require('../screenobjects/android/os_components/PermissionsDialog');
 const PreciseLocationBanner = require('../screenobjects/android/components/PreciseLocationBanner');
 const AppOsPermissions = require('../screenobjects/android/os_components/AppOsPermissions');
+const AudioSettings = require('../screenobjects/android/AudioSettings');
+const UnitsOfMeasureSetting = require('../screenobjects/android/UnitsOfMeasureSetting');
+const AccountScreen = require('../screenobjects/android/AccountScreen');
+const SettingsTab = require('../screenobjects/android/SettingsTab');
 
 describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   
@@ -24,7 +28,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     await driver.closeApp();
   })
 
-  describe('Get race ready. Location permissions', () => {
+  describe('Get race ready. Confirm location services', () => {
 
     it('TAP on "Home" nav button. Redirected to Home screen', async () => {
       await NavBar.tapHomeButton();
@@ -156,19 +160,119 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     })
   })
 
-  describe('Get race ready. Confirming Audio.', () => {
+  describe('Get race ready. Confirm Audio Settings.', () => {
     
     it('TAP on "Home" nav button. Redirected to Home screen', async () => {
       await NavBar.tapHomeButton();
+      await driver.pause(2000);
       await expect(HomeScreen.countdown).toBeDisplayed();
     })
     
-    it('SCROLL Home screen down until "Turn your GPS on" button is displayed', async () => {
-      const elem = HomeScreen.turnGPSonBtn;
+    it('SCROLL Home screen down until "Confirm Audio" button is displayed', async () => {
+      const elem = HomeScreen.confirmAudioBtn;
       await Gestures.checkIfDisplayedWithSwipeUp(await elem, 5)
     })
 
-   
+    it('TAP on "Confirm Audio" button REDIRECTS to Audio Settings screen', async () => {
+      const elem = AudioSettings.screenTitle;
+      await HomeScreen.tapConfirmAudioBtn();
+      await elem.waitForDisplayed({timeout:3000});
+    })
+
+    it('Audio Settings screen HAS correct TITLE', async () => {
+      const elem = AudioSettings.screenTitle;
+      await expect(elem).toHaveText("AUDIO SETTINGS");
+    })
+
+    it('Audio settings screen HAS a section with "Training" audio options', async () => {
+      const elem = AudioSettings.trainingAudioLabel;
+      await expect(elem).toBeDisplayed();
+      await expect(elem).toHaveText("TRAINING AUDIO");
+    })
+
+    it('Audio settings screen HAS a section with "Race Day" audio options', async () => {
+      const elem = AudioSettings.raceDayAudioLabel;
+      await expect(elem).toBeDisplayed();
+      await expect(elem).toHaveText("RACE DAY AUDIO");
+    })
+
+    it('TAP on Training Audio option starts downloading audio', async () => {
+      //find way to make assertion of newly selected value
+      await AudioSettings.tapTrainingDayAudioOption();
+      await driver.pause(5000);
+    })
+    
+    it('TAP on Race Day Audio option starts downloading audio', async () => {
+      //find way to make assertion of newly selected value
+      await AudioSettings.tapRaceDayAudioOption();
+      await driver.pause(15000);
+    })
+
+    it('TAP on "Back" button REDIRECTS back to the Home screen', async () => {
+      //find way to make assertion of newly selected value
+      await AudioSettings.tapBackButton();
+      await expect(HomeScreen.registerNowButtton).toBeDisplayed();
+    })
+
+  })
+
+  describe('Get race ready. Confirming Units of Measure.', () => {
+    
+    it('TAP on "Account" nav button REDIRECTS to Account screen', async () => {
+      // TODO: add assertion to verify navigation to Account screen (requires hooks)
+      await driver.pause(2000);
+      await NavBar.tapAccountButton();
+    })
+
+    it('TAP on "Settings" REDIRECTS to Settings tab', async () => {
+      // TODO: add assertion to verify navigation to Settings screen (requires hooks)
+      await driver.pause(1000);
+      await AccountScreen.tapSettingsTab();
+    })
+
+    it('"Units of Measure" button is present in the Settings', async () => {
+      const elem = SettingsTab.unitsOfMeasureBtn;
+      await driver.pause(1000);
+      await expect(elem).toBeDisplayed();
+    })
+
+    it('TAP on "Units of Measure" button REDIRECTS to UOM menu', async () => {
+      const elem = UnitsOfMeasureSetting.screenTitle;
+      await SettingsTab.tapSettingByText('Units');
+      await elem.waitForDisplayed({timeout: 2000});
+    })
+
+    it('Units of Measure screen HAS correct TITLE', async () => {
+      const elem = UnitsOfMeasureSetting.screenTitle;
+      await expect(elem).toBeDisplayed();
+    })
+
+    it('Units of Measure screen HAS both "Metric" and "Imperial" options available', async () => {
+      const imperial = UnitsOfMeasureSetting.imperialOption;
+      const metric = UnitsOfMeasureSetting.metricOption;
+      await expect(imperial).toBeDisplayed();
+      await expect(metric).toBeDisplayed();
+    })
+
+    it('"Imperial" option to be ENABLED and CLICKABLE', async () => {
+      const elem = UnitsOfMeasureSetting.imperialOption;
+      await expect(elem).toHaveAttrContaining('enabled', 'true');
+      await expect(elem).toHaveAttrContaining('clickable', 'true');
+    })
+
+    it('"Metric" option to be ENABLED and CLICKABLE', async () => {
+      const elem = UnitsOfMeasureSetting.metricOption;
+      await expect(elem).toHaveAttrContaining('enabled', 'true');
+      await expect(elem).toHaveAttrContaining('clickable', 'true');
+    })
+
+    it('TAP on User preferred option DISMISSES menu and REDIRECTS back to Settings ', async () => {
+      // TODO: add assertion to verify navigation to Settings screen (requires hooks)
+      if(USER_UOM.toLowerCase() === 'metric') await UnitsOfMeasureSetting.tapMetricOption();
+      else await UnitsOfMeasureSetting.tapImperialOption();
+      await UnitsOfMeasureSetting.screenTitle.waitForDisplayed({timeout:2000, reverse:true});
+    })
+    
   })
 
 })
