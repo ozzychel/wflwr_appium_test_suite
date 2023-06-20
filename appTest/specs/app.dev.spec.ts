@@ -27,6 +27,7 @@ const PermissionsDialog = require('../screenobjects/android/os_components/Permis
 const PreciseLocationBanner = require('../screenobjects/android/components/PreciseLocationBanner');
 const AppOsPermissions = require('../screenobjects/android/os_components/AppOsPermissions');
 const AudioSettings = require('../screenobjects/android/AudioSettings');
+const UnitsOfMeasureSetting = require('../screenobjects/android/UnitsOfMeasureSetting');
 
 describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   
@@ -102,15 +103,6 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
   describe('Get race ready. Confirming Units of Measure.', () => {
     
-    // it('Go to Audio settings', async () => {
-    //   await NavBar.tapAccountButton();
-    //   await AccountScreen.tapSettingsTab();
-
-    //   const elem = await $('//android.widget.TextView[contains(@text, "Audio")]');
-    //   await Gestures.checkIfDisplayedWithSwipeUp(elem, 2);
-    //   await elem.click();
-    //   await driver.pause(2000)
-    // })
     it('TAP on "Account" nav button REDIRECTS to Account screen', async () => {
       // TODO: add assertion to verify navigation to Account screen (requires hooks)
       await driver.pause(2000);
@@ -119,7 +111,51 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     it('TAP on "Settings" REDIRECTS to Settings tab', async () => {
       // TODO: add assertion to verify navigation to Settings screen (requires hooks)
+      await driver.pause(1000);
       await AccountScreen.tapSettingsTab();
+    })
+
+    it('"Units of Measure" button is present in the Settings', async () => {
+      const elem = SettingsTab.unitsOfMeasureBtn;
+      await driver.pause(1000);
+      await expect(elem).toBeDisplayed();
+    })
+
+    it('TAP on "Units of Measure" button REDIRECTS to UOM menu', async () => {
+      const elem = UnitsOfMeasureSetting.screenTitle;
+      await SettingsTab.tapSettingByText('Units');
+      await elem.waitForDisplayed({timeout: 2000});
+    })
+
+    it('Units of Measure screen HAS correct TITLE', async () => {
+      const elem = UnitsOfMeasureSetting.screenTitle;
+      await expect(elem).toBeDisplayed();
+    })
+
+    it('Units of Measure screen HAS both "Metric" and "Imperial" options available', async () => {
+      const imperial = UnitsOfMeasureSetting.imperialOption;
+      const metric = UnitsOfMeasureSetting.metricOption;
+      await expect(imperial).toBeDisplayed();
+      await expect(metric).toBeDisplayed();
+    })
+
+    it('"Imperial" option to be ENABLED and CLICKABLE', async () => {
+      const elem = UnitsOfMeasureSetting.imperialOption;
+      await expect(elem).toHaveAttrContaining('enabled', 'true');
+      await expect(elem).toHaveAttrContaining('clickable', 'true');
+    })
+
+    it('"Metric" option to be ENABLED and CLICKABLE', async () => {
+      const elem = UnitsOfMeasureSetting.metricOption;
+      await expect(elem).toHaveAttrContaining('enabled', 'true');
+      await expect(elem).toHaveAttrContaining('clickable', 'true');
+    })
+
+    it('TAP on User preferred option DISMISSES menu and REDIRECTS back to Settings ', async () => {
+      // TODO: add assertion to verify navigation to Settings screen (requires hooks)
+      if(USER_UOM.toLowerCase() === 'metric') await UnitsOfMeasureSetting.tapMetricOption();
+      else await UnitsOfMeasureSetting.tapImperialOption();
+      await UnitsOfMeasureSetting.screenTitle.waitForDisplayed({timeout:2000, reverse:true});
     })
     
   })
