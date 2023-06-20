@@ -79,6 +79,9 @@ export const config: Options.Testrunner = {
         ],
         consent: [
             './appTest/specs/app.cookieConsent.spec.ts'
+        ],
+        permissions: [
+            './appTest/specs/app.permissions.spec.ts'
         ]
      },
 

@@ -20,6 +20,10 @@ class HomeScreen extends AppScreen {
   async tapTurnGPSonBtn () {
     await this.turnGPSonBtn.click();
   }
+
+  async tapConfirmAudioBtn () {
+    await this.confirmAudioBtn.click();
+  }
 }
 
 module.exports = new HomeScreen();
