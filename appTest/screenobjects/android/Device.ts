@@ -23,6 +23,8 @@ class Device {
       await this.executeAdbCommand(`input text ${pin}`)
     }
 
+    //Get screen size
+
   }
 
 module.exports = new Device();
