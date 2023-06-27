@@ -1,9 +1,21 @@
 import { DEFAULT_PIN } from '../../helpers/Constants';
 
 class Device {
+
+    screenSize = null;
+    screenWidth = null;
+    screenHeight = null;
     
+    getScreenSize = async function () {
+      let size = await driver.getWindowSize();
+      this.screenSize = size;
+      this.screenWidth = size.width;
+      this.screenHeight = size.height;
+      return size;
+    }
+
     //Get the platform version
-    private get platformVersion(): number {
+    private get platformVersion (): number {
         return parseInt(
             (('platformVersion' in driver.capabilities &&
                 driver.capabilities.platformVersion) as string) || '8',
@@ -22,8 +34,6 @@ class Device {
     async enterPin(pin: string) {
       await this.executeAdbCommand(`input text ${pin}`)
     }
-
-    //Get screen size
 
   }
 

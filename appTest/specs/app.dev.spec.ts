@@ -38,8 +38,12 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       await Device.enterPin(DEFAULT_PIN);
       await driver.pause(1000)
     } else { 
-      console.log(">>>>>>>CONSOLE.LOG:>> SCREEN IS NOT LOCKED!!! <<<<<<<<")
+      console.log(">>>>>>>CONSOLE.LOG:>> SCREEN WAS NOT LOCKED!!! <<<<<<<<")
     }
+  })
+
+  beforeAll(async () => {
+    await Device.getScreenSize();
   })
 
   afterAll(async () => {
@@ -47,48 +51,50 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   })
 
   
-
   describe('Get race ready. Confirming Battery Optimization.', () => {
     
-    // it('Invoke native "App Info" settings of the app (Settings > Apps > World Run) ', async () => {
-    //   await driver.pause(5000);
-    //   await Device.executeAdbCommand(`am start -a android.settings.APPLICATION_DETAILS_SETTINGS -d package:${APP_NAME}`)
-    //   await AppInfoSettings.screenTitle.waitForDisplayed({timeout:2000})
-    // })
-
-    // it('SCROLL untill "Battery" settings option IS DISPLAYED on the screen', async () => {
-    //   const elem = AppInfoSettings.batteryMenuItem;
-    //   await Gestures.checkIfDisplayedWithSwipeUp(elem, 3);
-    // })
-
-    // it('TAP on Battery setting REDIRECTS to battery usage menu', async () => {
-    //   const elem = AppInfoSettings.unrestrictedMenuItem;
-    //   await AppInfoSettings.tapMenuOption('Battery');
-    //   await elem.waitForDisplayed({timeout:2000});
-    //   await expect(elem).toBeDisplayed();
-    // })
-
-    // it('TAP on "Unrestricted" option selects Unrestricted battery usage', async () => {
-    //   await AppInfoSettings.tapMenuOption('Unrestricted');
-    //   await driver.pause(1000);
-    //   await expect(AppInfoSettings.unrestrictedCheckbox).toHaveAttrContaining("checked", "true");
-    // })
-
-    // it('Relauch app', async () => {
-    //   await driver.pressKeyCode(187);
-    //   await driver.pause(2000);
-    //   await Gestures.swipeRight(0.6);
-    //   await Device.executeAdbCommand(`input tap`)
-    // })
-
-    it('Relauch app', async () => {
-      const screenSize = await driver.getWindowRect();
-      // await console.log("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-", val)
-      await driver.pause(5000)
+    it('TAP on "Home" nav button. Redirected to Home screen', async () => {
+      await NavBar.tapHomeButton();
+      await driver.pause(2000);
+      await Gestures.checkIfDisplayedWithSwipeDown(HomeScreen.countdown, 10)
     })
 
+    it('SCROLL untill "Battery" settings option IS DISPLAYED on the screen', async () => {
+      const elem = AppInfoSettings.batteryMenuItem;
+      await Gestures.checkIfDisplayedWithSwipeUp(elem, 3);
+    })
+
+    it('Invoke native "App Info" settings of the app (Settings > Apps > World Run) ', async () => {
+      await driver.pause(5000);
+      await Device.executeAdbCommand(`am start -a android.settings.APPLICATION_DETAILS_SETTINGS -d package:${APP_NAME}`)
+      await AppInfoSettings.screenTitle.waitForDisplayed({timeout:2000})
+    })
+
+    it('TAP on Battery setting REDIRECTS to battery usage menu', async () => {
+      const elem = AppInfoSettings.unrestrictedMenuItem;
+      await AppInfoSettings.tapMenuOption('Battery');
+      await elem.waitForDisplayed({timeout:2000});
+      await expect(elem).toBeDisplayed();
+    })
+
+    it('TAP on "Unrestricted" option selects Unrestricted battery usage', async () => {
+      await AppInfoSettings.tapMenuOption('Unrestricted');
+      await driver.pause(1000);
+      await expect(AppInfoSettings.unrestrictedCheckbox).toHaveAttrContaining("checked", "true");
+    })
+
+    it('Return back to the app and check Race ready status', async () => {
+      await driver.pressKeyCode(187);
+      await driver.pause(1000);
+      await Gestures.swipeRight(0.6);
+      await Device.executeAdbCommand(`input tap ${Device.screenWidth / 2} ${Device.screenHeight / 2}`)
+      await driver.pause(2000)
+    })  
     
   })
 
+
+
 })
+
 

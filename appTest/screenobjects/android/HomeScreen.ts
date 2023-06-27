@@ -12,6 +12,7 @@ class HomeScreen extends AppScreen {
   private get turnGPSonBtn () {return $(`//android.widget.TextView[@text="TURN YOUR GPS ON"]`)};
   private get confirmAudioBtn () {return $(`//android.widget.TextView[@text="CONFIRM AUDIO"]`)};
   private get learnMoreBtn () {return $(`//android.widget.TextView[@text="LEARN MORE"]`)};
+  private get batteryOptLabel () {return $('//android.widget.TextView[@text="TURN OFF BATTERY OPTIMIZATION"]')}
 
   async tapRegisterNowButton () {
     await this.registerNowButtton.click();

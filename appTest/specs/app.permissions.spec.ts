@@ -25,13 +25,17 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     }
   })
 
+  beforeAll(async () => {
+    await Device.getScreenSize();
+  })
+
   afterAll(async () => {
     await driver.closeApp();
   })
 
   describe('Get race ready. Confirm location services', () => {
 
-    it('TAP on "Home" nav button. Redirected to Home screen', async () => {
+    it('TAP on "Home" nav button redirects to Home screen', async () => {
       await NavBar.tapHomeButton();
       await expect(HomeScreen.countdown).toBeDisplayed();
     })
@@ -163,10 +167,10 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
   describe('Get race ready. Confirm Audio Settings.', () => {
     
-    it('TAP on "Home" nav button. Redirected to Home screen', async () => {
+    it('TAP on "Home" nav button redirects to Home screen', async () => {
       await NavBar.tapHomeButton();
       await driver.pause(2000);
-      await expect(HomeScreen.countdown).toBeDisplayed();
+      await Gestures.checkIfDisplayedWithSwipeDown(HomeScreen.countdown, 10)
     })
     
     it('SCROLL Home screen down until "Confirm Audio" button is displayed', async () => {
@@ -278,6 +282,17 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
   describe('Get race ready. Confirming Battery Optimization.', () => {
     
+    it('TAP on "Home" nav button redirects to Home screen', async () => {
+      await NavBar.tapHomeButton();
+      await driver.pause(2000);
+      await Gestures.checkIfDisplayedWithSwipeDown(HomeScreen.countdown, 10)
+    })
+
+    it('SCROLL Home screen down until "Confirm Audio" button is displayed', async () => {
+      const elem = HomeScreen.batteryOptLabel;
+      await Gestures.checkIfDisplayedWithSwipeUp(await elem, 5)
+    })
+
     it('Invoke native "App Info" settings of the app (Settings > Apps > World Run) ', async () => {
       await driver.pause(5000);
       await Device.executeAdbCommand(`am start -a android.settings.APPLICATION_DETAILS_SETTINGS -d package:${APP_NAME}`)
@@ -302,14 +317,15 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       await expect(AppInfoSettings.unrestrictedCheckbox).toHaveAttrContaining("checked", "true");
     })
 
-    it('Return back / foreground WFLWR application', async () => {
+    it('Return back to the app using application switcher', async () => {
       await driver.pressKeyCode(187);
-      await driver.pause(2000);
+      await driver.pause(1000);
       await Gestures.swipeRight(0.6);
-      await Device.executeAdbCommand(`input tap 540 960`);
-    })
-  })
+      await Device.executeAdbCommand(`input tap ${Device.screenWidth / 2} ${Device.screenHeight / 2}`)
+      await driver.pause(2000)
+    })  
 
+  })
 
 })
 
