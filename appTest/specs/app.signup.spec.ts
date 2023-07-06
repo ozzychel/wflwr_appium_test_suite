@@ -1,10 +1,35 @@
-import { APP_NAME, USER_EMAIL, USER_FIRSTNAME, USER_LASTNAME, USER_PASSWORD } from "../helpers/Constants";
+import { APP_NAME, USER_EMAIL, USER_FIRSTNAME, USER_LASTNAME, USER_PASSWORD, DEFAULT_PIN } from "../helpers/Constants";
 import Gestures from "../helpers/Gestures";
 const LoginScreen = require('../screenobjects/android/LoginScreen');
 const SignupScreen = require('../screenobjects/android/SignupScreen');
 const AccountCreatedBanner = require('../screenobjects/android/components/AccountCreatedBanner');
+const Device = require('../screenobjects/android/Device');
 
-describe('LOGIN SCREEN. EMAIL FLOW. SIGN UP AS A NEW USER', () => {
+
+describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
+  
+  beforeAll(async () => {
+    await Device.getScreenSize();
+    await driver.startRecordingScreen();
+  })
+
+  beforeEach(async ()=> {
+    if(await driver.isLocked()) {
+      await driver.unlock();
+      await Device.enterPin(DEFAULT_PIN);
+      await driver.pause(1000)
+    } else { 
+      console.log(">>>>>>>CONSOLE.LOG:>> SCREEN WAS NOT LOCKED!!! <<<<<<<<")
+    }
+  })
+
+  afterAll(async () => {
+    await driver.closeApp();
+    await driver.saveRecordingScreen('./appTest/screenshots/video/signup.mp4');
+    await driver.pause(2000);
+  })
+
+  describe('LOGIN SCREEN. EMAIL FLOW. SIGN UP AS A NEW USER', () => {
   it('"Continue with email button is ENABLED and CLICKABLE', async () => {
     const elem = LoginScreen.continueWithEmailButton;
     await expect(elem).toHaveAttrContaining('enabled', 'true');
@@ -261,5 +286,7 @@ describe('LOGIN SCREEN. EMAIL FLOW. SIGN UP AS A NEW USER', () => {
     await elem.waitForDisplayed({timeout: 2000, reverse: true})
   })
 
+
+  })
 
 })

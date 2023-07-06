@@ -324,8 +324,11 @@ export const config: Options.Testrunner = {
      * @param {Boolean} result.passed    true if test has passed, otherwise false
      * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-    // },
+    afterTest: async function(test, context, { error, result, duration, passed, retries }) {
+        if(error){
+           await driver.saveScreenshot(`./appTest/screenshots/TC${test["id"].slice(4)}.${test["description"].split(' ').join('')}.png`)
+        }
+    },
 
 
     /**

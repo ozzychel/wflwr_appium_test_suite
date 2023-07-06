@@ -15,22 +15,25 @@ const AppInfoSettings = require('../screenobjects/android/os_components/AppInfoS
 
 describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   
+  beforeAll(async () => {
+    await Device.getScreenSize();
+    await driver.startRecordingScreen();
+  })
+
   beforeEach(async ()=> {
     if(await driver.isLocked()) {
       await driver.unlock();
       await Device.enterPin(DEFAULT_PIN);
       await driver.pause(1000)
     } else { 
-      console.log(">>>>>>> CONSOLE.LOG:>> SCREEN IS NOT LOCKED!!! <<<<<<<<")
+      console.log(">>>>>>>CONSOLE.LOG:>> SCREEN WAS NOT LOCKED!!! <<<<<<<<")
     }
-  })
-
-  beforeAll(async () => {
-    await Device.getScreenSize();
   })
 
   afterAll(async () => {
     await driver.closeApp();
+    await driver.saveRecordingScreen('./appTest/screenshots/video/permissions.mp4');
+    await driver.pause(2000);
   })
 
   describe('Get race ready. Confirm location services', () => {
