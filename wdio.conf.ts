@@ -108,9 +108,27 @@ export const config: Options.Testrunner = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [
+        // //Galaxy S20 
+        // {
+        //     'appium:deviceName': 'SM-G986U1',
+        //     'appium:udid': 'R5CN20YDB5R',
+        //     'appium:platformName': 'Android',
+        //     'appium:platformVersion': '12.0',
+        //     'appium:automationName': 'UiAutomator2',
+        //     'appium:orientation': 'PORTRAIT',
+        //     'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
+        //     'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
+        //     // 'appium:app': './apps/WFLWRQA6.6.0.9.apk',
+        //     "appium:app": join(
+        //         process.cwd(),
+        //         "./apps/WFLWRQA6.6.0.11.apk"
+        //     ),
+        //     'appium:noReset': true,
+        //     'appium:newCommandTimeout': 240,
+        // },
         {
-            'appium:deviceName': 'SM-G986U1',
-            'appium:udid': 'R5CN20YDB5R',
+            'appium:deviceName': 'SM-S901U1',
+            'appium:udid': 'R5CT92C0ZLT',
             'appium:platformName': 'Android',
             'appium:platformVersion': '12.0',
             'appium:automationName': 'UiAutomator2',

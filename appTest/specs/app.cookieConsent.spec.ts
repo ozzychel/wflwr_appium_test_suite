@@ -23,9 +23,9 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   })
 
   afterAll(async () => {
+    const fileName = `${driver.capabilities["deviceManufacturer"]}_${driver.capabilities["deviceModel"]}_${driver.capabilities["udid"]}_${driver.config["suite"][0]}`
+    await driver.saveRecordingScreen(`./appTest/screenshots/video/${fileName}.mp4`);
     await driver.closeApp();
-    await driver.saveRecordingScreen('./appTest/screenshots/video/consent.mp4');
-    await driver.pause(2000);
   })
 
   describe('BUILD APP INSTALLATION', () => {

@@ -31,9 +31,9 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   })
 
   afterAll(async () => {
+    const fileName = `${driver.capabilities["deviceManufacturer"]}_${driver.capabilities["deviceModel"]}_${driver.capabilities["udid"]}_${driver.config["suite"][0]}`
+    await driver.saveRecordingScreen(`./appTest/screenshots/video/${fileName}.mp4`);
     await driver.closeApp();
-    await driver.saveRecordingScreen('./appTest/screenshots/video/registration.mp4');
-    await driver.pause(2000);
   })
 
   describe('REGISTER TO RUN. PERSONAL DATA', () => {
@@ -525,10 +525,6 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     })
 
     it('"Participation terms" checkbox is DISPLAYED and UNCHECKED by default', async () => {
-      // await Gestures.swipeUp(0.5);
-      // await Gestures.swipeUp(0.5);
-      // await Gestures.swipeUp(0.5);
-      // await Gestures.swipeUp(0.5);
       const elem = RegSummary.termsCheckBox;
       await Gestures.checkIfDisplayedWithSwipeUp(elem, 8);
       await expect(elem).toBeDisplayed();
