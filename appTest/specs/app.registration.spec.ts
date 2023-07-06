@@ -93,6 +93,17 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       } else {return true}
     })
 
+    it(`TAP on Cookie banner button DISSMISS Cookie banner`, async () => {
+      const cont = WebCookieBanner.container;
+      const flag = await cont.isDisplayed();
+      if(flag) {
+        await WebCookieBanner.tapAcceptAllBtn();
+        await WebCookieBanner.container.waitForDisplayed({timeout: 1000, reverse:true})
+      } else {
+        return true;
+      }
+    })
+
     it('Registration screen HAS navigation menu and main body', async () => {
       await expect(RegScreenMenu.menuContainer).toBeDisplayed();
       await expect(RegScreenBody.bodyContainer).toBeDisplayed();
