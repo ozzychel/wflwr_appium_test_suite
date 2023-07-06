@@ -38,34 +38,35 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
       return true;
     }
   })
-
-  it(`Cookie Banner. All buttons ARE DISPLAYED and ENABLED`, async () => {
+  
+  it(`Cookie Banner. "Accept All" button is DISPLAYED and ENABLED`, async () => {
     const cont = WebCookieBanner.container;
-    const btnGroup = WebCookieBanner.buttonGroup;
-    const acceptAllBtn = WebCookieBanner.acceptAllBtn;
-    const rejectAllBtn = WebCookieBanner.rejectAllButton;
-    const settingsBtn = WebCookieBanner.settingsButton;
     const flag = await cont.isDisplayed();
+    const elem = WebCookieBanner.acceptAllButton;
     if(flag) {
-      await expect(btnGroup).toBeDisplayed();
-      await expect(acceptAllBtn).toBeDisplayed();
-      await expect(acceptAllBtn).toHaveAttrContaining("enabled", "true");
-      await expect(rejectAllBtn).toBeDisplayed();
-      await expect(rejectAllBtn).toHaveAttrContaining("enabled", "true");
-      await expect(settingsBtn).toBeDisplayed();
-      await expect(settingsBtn).toHaveAttrContaining("enabled", "true");
-    } else {}
+      await expect(elem).toBeDisplayed();
+      await expect(elem).toHaveAttrContaining("enabled", "true");
+    } else {return true}
   })
 
-  it(`TAP on Cookie banner button DISSMISS Cookie banner`, async () => {
+  it(`Cookie Banner. "Reject All Tracking" button is DISPLAYED and ENABLED`, async () => {
     const cont = WebCookieBanner.container;
     const flag = await cont.isDisplayed();
+    const elem = WebCookieBanner.rejectAllButton;
     if(flag) {
-      await WebCookieBanner.tapAcceptAllBtn();
-      await WebCookieBanner.container.waitForDisplayed({timeout: 1000, reverse:true})
-    } else {
-      return true;
-    }
+      await expect(elem).toBeDisplayed();
+      await expect(elem).toHaveAttrContaining("enabled", "true");
+    } else {return true}
+  })
+
+  it(`Cookie Banner. "Privacy Settings" button is DISPLAYED and ENABLED`, async () => {
+    const cont = WebCookieBanner.container;
+    const flag = await cont.isDisplayed();
+    const elem = WebCookieBanner.settingsButton;
+    if(flag) {
+      await expect(elem).toBeDisplayed();
+      await expect(elem).toHaveAttrContaining("enabled", "true");
+    } else {return true}
   })
 
   it('Registration screen HAS navigation menu and main body', async () => {
@@ -77,7 +78,7 @@ describe('REGISTER TO RUN. PERSONAL DATA', () => {
     //TODO
   })
 
-//   //PERSONAL DATA FORM
+  //PERSONAL DATA FORM
   it('"Personal data" TITLE is DISPLAYED on the top of the page ', async () => {
     const elem = RegScreenBody.personalDataTitle;
     await expect(elem).toBeDisplayed();
@@ -442,13 +443,13 @@ describe('REGISTER TO RUN. PAYMENT METHODS', () => {
     await driver.pressKeyCode(33); //e
     await driver.pressKeyCode(47); //s
     await driver.pressKeyCode(48); //t
-    // await driver.pressKeyCode(29); //a
-    // await driver.pressKeyCode(44); //p
-    // await driver.pressKeyCode(44); //p
+    await driver.pressKeyCode(29); //a
+    await driver.pressKeyCode(44); //p
+    await driver.pressKeyCode(44); //p
     await driver.pressKeyCode(9);  //2
     await driver.pressKeyCode(7);  //0
     await driver.pressKeyCode(9);  //2
-    await driver.pressKeyCode(10); //3
+    await driver.pressKeyCode(11); //4
     await driver.pause(1000);
     await PaymentMethod.tapApplyCodeButton();
     await driver.pause(4000)
@@ -538,24 +539,24 @@ describe('REGISTER TO RUN. SUMMARY.', () => {
   })
 
   // !!! Curently commented out to avoid account termination 
-  // it('TAP on "Purchase" button REDIRECTS to Confirmation screen', async () => {
-  //   await RegSummary.tapPurchaseButton();
-  //   await driver.pause(5000);
-  //   await RegSummary.weAreDelightedTitle.waitForDisplayed({timeout: 5000});
-  // })
+  it('TAP on "Purchase" button REDIRECTS to Confirmation screen', async () => {
+    await RegSummary.tapPurchaseButton();
+    await driver.pause(5000);
+    await RegSummary.weAreDelightedTitle.waitForDisplayed({timeout: 5000});
+  })
 
-  // it('Confirmation user message is DISPLAYED and HAS correct TEXT', async () => {
-  //   const elem = RegSummary.weAreDelightedTitle;
-  //   await expect(elem).toBeDisplayed();
-  //   await expect(elem).toHaveText(`WE'RE DELIGHTED YOU'RE JOINING US!`);
-  // })
+  it('Confirmation user message is DISPLAYED and HAS correct TEXT', async () => {
+    const elem = RegSummary.weAreDelightedTitle;
+    await expect(elem).toBeDisplayed();
+    await expect(elem).toHaveText(`WE'RE DELIGHTED YOU'RE JOINING US!`);
+  })
 
-  // it('TAP on close ( x ) button REDIRECTS to Home screen ', async () => {
-  //   await RegScreenMenu.tapCloseButton();
-  //   await driver.pause(5000);
-  //   await RegSummary.weAreDelightedTitle.waitForDisplayed({timeout: 3000, reverse:true});
-  //   await expect(NavBar.homeButton).toBeDisplayed();
-  // })
+  it('TAP on close ( x ) button REDIRECTS to Home screen ', async () => {
+    await RegScreenMenu.tapCloseButton();
+    await driver.pause(5000);
+    await RegSummary.weAreDelightedTitle.waitForDisplayed({timeout: 3000, reverse:true});
+    await expect(NavBar.homeButton).toBeDisplayed();
+  })
 
 })
 

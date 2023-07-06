@@ -1,5 +1,5 @@
 class AppInfoSettings {
-  private get container () {return $('id=com.android.settings:id/coordinato')}
+  private get container () {return $('id=com.android.settings:id/coordinator')}
   private get screenHeader () {return $('id=com.android.settings:id/action_bar')}
   private get backButton () {return $('//android.widget.ImageButton[@content-desc="Navigate up"]')}
   private get screenTitle () {return $('//android.widget.TextView[@text="App info"]')}
