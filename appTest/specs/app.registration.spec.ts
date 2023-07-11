@@ -58,9 +58,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       const flag = await cont.isDisplayed();
       if(flag) {
         await expect(text).toHaveTextContaining("By continuing to use our site and services, you agree to our updated")
-      } else {
-        return true;
-      }
+      } else {return true;}
     })
     
     it(`Cookie Banner. "Accept All" button is DISPLAYED and ENABLED`, async () => {

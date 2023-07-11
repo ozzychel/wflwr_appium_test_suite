@@ -90,13 +90,23 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     })
 
     it('"Approximate location" option CAN BE SELECTED', async () => {
-      await PermissionsDialog.tapApproximateOption();
-      await driver.pause(1000);
+      //older android versions doesn't have approx and precise selection
+      //use element presence check
+      const flag = await PermissionsDialog.approximateOption.isDisplayed();
+      if(flag) {
+        await PermissionsDialog.tapApproximateOption();
+        await driver.pause(1000);
+      } else {return true}
     })   
     
     it('"Precise location" option CAN BE SELECTED', async () => {
-      await PermissionsDialog.tapPreciseOption();
-      await driver.pause(1000);
+      //older android versions doesn't have approx and precise selection
+      //use element presence check
+      const flag = await PermissionsDialog.preciseOption.isDisplayed();
+      if(flag) {
+        await PermissionsDialog.tapPreciseOption();
+        await driver.pause(1000);
+      } else {return true}
     }) 
 
     it('TAP on "While using the app" button INVOKES OS dialog prompt - Pghysical Activity', async () => {
