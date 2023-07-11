@@ -48,39 +48,57 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   })
 
   afterAll(async () => {
-    const fileName = `${driver.capabilities["deviceManufacturer"]}_${driver.capabilities["deviceModel"]}_${driver.capabilities["udid"]}_${driver.config["suite"][0]}`
     await driver.closeApp();
+    const fileName = `${driver.capabilities["deviceManufacturer"]}_${driver.capabilities["deviceModel"]}_${driver.capabilities["udid"]}_${driver.config["suite"][0]}`
     await driver.saveRecordingScreen(`./appTest/screenshots/video/${fileName}.mp4`);
     await driver.pause(2000);
   })
 
-  describe('LOGIN SCREEN. CONTAINERS AND LAYOUT', () => {
-    it('Main App container EXISTS and DISPLAYED. App launched', async () => {
-      const elem = await LoginScreen.container;
-      await elem.waitForDisplayed({ timeout: 3000 });
-    });
-
-    it('Main App container is NOT SCROLLABLE', async () => {
-      const elem = await LoginScreen.touchOutside;
-      await expect(elem).toHaveAttrContaining('scrollable', 'false');
-    })
-  })    
-
-  describe('LOGIN SCREEN. COOKIES CONSENT BANNER.', () => {
+  describe('Get race ready. Confirming Battery Optimization.', () => {
     
-    //Buttons
-    it('Banner HAS button layout', async () => {
-      const elem = await CookiesBanner.buttonLayout;
+    it('TAP on "Home" nav button redirects to Home screen', async () => {
+      await NavBar.tapHomeButton();
+      await driver.pause(2000);
+      await Gestures.checkIfDisplayedWithSwipeDown(HomeScreen.countdown, 10)
+    })
+
+    it('SCROLL Home screen down until "Confirm Audio" button is displayed', async () => {
+      const elem = HomeScreen.batteryOptLabel;
+      await Gestures.checkIfDisplayedWithSwipeUp(await elem, 5)
+    })
+
+    it('Invoke native "App Info" settings of the app (Settings > Apps > World Run) ', async () => {
+      await driver.pause(5000);
+      await Device.executeAdbCommand(`am start -a android.settings.APPLICATION_DETAILS_SETTINGS -d package:${APP_NAME}`)
+      await AppInfoSettings.optionsList.waitForDisplayed({timeout:2000})
+    })
+
+    it('SCROLL untill "Battery" settings option IS DISPLAYED on the screen', async () => {
+      const elem = AppInfoSettings.batteryMenuItem;
+      await Gestures.checkIfDisplayedWithSwipeUp(elem, 3);
+    })
+
+    it('TAP on Battery setting REDIRECTS to battery usage menu', async () => {
+      const elem = AppInfoSettings.unrestrictedMenuItem;
+      await AppInfoSettings.tapMenuOption('Battery');
+      await elem.waitForDisplayed({timeout:2000});
       await expect(elem).toBeDisplayed();
     })
 
-    it('TAP Go to Settings button', async () => {
-      await CookiesBanner.tapGoToSettingsButton();
-      await driver.pause(2000);
-      await CookiesBannerExpanded.pcLayoutContainer.waitForDisplayed({timeout: 2000});
+    it('TAP on "Unrestricted" option selects Unrestricted battery usage', async () => {
+      await AppInfoSettings.tapMenuOption('Unrestricted');
+      await driver.pause(1000);
+      await expect(AppInfoSettings.unrestrictedCheckbox).toHaveAttrContaining("checked", "true");
     })
-  })
-  
-  
 
+    it('Return back to the app using application switcher', async () => {
+      await driver.pressKeyCode(187);
+      await driver.pause(1000);
+      await Gestures.swipeRight(0.6);
+      await Device.executeAdbCommand(`input tap ${Device.screenWidth / 2} ${Device.screenHeight / 2}`)
+      await driver.pause(2000)
+    })  
+
+  })   
+  
 })

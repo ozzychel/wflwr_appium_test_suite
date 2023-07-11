@@ -299,7 +299,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     it('Invoke native "App Info" settings of the app (Settings > Apps > World Run) ', async () => {
       await driver.pause(5000);
       await Device.executeAdbCommand(`am start -a android.settings.APPLICATION_DETAILS_SETTINGS -d package:${APP_NAME}`)
-      await AppInfoSettings.screenTitle.waitForDisplayed({timeout:2000})
+      await AppInfoSettings.optionsList.waitForDisplayed({timeout:2000})
     })
 
     it('SCROLL untill "Battery" settings option IS DISPLAYED on the screen', async () => {

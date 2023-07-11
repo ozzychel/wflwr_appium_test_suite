@@ -250,7 +250,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     it('TAP "Confirm My Choices" button. REDIRECTED to Login screen', async () => {
         const container = LoginScreen.container;
-        await CookiesBannerExpanded.tapConfirmButton();
+        await CookiesBannerExpanded.tapAllowAllButton();
         await container.waitForDisplayed({timeout: 2000, reverse:true});
         await (LoginScreen.appUiView).waitForDisplayed({timeout: 2000});
     })

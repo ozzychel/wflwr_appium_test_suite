@@ -21,7 +21,7 @@ function getConnectedAndroidDevices() {
           const deviceInfo = {};
 
           const udid = line.split('\t')[0];
-          deviceInfo.udid = udid;
+          deviceInfo['appium:udid'] = udid;
 
           const deviceNamePromise = getDeviceProperty(udid, 'ro.product.model');
           const androidVersionPromise = getDeviceProperty(udid, 'ro.build.version.release');
@@ -29,9 +29,9 @@ function getConnectedAndroidDevices() {
           promises.push(
             Promise.all([deviceNamePromise, androidVersionPromise])
               .then(([deviceName, androidVersion]) => {
-                deviceInfo.deviceName = deviceName;
-                deviceInfo.platformName = 'Android';
-                deviceInfo.platformVersion = androidVersion;
+                deviceInfo['appium:deviceName'] = deviceName;
+                deviceInfo['appium:platformName'] = 'Android';
+                deviceInfo['appium:platformVersion'] = androidVersion;
                 deviceList.push(deviceInfo);
               })
               .catch(error => {
@@ -63,16 +63,6 @@ function getDeviceProperty(udid, property) {
     });
   });
 }
-
-// Usage example
-// getConnectedAndroidDevices()
-//   .then(devices => {
-//     // console.log(devices);
-//     return devices;
-//   })
-//   .catch(error => {
-//     console.error('Error:', error);
-//   });
 
 async function test () {
   const devices = await getConnectedAndroidDevices();

@@ -4,8 +4,9 @@ class AppInfoSettings {
   private get backButton () {return $('//android.widget.ImageButton[@content-desc="Navigate up"]')}
   private get screenTitle () {return $('//android.widget.TextView[@text="App info"]')}
   private get content () {return $('id=com.android.settings:id/content_frame')}
-  private get batteryMenuItem () {return $('android=new UiSelector().resourceId("android:id/title").text("Battery")')}
+  private get batteryMenuItem () {return $('android=new UiSelector().resourceId("android:id/title").textContains("Battery")')}
   private get unrestrictedMenuItem () {return $('android=new UiSelector().resourceId("android:id/title").text("Unrestricted")')}
+  private get optionsList () {return $('id=android:id/list_container')}
   private get unrestrictedCheckbox () {return this.getNthElementByResourceId(0, "android:id/checkbox")};
 
   async getNthElementByResourceId (n:number, id:string) {
@@ -25,7 +26,7 @@ class AppInfoSettings {
   }
 
   async tapMenuOption (param:string) {
-    const elem = await $(`android=new UiSelector().resourceId("android:id/title").text("${param}")`);
+    const elem = await $(`android=new UiSelector().resourceId("android:id/title").textContains("${param}")`);
     await elem.click();
   }
 }
