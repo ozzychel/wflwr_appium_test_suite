@@ -3,6 +3,7 @@ import AppScreen from "../AppScreen";
 /// try to extend AppScreen
 class PermissionsDialog {
   private get dialog () {return $('id=com.android.permissioncontroller:id/grant_dialog')}
+  private get contentContainer () {return $('id=com.android.permissioncontroller:id/content_container')}
   private get preciseOption () {return $('id=com.android.permissioncontroller:id/permission_location_accuracy_radio_fine')}
   private get approximateOption () {return $('id=com.android.permissioncontroller:id/permission_location_accuracy_radio_coarse')}
   private get whileUsingTheAppBtn () {return $('id=com.android.permissioncontroller:id/permission_allow_foreground_only_button')}

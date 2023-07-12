@@ -78,7 +78,8 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     })
 
     it('TAP on "Turn on your location" button INVOKES OS Permissions dialog', async () => {
-      const elem = PermissionsDialog.dialog;
+      // const elem = PermissionsDialog.dialog;
+      const elem = PermissionsDialog.contentContainer;
       await TurnOnLocationBanner.tapTurnOnYourLocationBtn();
       await elem.waitForDisplayed({timeout:2000});
     })
@@ -86,7 +87,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     it('OS Permissions Dialog requests ACCESS to User LOCATION', async () => {
       const elem = PermissionsDialog.permissionMsg;
       await expect(elem).toBeDisplayed();
-      await expect(elem).toHaveTextContaining(`to access this device’s location?`)
+      await expect(elem).toHaveTextContaining(["Allow World Run to access this device", 'location?'])
     })
 
     it('"Approximate location" option CAN BE SELECTED', async () => {
@@ -111,7 +112,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     it('TAP on "While using the app" button INVOKES OS dialog prompt - Pghysical Activity', async () => {
       await PermissionsDialog.tapWhileUsingTheAppBtn();
-      await PermissionsDialog.dialog.waitForDisplayed({timeout:2000});
+      await PermissionsDialog.contentContainer.waitForDisplayed({timeout:2000});
     })
 
     it('OS Permissions Dialog requests ACCESS to User Physical Activity', async () => {
@@ -121,7 +122,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     it('TAP on "Allow" Physical Activity button DISMISSES Permissions dialog', async () =>{
       await PermissionsDialog.tapAllowBtn();
-      await PermissionsDialog.dialog.waitForDisplayed({timeout: 2000, reverse: true});
+      await PermissionsDialog.contentContainer.waitForDisplayed({timeout: 2000, reverse: true});
     })
 
     it('TAP on "Allow" Physical Activity button INVOKES "Precise Location" banner', async () => {
@@ -138,7 +139,13 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     it('"Precise location" banner HAS correct SUBTITLE', async () => {
       const elem = PreciseLocationBanner.bannerSubtitle;
       await expect(elem).toBeDisplayed();
-      await expect(elem).toHaveTextContaining('ALLOW ALL THE TIME');
+      if(elem.toHaveAttrContaining('ALLOW ALL THE TIME')) {
+        expect(elem).toHaveTextContaining('ALLOW ALL THE TIME');
+        return;
+      } else {
+        expect(elem).toHaveTextContaining('ALWAYS ALLOW');
+        return;
+      }
     })
 
     it('"Go to Settings" button is DISPLAYED and CLICKABLE', async () => {
@@ -155,19 +162,37 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     it('TAP on "Go to Settings" REDIRECTS to OS Location Settings', async () => {
       await PreciseLocationBanner.tapGoToSettingsBtn();
-      await AppOsPermissions.container.waitForDisplayed({timeout: 2000});
+      const platformVersion = parseInt(driver.capabilities["platformVersion"]);
+      if(platformVersion >= 11) {
+        expect(await AppOsPermissions.container.waitForDisplayed({timeout:2000})).toBe(true) 
+      }
+      if(platformVersion < 11) {
+        expect(await PermissionsDialog.contentContainer.waitForDisplayed({timeout: 3000})).toBe(true)
+      }
+      return false;
     })
 
     it('TAP on "Allow all the time" setting SELECTS the option', async () => {
-      const elem = AppOsPermissions.allowAllTheTime;
-      await expect(elem).toHaveAttrContaining('checked', 'false');
-      await AppOsPermissions.tapAllowAllTheTime();
-      await expect(elem).toHaveAttrContaining('checked', 'true')
+      const platformVersion = parseInt(driver.capabilities["platformVersion"]);
+      const elem1 = AppOsPermissions.allowAllTheTime;
+      const elem2 = AppOsPermissions.allwaysAllow;
+      if(platformVersion >= 11) {
+        await AppOsPermissions.tapAllowAllTheTime();
+        await expect(elem1).toHaveAttrContaining('checked', 'true');
+      } 
+      if(platformVersion < 11) {
+        await AppOsPermissions.tapAlwaysAllow();
+        await expect(PermissionsDialog.contentContainer).not.toBeDisplayed();
+      }
+      return false;
     })
 
     it('TAP on the Back button REDIRECTS back to the app', async () => {
-      await AppOsPermissions.tapBackButton();
-      await AppOsPermissions.container.waitForDisplayed({timeout:2000, reverse:true});
+      const platformVersion = parseInt(driver.capabilities["platformVersion"]);
+      if(platformVersion >= 11) {
+        await AppOsPermissions.tapBackButton();
+        await AppOsPermissions.container.waitForDisplayed({timeout:3000, reverse:true});
+      }
       await expect(NavBar.homeButton).toBeDisplayed();
       await driver.pause(3000); 
     })
@@ -176,7 +201,8 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       //todo
       return true;
     })
-  })
+  
+  })  
 
   describe('Get race ready. Confirm Audio Settings.', () => {
     
@@ -301,7 +327,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       await Gestures.checkIfDisplayedWithSwipeDown(HomeScreen.countdown, 10)
     })
 
-    it('SCROLL Home screen down until "Confirm Audio" button is displayed', async () => {
+    it('SCROLL Home screen down until "Learn More" button is displayed', async () => {
       const elem = HomeScreen.batteryOptLabel;
       await Gestures.checkIfDisplayedWithSwipeUp(await elem, 5)
     })
@@ -312,30 +338,18 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       await AppInfoSettings.optionsList.waitForDisplayed({timeout:2000})
     })
 
-    it('SCROLL untill "Battery" settings option IS DISPLAYED on the screen', async () => {
-      const elem = AppInfoSettings.batteryMenuItem;
-      await Gestures.checkIfDisplayedWithSwipeUp(elem, 3);
+    it('Set battery optimization to Unrestricted programmatically', async () => {
+      //since different android versions have different settings menu structure
+      //it is more efficient to set the battery settings to unrestiricted using ADB
+      await Device.executeAdbCommand(`dumpsys deviceidle whitelist +${APP_NAME}`)
     })
-
-    it('TAP on Battery setting REDIRECTS to battery usage menu', async () => {
-      const elem = AppInfoSettings.unrestrictedMenuItem;
-      await AppInfoSettings.tapMenuOption('Battery');
-      await elem.waitForDisplayed({timeout:2000});
-      await expect(elem).toBeDisplayed();
-    })
-
-    it('TAP on "Unrestricted" option selects Unrestricted battery usage', async () => {
-      await AppInfoSettings.tapMenuOption('Unrestricted');
-      await driver.pause(1000);
-      await expect(AppInfoSettings.unrestrictedCheckbox).toHaveAttrContaining("checked", "true");
-    })
-
+    
     it('Return back to the app using application switcher', async () => {
       await driver.pressKeyCode(187);
       await driver.pause(1000);
       await Gestures.swipeRight(0.6);
-      await Device.executeAdbCommand(`input tap ${Device.screenWidth / 2} ${Device.screenHeight / 2}`)
-      await driver.pause(2000)
+      await Device.executeAdbCommand(`input tap ${Device.screenWidth / 2} ${Device.screenHeight / 2}`);
+      await driver.pause(2000);
     })  
 
   })

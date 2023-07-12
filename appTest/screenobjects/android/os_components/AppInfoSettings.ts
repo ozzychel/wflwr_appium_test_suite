@@ -7,6 +7,7 @@ class AppInfoSettings {
   private get batteryMenuItem () {return $('android=new UiSelector().resourceId("android:id/title").textContains("Battery")')}
   private get unrestrictedMenuItem () {return $('android=new UiSelector().resourceId("android:id/title").text("Unrestricted")')}
   private get optionsList () {return $('id=android:id/list_container')}
+  private get advanceMenuItem () {return $('android=new UiSelector().resourceId("android:id/title").text("Advanced")')}
   private get unrestrictedCheckbox () {return this.getNthElementByResourceId(0, "android:id/checkbox")};
 
   async getNthElementByResourceId (n:number, id:string) {
