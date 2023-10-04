@@ -56,11 +56,6 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       await driver.pause(5000)
     });
 
-    
-    it('Terminate app', async () => {
-      await driver.terminateApp('com.redbull.WingsForLifeWorldRun.debug')
-    });
-
 
     // it('Main App container is NOT SCROLLABLE', async () => {
     //   const elem = await LoginScreen.touchOutside;

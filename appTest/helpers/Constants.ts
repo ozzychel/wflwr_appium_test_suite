@@ -2,8 +2,6 @@ const Device = require('../screenobjects/android/Device.ts');
 
 export const APP_NAME = Device.isAndroid ? 'com.redbull.wingsforlifeworldrun.debug' : 'com.redbull.WingsForLifeWorldRun.debug';
 export const DEFAULT_PIN = '0000';
-// export const APP_NAME = 'com.redbull.wingsforlifeworldrun.debug';
-// 'com.redbull.WingsForLifeWorldRun.debug'
 
 // Test User data (consider moving to JSON)
 export const USER_EMAIL = 'rbmh_test2@yahoo.com';

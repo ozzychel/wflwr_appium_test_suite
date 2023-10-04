@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import type { Options } from '@wdio/types';
 import { join } from 'path';
 
@@ -125,7 +126,8 @@ export const config: Options.Testrunner = {
             "appium:app": "/Users/apetunin/Projects/wflwr_appium_test_suite/apps/wflwr_debug.ipa",
             "appium:bundleId": "com.redbull.WingsForLifeWorldRun.debug",
             "appium:xcodeSigningId": "iPhone Developer",
-            "appium:xcodeOrgId": "WEPGUP3YFT"
+            "appium:xcodeOrgId": process.env.XCODE_ORG_ID
+            // "appium:xcodeOrgId": "WEPGUP3YFT"
         }
 
         // //  //Galaxy S23
