@@ -467,7 +467,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       await expect(elem).toHaveAttrContaining("clickable", "true");
     })
     
-    //TODO: do credit card section check (very questionable)
+    // TODO: do credit card section check (very questionable)
     it('Correct voucher INPUT - "TEST2023" shows user MESSAGE ', async () => {
       await PaymentMethod.tapVoucherInput();
       await driver.pause(1000);

@@ -112,6 +112,22 @@ export const config: Options.Testrunner = {
     //
     capabilities: [
 
+        // // iPhone 13 mini
+
+        {
+            'appium:deviceName': 'iPhone 13 mini',
+            "appium:udid": "00008110-001264901E04801E",
+            "appium:platformName": "IOS",
+            "appium:automationName": "XCUITest",
+            "appium:orientation": "PORTRAIT",
+            "appium:noReset": true,
+            "appium:newCommandTimeout": 240,
+            "appium:app": "/Users/apetunin/Projects/wflwr_appium_test_suite/apps/wflwr_debug.ipa",
+            "appium:bundleId": "com.redbull.WingsForLifeWorldRun.debug",
+            "appium:xcodeSigningId": "iPhone Developer",
+            "appium:xcodeOrgId": "WEPGUP3YFT"
+        }
+
         // //  //Galaxy S23
         // {
         //     'appium:udid': 'R5CT92C0ZLT',
@@ -132,80 +148,80 @@ export const config: Options.Testrunner = {
         // },
        
         // //Galaxy S20 
-        {
-            'appium:udid': 'R5CN20YDB5R',
-            'appium:deviceName': 'SM-G986U1',
-            'appium:platformName': 'Android',
-            'appium:platformVersion': '12',
-            'appium:automationName': 'UiAutomator2',
-            'appium:orientation': 'PORTRAIT',
-            'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
-            'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
-            "appium:app": join(
-                process.cwd(),
-                "./apps/WFLWRQA6.6.0.11.apk"
-            ),
-            'appium:noReset': true,
-            'appium:newCommandTimeout': 240,
-            'appium:systemPort': 6011
-        },
+        // {
+        //     'appium:udid': 'R5CN20YDB5R',
+        //     'appium:deviceName': 'SM-G986U1',
+        //     'appium:platformName': 'Android',
+        //     'appium:platformVersion': '12',
+        //     'appium:automationName': 'UiAutomator2',
+        //     'appium:orientation': 'PORTRAIT',
+        //     'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
+        //     'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
+        //     "appium:app": join(
+        //         process.cwd(),
+        //         "./apps/WFLWRQA6.6.0.11.apk"
+        //     ),
+        //     'appium:noReset': true,
+        //     'appium:newCommandTimeout': 240,
+        //     'appium:systemPort': 6011
+        // },
         
         //  //Pixel 6a
-        {
-            'appium:udid': '2B111JEGR07534',
-            'appium:deviceName': 'Pixel 6a',
-            'appium:platformName': 'Android',
-            'appium:platformVersion': '13',
-            'appium:automationName': 'UiAutomator2',
-            'appium:orientation': 'PORTRAIT',
-            'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
-            'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
-            "appium:app": join(
-                process.cwd(),
-                "./apps/WFLWRQA6.6.0.11.apk"
-            ),
-            'appium:noReset': true,
-            'appium:newCommandTimeout': 240,
-            'appium:systemPort': 6022
-        },
+        // {
+        //     'appium:udid': '2B111JEGR07534',
+        //     'appium:deviceName': 'Pixel 6a',
+        //     'appium:platformName': 'Android',
+        //     'appium:platformVersion': '13',
+        //     'appium:automationName': 'UiAutomator2',
+        //     'appium:orientation': 'PORTRAIT',
+        //     'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
+        //     'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
+        //     "appium:app": join(
+        //         process.cwd(),
+        //         "./apps/WFLWRQA6.6.0.11.apk"
+        //     ),
+        //     'appium:noReset': true,
+        //     'appium:newCommandTimeout': 240,
+        //     'appium:systemPort': 6022
+        // },
 
         // // Pixel 2XL
-        {
-            'appium:udid': '806KPWQ1973929',
-            'appium:deviceName': 'Pixel 2 XL',
-            'appium:platformName': 'Android',
-            'appium:platformVersion': '11',
-            'appium:automationName': 'UiAutomator2',
-            'appium:orientation': 'PORTRAIT',
-            'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
-            'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
-            "appium:app": join(
-                process.cwd(),
-                "./apps/WFLWRQA6.6.0.11.apk"
-            ),
-            'appium:noReset': true,
-            'appium:newCommandTimeout': 240,
-            'appium:systemPort': 6033
-        },
+        // {
+        //     'appium:udid': '806KPWQ1973929',
+        //     'appium:deviceName': 'Pixel 2 XL',
+        //     'appium:platformName': 'Android',
+        //     'appium:platformVersion': '11',
+        //     'appium:automationName': 'UiAutomator2',
+        //     'appium:orientation': 'PORTRAIT',
+        //     'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
+        //     'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
+        //     "appium:app": join(
+        //         process.cwd(),
+        //         "./apps/WFLWRQA6.6.0.11.apk"
+        //     ),
+        //     'appium:noReset': true,
+        //     'appium:newCommandTimeout': 240,
+        //     'appium:systemPort': 6033
+        // },
 
         // Samsung A50
-        {
-            'appium:udid': 'R58M94VYH0V',
-            'appium:deviceName': 'SM-A505U',
-            'appium:platformName': 'Android',
-            'appium:platformVersion': '10',
-            'appium:automationName': 'UiAutomator2',
-            'appium:orientation': 'PORTRAIT',
-            'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
-            'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
-            "appium:app": join(
-                process.cwd(),
-                "./apps/WFLWRQA6.6.0.11.apk"
-            ),
-            'appium:noReset': true,
-            'appium:newCommandTimeout': 240,
-            'appium:systemPort': 6044
-        }
+        // {
+        //     'appium:udid': 'R58M94VYH0V',
+        //     'appium:deviceName': 'SM-A505U',
+        //     'appium:platformName': 'Android',
+        //     'appium:platformVersion': '10',
+        //     'appium:automationName': 'UiAutomator2',
+        //     'appium:orientation': 'PORTRAIT',
+        //     'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
+        //     'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
+        //     "appium:app": join(
+        //         process.cwd(),
+        //         "./apps/WFLWRQA6.6.0.11.apk"
+        //     ),
+        //     'appium:noReset': true,
+        //     'appium:newCommandTimeout': 240,
+        //     'appium:systemPort': 6044
+        // }
 ],
     //
     // ===================

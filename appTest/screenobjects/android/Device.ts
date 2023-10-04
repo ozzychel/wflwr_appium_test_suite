@@ -5,6 +5,8 @@ class Device {
     screenSize = null;
     screenWidth = null;
     screenHeight = null;
+    isAndroid = null;
+    isIOS = null;
     
     getScreenSize = async function () {
       let size = await driver.getWindowSize();
@@ -21,6 +23,17 @@ class Device {
                 driver.capabilities.platformVersion) as string) || '8',
             10,
         );
+    }
+
+    getPlatfrom = async function () {
+      if(driver.isAndroid) {
+        this.isAndroid = true;
+        this.isIOS = false;
+      } 
+      if(driver.isIOS) {
+        this.isAndroid = false;
+        this.isIOS = true;
+      }
     }
 
     //Execute adb command
