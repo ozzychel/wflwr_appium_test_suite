@@ -1,8 +1,26 @@
 class LoginScreen {
   private get content () {return $('id=content')};
-  private get container () {return $('id=container')};
-  private get bannerLayoutContainer () {return $(`id=design_bottom_sheet`)};
-  private get touchOutside () {return $('id=touch_outside')};
+  
+  private get container () {  
+    return driver.isAndroid ? 
+    $('id=container') : 
+    $('id=World Run')
+  };
+
+  private get touchOutside () {
+    return driver.isAndroid ? 
+    $('id=touch_outside') :
+    $('//XCUIElementTypeApplication[@name="World Run"]/XCUIElementTypeWindow/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther')
+  };
+
+  private get bannerLayoutContainer () {
+    return driver.isAndroid ?
+      $('id=design_bottom_sheet') : 
+      $('//XCUIElementTypeTable/parent::*')
+  };
+  
+  
+  private get logo () { return $('id=WFLWR Logo')}
   private get appUiView () {return $('//androidx.compose.ui.platform.ComposeView')}
   
   //find better way to avoid xpath below and target Button class, not text

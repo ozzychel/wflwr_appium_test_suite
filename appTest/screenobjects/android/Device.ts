@@ -1,5 +1,3 @@
-import { DEFAULT_PIN } from '../../helpers/Constants';
-
 class Device {
 
     screenSize = null;
@@ -25,7 +23,7 @@ class Device {
         );
     }
 
-    getPlatfrom = async function () {
+    getPlatform = async function () {
       if(driver.isAndroid) {
         this.isAndroid = true;
         this.isIOS = false;

@@ -127,7 +127,6 @@ export const config: Options.Testrunner = {
             "appium:bundleId": "com.redbull.WingsForLifeWorldRun.debug",
             "appium:xcodeSigningId": "iPhone Developer",
             "appium:xcodeOrgId": process.env.XCODE_ORG_ID
-            // "appium:xcodeOrgId": "WEPGUP3YFT"
         }
 
         // //  //Galaxy S23

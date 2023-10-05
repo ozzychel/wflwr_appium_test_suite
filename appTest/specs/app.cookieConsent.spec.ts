@@ -9,7 +9,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   
   beforeAll(async () => {
     await Device.getScreenSize();
-    await Device.getPlatfrom();
+    await Device.getPlatform();
     await driver.startRecordingScreen();
   })
 
@@ -49,11 +49,6 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     it('Touch_outside container EXISTS and DISPLAYED', async () => {
       const elem = await LoginScreen.touchOutside;
       await expect(elem).toBeDisplayed();
-    })
-
-    it('Touch_outside container HAS class - View', async () => {
-      const elem = await LoginScreen.touchOutside;
-      await expect(elem).toHaveAttrContaining("class", 'android.view.View');
     })
 
     it('Touch_outside container is NOT SCROLLABLE', async () => {
