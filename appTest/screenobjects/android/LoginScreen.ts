@@ -3,14 +3,14 @@ class LoginScreen {
   
   private get container () {  
     return driver.isAndroid ? 
-    $('id=container') : 
-    $('id=World Run')
+      $('id=container') : 
+      $('id=World Run')
   };
 
   private get touchOutside () {
     return driver.isAndroid ? 
-    $('id=touch_outside') :
-    $('//XCUIElementTypeApplication[@name="World Run"]/XCUIElementTypeWindow/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther')
+      $('id=touch_outside') :
+      $('//XCUIElementTypeApplication[@name="World Run"]/XCUIElementTypeWindow/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther')
   };
 
   private get bannerLayoutContainer () {
@@ -19,6 +19,7 @@ class LoginScreen {
       $('//XCUIElementTypeTable/parent::*')
   };
   
+  private get iosTrackingAlert () {return $('-ios predicate string:type == "XCUIElementTypeAlert"')}
   
   private get logo () { return $('id=WFLWR Logo')}
   private get appUiView () {return $('//androidx.compose.ui.platform.ComposeView')}

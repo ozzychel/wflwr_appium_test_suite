@@ -32,14 +32,14 @@ const AppInfoSettings = require('../screenobjects/android/os_components/AppInfoS
 
 describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   
-  // beforeAll(async () => {
-  //   await Device.getScreenSize();
-  //   await Device.getPlatform();
-  // })
+  beforeAll(async () => {
+    await Device.getScreenSize();
+    await Device.getPlatform();
+  })
 
-  // afterAll(async () => {
-  //   await driver.terminateApp(APP_NAME);
-  // })
+  afterAll(async () => {
+    await driver.terminateApp(APP_NAME);
+  })
 
   describe('BUILD APP INSTALLATION', () => {
     it('Device platfrom should be iOS', async () => {
@@ -49,6 +49,12 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     it('Should have have app installed on the device', async () => {
       await expect(await driver.isAppInstalled(APP_NAME)).toBe(true);
     })
+
+    // it('Should have have app installed on the device', async () => {
+    //   const elem = await $('-ios predicate string:type == "XCUIElementTypeAlert"');
+    //   await driver.pause(2000)
+    //   await expect(elem).toHaveText("Allow")
+    // })
   })
 
   describe('LOGIN SCREEN. CONTAINERS AND LAYOUT', () => {
@@ -111,5 +117,107 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     })
 
   })  
+
+  describe('LOGIN SCREEN. COOKIES CONSENT BANNER.', () => {
+    it('Banner container NOT CLICKABLE and is NOT SCROLLABLE', async () => {
+      if(driver.isAndroid) {
+        const elem = await LoginScreen.bannerLayoutContainer;
+        await expect(elem).toHaveAttrContaining('scrollable', 'false');
+        await expect(elem).toHaveAttrContaining('clickable', 'false');
+      }
+      if(driver.isIOS) {
+        //TODO
+      }
+    })
+
+    it('Banner HAS privacy settings user message', async () => {
+      const elem = await CookiesBanner.textLayout;
+      await expect(elem).toExist();
+      await expect(elem).toBeDisplayed();
+    })
+
+    // it('Privacy Settings Text IS scrollable and is NOT CLICKABLE', async () => {
+    //   const elem = await CookiesBanner.textLayout;
+    //   await expect(elem).toHaveAttrContaining('scrollable', 'true');
+    //   await expect(elem).toHaveAttrContaining('clickable', 'false');
+    // })
+
+    it('Privacy Settings Text HAS correct TITLE', async () => {
+      const elem = await CookiesBanner.bannerTitle;
+      await expect(elem).toHaveText('Privacy Settings');
+    })
+
+    it('Privacy Settings text HAS correct TEXT copy', async () => {
+      const elem = await CookiesBanner.alertNotice;
+      await expect(elem).toHaveText(alertNoticeText);
+    })
+
+    // //Buttons
+    it('Banner HAS button layout', async () => {
+      const elem = await CookiesBanner.buttonLayout;
+      await expect(elem).toBeDisplayed();
+    })
+
+    // it('Button layout is NOT SCROLLABLE', async () => {
+    //   const elem = await CookiesBanner.buttonLayout;
+    //   await expect(elem).toHaveAttrContaining('scrollable', 'false');
+    // })
+
+    it('"Allow All" button IS displayed and HAS correct LABEL', async () => {
+      const elem = await CookiesBanner.allowAllButton;
+      await expect(elem).toBeDisplayed();
+      await expect(elem).toHaveText('Allow All');
+    })
+
+    it('"Allow All" button is CLICKABLE', async () => {
+      const elem = await CookiesBanner.allowAllButton;
+      if (driver.isAndroid) {
+        await expect(elem).toHaveAttrContaining('clickable', 'true')
+      }
+      if(driver.isIOS) {
+        await expect(elem).toHaveAttrContaining('enabled', 'true')
+      }
+    })
+
+    it('"Decline All" button is DISPLAYED and HAS correct LABEL', async () => {
+      const elem = await CookiesBanner.declineAllButton;
+      await expect(elem).toBeDisplayed();
+      await expect(elem).toHaveText('Decline All')
+    })
+
+    it('"Decline All" button is CLICKABLE', async () => {
+      const elem = await CookiesBanner.declineAllButton;
+      if (driver.isAndroid) {
+        await expect(elem).toHaveAttrContaining('clickable', 'true')
+      }
+      if(driver.isIOS) {
+        await expect(elem).toHaveAttrContaining('enabled', 'true')
+      }
+    })
+
+    it('"Go to Settings" button is DISPLAYED and HAS correct LABEL', async () => {
+      const elem = await CookiesBanner.goToSettingsButton;
+      await expect(elem).toBeDisplayed();
+      await expect(elem).toHaveText('Go to Settings');
+    })
+
+    it('"Go to Settings" button is CLICKABLE', async () => {
+      const elem = await CookiesBanner.goToSettingsButton;
+      if (driver.isAndroid) {
+        await expect(elem).toHaveAttrContaining('clickable', 'true')
+      }
+      if(driver.isIOS) {
+        await expect(elem).toHaveAttrContaining('enabled', 'true')
+      }
+    })
+
+    it('TAP "Go to Settings" button', async () => {
+      await CookiesBanner.tapGoToSettingsButton();
+      await driver.pause(2000);
+
+      // await CookiesBannerExpanded.pcLayoutContainer.waitForDisplayed({timeout: 2000});
+
+    })
+  })
 
 })

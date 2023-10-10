@@ -3,13 +3,46 @@ import AppScreen from "../AppScreen";
 /// try to extend AppScreen
 class CookiesBanner {
   
-  private get buttonLayout () {return $(`id=button_layout`)}
-  private get allowAllButton () {return $(`id=btn_accept_cookies`)};
-  private get declineAllButton () {return $(`id=btn_reject_cookies`)};
-  private get goToSettingsButton () {return $(`id=cookies_setting_button`)};
-  private get textLayout () {return $(`id=cookies_text_layout`)};
-  private get bannerTitle () {return $(`id=banner_title`)};
-  private get alertNotice () {return $(`id=alert_notice_text`);};
+  private get textLayout () {
+    return driver.isAndroid ?
+      $(`id=cookies_text_layout`) :
+      $(`-ios predicate string:type == "XCUIElementTypeTable"`)
+  };
+  private get bannerTitle () {
+    return driver.isAndroid ?  
+      $(`id=banner_title`) : 
+      $(`//XCUIElementTypeTable/XCUIElementTypeCell`)
+  };
+  
+  private get alertNotice () {
+    return driver.isAndroid ? 
+      $(`id=alert_notice_text`) :
+      $(`id=bannerDescriptions`)
+  };
+  
+  private get buttonLayout () { 
+    return driver.isAndroid ?
+      $(`id=button_layout`) :
+      $(`//XCUIElementTypeButton[@name="bannerAllowAllButton"]/parent::*`)
+  };
+
+  private get allowAllButton () {
+    return driver.isAndroid ?  
+      $(`id=btn_accept_cookies`) :
+      $(`id=bannerAllowAllButton`)
+  };
+
+  private get declineAllButton () {
+    return driver.isAndroid ? 
+      $(`id=btn_reject_cookies`) :
+      $(`id=bannerRejectAllButton`)
+  };
+
+  private get goToSettingsButton () {
+    return driver.isAndroid ? 
+      $(`id=cookies_setting_button`) :
+      $(`id=bannerPrivacySettingsButton`)
+  };
 
   async tapAllowAllButton () {
     await this.allowAllButton.click();
