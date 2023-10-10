@@ -53,7 +53,7 @@ class CookiesBanner {
   }
   
   async tapGoToSettingsButton () {
-    await (await this.goToSettingsButton).click();
+    await this.goToSettingsButton.click();
   }
 
 }
