@@ -121,12 +121,13 @@ export const config: Options.Testrunner = {
             "appium:platformName": "IOS",
             "appium:automationName": "XCUITest",
             "appium:orientation": "PORTRAIT",
-            "appium:noReset": true,
-            "appium:newCommandTimeout": 240,
             "appium:app": "/Users/apetunin/Projects/wflwr_appium_test_suite/apps/wflwr_debug.ipa",
             "appium:bundleId": "com.redbull.WingsForLifeWorldRun.debug",
             "appium:xcodeSigningId": "iPhone Developer",
-            "appium:xcodeOrgId": process.env.XCODE_ORG_ID
+            "appium:xcodeOrgId": process.env.XCODE_ORG_ID,
+            "appium:newCommandTimeout": 240,
+            // "appium:noReset": true,
+            "appium:fullReset" : true
         }
 
         // //  //Galaxy S23

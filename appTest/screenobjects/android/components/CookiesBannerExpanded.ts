@@ -7,7 +7,13 @@ class CookiesBannerExpanded {
   //todo: implement SDK preferences validation methods:
   //-striclty, -performance, -marketing
   //implement switch getters and taps
-  private get pcLayoutContainer () {return $(`id=pc_layout`)};
+  private get pcLayoutContainer () {
+    return driver.isAndroid ? 
+    $(`id=pc_layout`) :
+    $(`//XCUIElementTypeApplication[@name="World Run"]/XCUIElementTypeWindow/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]`)
+  };
+
+
   private get topScrollView () {return $(`android=new UiSelector().resourceId("${APP_NAME}:id/pc_layout").childSelector(new UiSelector().className("android.widget.ScrollView"))`)};
   private get footerLayout () {return $(`id=footer_layout`)};
   private get title () {return $(`id=main_text`)};

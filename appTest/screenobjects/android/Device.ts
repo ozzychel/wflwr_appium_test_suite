@@ -27,10 +27,12 @@ class Device {
       if(driver.isAndroid) {
         this.isAndroid = true;
         this.isIOS = false;
+        return "android";
       } 
       if(driver.isIOS) {
         this.isAndroid = false;
         this.isIOS = true;
+        return "ios";
       }
     }
 

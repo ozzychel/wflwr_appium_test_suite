@@ -1,6 +1,4 @@
-const Device = require('../screenobjects/android/Device.ts');
-
-export const APP_NAME = Device.isAndroid ? 'com.redbull.wingsforlifeworldrun.debug' : 'com.redbull.WingsForLifeWorldRun.debug';
+export const APP_NAME = driver.isAndroid ? 'com.redbull.wingsforlifeworldrun.debug' : 'com.redbull.WingsForLifeWorldRun.debug';
 export const DEFAULT_PIN = '0000';
 
 // Test User data (consider moving to JSON)

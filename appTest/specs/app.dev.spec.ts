@@ -1,5 +1,5 @@
 import { APP_NAME, DEFAULT_PIN, USER_BIRTH_MONTH, USER_FIRSTNAME, USER_LASTNAME, USER_BIRTH_DAY, USER_BIRTH_YEAR, USER_NATIONALITY, USER_EMAIL, USER_COUNTRY, USER_LANGUAGE, USER_LOCALE, USER_UOM } from "../helpers/Constants";
-import { alertNoticeText } from "../helpers/TextCopies";
+import { alertNoticeText, iosTrackingAlertTitle } from "../helpers/TextCopies";
 import Gestures from "../helpers/Gestures";
 const CookiesBanner = require('../screenobjects/android/components/CookiesBanner');
 const CookiesBannerExpanded = require('../screenobjects/android/components/CookiesBannerExpanded');
@@ -29,6 +29,7 @@ const AppOsPermissions = require('../screenobjects/android/os_components/AppOsPe
 const AudioSettings = require('../screenobjects/android/AudioSettings');
 const UnitsOfMeasureSetting = require('../screenobjects/android/UnitsOfMeasureSetting');
 const AppInfoSettings = require('../screenobjects/android/os_components/AppInfoSettings');
+const IOSTrackingAlert = require('../screenobjects/android/os_components/IOSTrackingAlert');
 
 describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   
@@ -41,21 +42,44 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     await driver.terminateApp(APP_NAME);
   })
 
-  describe('BUILD APP INSTALLATION', () => {
-    it('Device platfrom should be iOS', async () => {
-      await expect(driver.isIOS).toBe(true)
-    });
+  describe('BUILD INSTALLATION AND PLATFORM MATCH', () => {
+    if(driver.isAndroid) {
+      it('Device platform should is Android', async () => {
+        await expect(driver.isAndroid).toBe(true)
+      });
+    }
+    if(driver.isIOS) {
+      it('Device platform should is iOS', async () => {
+        await expect(driver.isIOS).toBe(true);
+      });
+    }
 
     it('Should have have app installed on the device', async () => {
       await expect(await driver.isAppInstalled(APP_NAME)).toBe(true);
     })
-
-    // it('Should have have app installed on the device', async () => {
-    //   const elem = await $('-ios predicate string:type == "XCUIElementTypeAlert"');
-    //   await driver.pause(2000)
-    //   await expect(elem).toHaveText("Allow")
-    // })
   })
+
+  // add section to handle IOS tracking alert when launched first time
+  // use fullReset:true in appium config to simulate clean state for every ios run
+  if(driver.isIOS && driver.capabilities["fullReset"]) {
+    describe('IOS TRACKING ALERT', () => {
+      it('IOS tracking alert is displayed', async () => {
+        const elem = await IOSTrackingAlert.container;
+        await elem.waitForDisplayed({ timeout: 3000 });
+      });
+
+      it('IOS tracking alert HAS correct text copy', async () => {
+        const elem = await IOSTrackingAlert.container;
+        await expect(elem).toHaveTextContaining(iosTrackingAlertTitle);
+      });
+
+      it('TAP on "Allow" button DISMISS tracking alert', async () => {
+        const elem = await IOSTrackingAlert.container;
+        await IOSTrackingAlert.tapAllowButton();
+        await elem.waitForDisplayed({ timeout: 3000 , reverse: true });
+      });
+    })
+  }
 
   describe('LOGIN SCREEN. CONTAINERS AND LAYOUT', () => {
     it('Main App container EXISTS and DISPLAYED. App launched', async () => {
@@ -214,9 +238,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     it('TAP "Go to Settings" button', async () => {
       await CookiesBanner.tapGoToSettingsButton();
       await driver.pause(2000);
-
-      // await CookiesBannerExpanded.pcLayoutContainer.waitForDisplayed({timeout: 2000});
-
+      await CookiesBannerExpanded.pcLayoutContainer.waitForDisplayed({timeout: 2000});
     })
   })
 
