@@ -119,6 +119,7 @@ export const config: Options.Testrunner = {
             'appium:deviceName': 'iPhone 13 mini',
             "appium:udid": "00008110-001264901E04801E",
             "appium:platformName": "IOS",
+            'appium:platformVersion': '16.0',
             "appium:automationName": "XCUITest",
             "appium:orientation": "PORTRAIT",
             "appium:app": "/Users/apetunin/Projects/wflwr_appium_test_suite/apps/wflwr_debug.ipa",
@@ -129,6 +130,25 @@ export const config: Options.Testrunner = {
             // "appium:noReset": true,
             "appium:fullReset" : true
         }
+
+        // //Galaxy S20 
+        // {
+        //     'appium:udid': 'R5CN20YDB5R',
+        //     'appium:deviceName': 'SM-G986U1',
+        //     'appium:platformName': 'Android',
+        //     'appium:platformVersion': '12',
+        //     'appium:automationName': 'UiAutomator2',
+        //     'appium:orientation': 'PORTRAIT',
+        //     'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
+        //     'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
+        //     "appium:app": join(
+        //         process.cwd(),
+        //         "./apps/WFLWRQA6.6.0.11.apk"
+        //     ),
+        //     'appium:noReset': true,
+        //     'appium:newCommandTimeout': 240,
+        //     'appium:systemPort': 6011
+        // },
 
         // //  //Galaxy S23
         // {
@@ -147,25 +167,6 @@ export const config: Options.Testrunner = {
         //     'appium:noReset': true,
         //     'appium:newCommandTimeout': 240,
         //     'appium:systemPort': 6001
-        // },
-       
-        // //Galaxy S20 
-        // {
-        //     'appium:udid': 'R5CN20YDB5R',
-        //     'appium:deviceName': 'SM-G986U1',
-        //     'appium:platformName': 'Android',
-        //     'appium:platformVersion': '12',
-        //     'appium:automationName': 'UiAutomator2',
-        //     'appium:orientation': 'PORTRAIT',
-        //     'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
-        //     'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
-        //     "appium:app": join(
-        //         process.cwd(),
-        //         "./apps/WFLWRQA6.6.0.11.apk"
-        //     ),
-        //     'appium:noReset': true,
-        //     'appium:newCommandTimeout': 240,
-        //     'appium:systemPort': 6011
         // },
         
         //  //Pixel 6a

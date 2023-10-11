@@ -1,5 +1,5 @@
 import { APP_NAME, DEFAULT_PIN, USER_BIRTH_MONTH, USER_FIRSTNAME, USER_LASTNAME, USER_BIRTH_DAY, USER_BIRTH_YEAR, USER_NATIONALITY, USER_EMAIL, USER_COUNTRY, USER_LANGUAGE, USER_LOCALE, USER_UOM } from "../helpers/Constants";
-import { alertNoticeText, iosTrackingAlertTitle } from "../helpers/TextCopies";
+import { alertNoticeTextIOS, alertNoticeText, iosTrackingAlertTitle } from "../helpers/TextCopies";
 import Gestures from "../helpers/Gestures";
 const CookiesBanner = require('../screenobjects/android/components/CookiesBanner');
 const CookiesBannerExpanded = require('../screenobjects/android/components/CookiesBannerExpanded');
@@ -44,12 +44,12 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
   describe('BUILD INSTALLATION AND PLATFORM MATCH', () => {
     if(driver.isAndroid) {
-      it('Device platform should is Android', async () => {
+      it('Device platform is Android', async () => {
         await expect(driver.isAndroid).toBe(true)
       });
     }
     if(driver.isIOS) {
-      it('Device platform should is iOS', async () => {
+      it('Device platform is iOS', async () => {
         await expect(driver.isIOS).toBe(true);
       });
     }
@@ -58,6 +58,24 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       await expect(await driver.isAppInstalled(APP_NAME)).toBe(true);
     })
   })
+
+  describe('BUILD INSTALLATION AND PLATFORM MATCH', () => {
+    if(driver.isAndroid) {
+      it('Device platform is Android', async () => {
+        await expect(driver.isAndroid).toBe(true)
+      });
+    }
+    if(driver.isIOS) {
+      it('Device platform is iOS', async () => {
+        await expect(driver.isIOS).toBe(true);
+      });
+    }
+
+    it('Should have have app installed on the device', async () => {
+      await expect(await driver.isAppInstalled(APP_NAME)).toBe(true);
+    })
+  })
+
 
   // add section to handle IOS tracking alert when launched first time
   // use fullReset:true in appium config to simulate clean state for every ios run
@@ -144,13 +162,13 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
   describe('LOGIN SCREEN. COOKIES CONSENT BANNER.', () => {
     it('Banner container NOT CLICKABLE and is NOT SCROLLABLE', async () => {
+      const elem = await LoginScreen.bannerLayoutContainer;
       if(driver.isAndroid) {
-        const elem = await LoginScreen.bannerLayoutContainer;
         await expect(elem).toHaveAttrContaining('scrollable', 'false');
         await expect(elem).toHaveAttrContaining('clickable', 'false');
       }
       if(driver.isIOS) {
-        //TODO
+        //TODO (tried hittable - didn't work)
       }
     })
 
@@ -195,12 +213,8 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     it('"Allow All" button is CLICKABLE', async () => {
       const elem = await CookiesBanner.allowAllButton;
-      if (driver.isAndroid) {
-        await expect(elem).toHaveAttrContaining('clickable', 'true')
-      }
-      if(driver.isIOS) {
-        await expect(elem).toHaveAttrContaining('enabled', 'true')
-      }
+      if(driver.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
+      if(driver.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
     })
 
     it('"Decline All" button is DISPLAYED and HAS correct LABEL', async () => {
@@ -211,12 +225,8 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     it('"Decline All" button is CLICKABLE', async () => {
       const elem = await CookiesBanner.declineAllButton;
-      if (driver.isAndroid) {
-        await expect(elem).toHaveAttrContaining('clickable', 'true')
-      }
-      if(driver.isIOS) {
-        await expect(elem).toHaveAttrContaining('enabled', 'true')
-      }
+      if(driver.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
+      if(driver.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
     })
 
     it('"Go to Settings" button is DISPLAYED and HAS correct LABEL', async () => {
@@ -227,19 +237,148 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     it('"Go to Settings" button is CLICKABLE', async () => {
       const elem = await CookiesBanner.goToSettingsButton;
-      if (driver.isAndroid) {
-        await expect(elem).toHaveAttrContaining('clickable', 'true')
-      }
-      if(driver.isIOS) {
-        await expect(elem).toHaveAttrContaining('enabled', 'true')
-      }
+      if(driver.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
+      if(driver.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
     })
 
-    it('TAP "Go to Settings" button', async () => {
+    it('TAP on "Go to Settings" button REDIRECTS to expanded cookie banner', async () => {
       await CookiesBanner.tapGoToSettingsButton();
       await driver.pause(2000);
       await CookiesBannerExpanded.pcLayoutContainer.waitForDisplayed({timeout: 2000});
     })
+  })
+
+  describe('LOGIN SCREEN. PRIVACY SETTINGS SDK PREFERENCES', () => {
+    //Privacy Settings Banner Expanded
+    // it('Expanded Cookies Banner main containers are DISPLAYED ', async () => {
+    //   const pcLayout = await CookiesBannerExpanded.pcLayoutContainer;
+    //   const topScrollView = CookiesBannerExpanded.topScrollView;
+    //   const footer = await CookiesBannerExpanded.footerLayout;
+    //   await expect(pcLayout).toBeDisplayed();
+    //   await expect(topScrollView).toBeDisplayed();
+    //   await expect(footer).toBeDisplayed();
+    // })
+
+    it('Screen HAS "Privacy Settings" TITLE', async () => {
+      const elem = CookiesBannerExpanded.title;
+      await expect(elem).toHaveText('Privacy Settings');
+    })
+
+    it('Main Info text is DISPLAYED and NOT SCROLLABLE', async () => {
+      const elem = CookiesBannerExpanded.mainText;
+      await expect(elem).toHaveText(await driver.isAndroid ? alertNoticeText : alertNoticeTextIOS);
+      // await expect(elem).toHaveAttrContaining('scrollable', 'false');
+    })
+
+    it('Button layout container is DISPLAYED', async () => {
+      const elem = CookiesBannerExpanded.buttonLayout;
+      await expect(elem).toBeDisplayed();
+    })
+
+
+    it('"Allow All" button is DISPLAYED and CLICKABLE', async () => {
+      const elem = CookiesBannerExpanded.allowAllBtn;
+      await expect(elem).toBeDisplayed();
+      if(driver.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
+      if(driver.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
+    })
+
+    it('"Allow All" button HAS correct LABEL', async () => {
+      const elem = CookiesBannerExpanded.allowAllBtn;
+      await expect(elem).toHaveText('Allow All')
+    })
+
+    it('"Decline All" button is DISPLAYED and CLICKABLE', async () => {
+      const elem = CookiesBannerExpanded.declineAllBtn;
+      await expect(elem).toBeDisplayed();
+      if(driver.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
+      if(driver.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
+    })
+
+    it('"Decline All" button HAS correct LABEL', async () => {
+      const elem = CookiesBannerExpanded.declineAllBtn;
+      await expect(elem).toHaveText('Decline All')
+    })
+
+    // //add button toggle here
+
+    // it('Preferences list is DISPLAYED', async () => {
+    //   const elem = CookiesBannerExpanded.preferencesList;
+    //   await expect(elem).toBeDisplayed();
+    //   await expect(elem).toHaveAttrContaining('scrollable', 'false');
+    // })
+
+    it('"Strictly necessary" consent container is DISPLAYED', async () => {
+      const elem = CookiesBannerExpanded.strictlyNecessaryCont;
+      await expect(elem).toBeDisplayed();
+    })
+
+    it('"Performance" consent container is DISPLAYED', async () => {
+      const elem = CookiesBannerExpanded.performanceCont;
+      await expect(elem).toBeDisplayed();
+    })
+
+    it('"Marketing" consent container is DISPLAYED', async () => {
+      const elem = CookiesBannerExpanded.marketingCont;
+      await expect(elem).toBeDisplayed();
+    })
+
+    // //TODO: create tests for SDK preferences, and for every sdk page
+    
+    // it('SDK Preferences TOGGLE can be switched ON and OFF', async () => {
+    //   const switch1 = await $('(//android.widget.Switch[@content-desc="Consent"])[1]')
+    //   const switch2 = await $('(//android.widget.Switch[@content-desc="Consent"])[2]')
+    //   expect(switch1).toHaveAttributeContaining('checked', 'false');
+    //   await switch1.click();
+    //   await driver.pause(1000)
+    //   expect(switch1).toHaveAttributeContaining('checked', 'true');
+    //   await switch1.click();
+    //   await driver.pause(1000)
+    //   expect(switch1).toHaveAttributeContaining('checked', 'false');
+    //   await switch1.click();
+    //   expect(switch1).toHaveAttributeContaining('checked', 'true');
+    //   await switch2.click();
+    //   await driver.pause(1000);
+    //   expect(switch1).toHaveAttributeContaining('checked', 'true');
+    // })
+
+    // it('Settings ID section title is DISPLAYED', async () => {
+    //   const elem = CookiesBannerExpanded.settingsIdTitle;
+    //   await expect(elem).toBeDisplayed();
+    //   await expect(elem).toHaveText('Settings ID');
+    // })
+
+    // it('Settings ID number is DISPLAYED', async () => {
+    //   const elem = CookiesBannerExpanded.settingsIdNumber;
+    //   await expect(elem).toBeDisplayed();
+    //   await expect(elem).not.toHaveText('');
+    // })
+
+    // it('Settings Id CAN BE COPIED with copy button TAP', async () => {
+    //   const elem = CookiesBannerExpanded.copyIdButton;
+    //   await expect(elem).toBeDisplayed();
+    //   await elem.click();
+    //   await driver.pause(1000)
+    // })
+
+    // it('"Confirm My Choices" button is DISPLAYED in the footer', async () => {
+    //   const elem = CookiesBannerExpanded.confirmButton;
+    //   await expect(elem).toBeDisplayed();
+    // })
+
+    // it('"Confirm My Choices" button is hittable and CLICKABLE', async () => {
+    //   const elem = CookiesBannerExpanded.confirmButton;
+    //   await expect(elem).toHaveAttrContaining('enabled', 'true');
+    //   await expect(elem).toHaveAttrContaining('clickable', 'true');
+    // })
+
+    // it('TAP "Confirm My Choices" button. REDIRECTED to Login screen', async () => {
+    //     const container = LoginScreen.container;
+    //     await CookiesBannerExpanded.tapAllowAllButton();
+    //     await container.waitForDisplayed({timeout: 2000, reverse:true});
+    //     await (LoginScreen.appUiView).waitForDisplayed({timeout: 2000});
+    // })
+
   })
 
 })

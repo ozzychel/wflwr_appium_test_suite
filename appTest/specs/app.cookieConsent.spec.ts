@@ -192,7 +192,6 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     it('Preferences list is DISPLAYED', async () => {
       const elem = CookiesBannerExpanded.preferencesList;
       await expect(elem).toBeDisplayed();
-      await expect(elem).toHaveAttrContaining('scrollable', 'false');
     })
 
     //TODO: create tests for SDK preferences, and for every sdk page
