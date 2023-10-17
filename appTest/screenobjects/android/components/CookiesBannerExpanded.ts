@@ -4,9 +4,6 @@ import { APP_NAME } from "../../../helpers/Constants";
 /// try to extend AppScreen
 class CookiesBannerExpanded {
 
-  //todo: implement SDK preferences validation methods:
-  //-striclty, -performance, -marketing
-  //implement switch getters and taps
   private get pcLayoutContainer () {
     return driver.isAndroid ? 
     $(`id=pc_layout`) :
@@ -47,26 +44,18 @@ class CookiesBannerExpanded {
     return driver.isAndroid ?
       $('') :
       $('id=pcStrictlyNecessaryCell')
-  }
+  };
 
   private get performanceCont () {
     return driver.isAndroid ?
       $('') :
       $('//XCUIElementTypeCell[@name="pcEditableConsentCell"][1]')
-  }
+  };
 
   private get marketingCont () {
     return driver.isAndroid ?
       $('') :
       $('//XCUIElementTypeCell[@name="pcEditableConsentCell"][2]')
-  }
-  
-  private get preferencesList () {return $(`id=preferences_list`)};
-
-  private get settingsIdNumber () {
-    return driver.isAndroid ?
-      $(`id=dsid`) :
-      $(`id=pcDsIdCell`)
   };
 
   private get confirmButton () {
@@ -75,10 +64,39 @@ class CookiesBannerExpanded {
       $('id=pcConfirmMyChoiceButton')
   };
   
+  private get performanceSwitch () {
+    return driver.isAndroid ?
+      $('//android.widget.Switch[@content-desc="Consent"][1]') :
+      $('//XCUIElementTypeCell[@name="pcEditableConsentCell"][1]/XCUIElementTypeSwitch[@name="pcEditableConsentCellConsentSwitch"]')
+  }
+
+  private get marketingSwitch () {
+    return driver.isAndroid ?
+      $('//android.widget.Switch[@content-desc="Consent"][2]') :
+      $('//XCUIElementTypeCell[@name="pcEditableConsentCell"][2]/XCUIElementTypeSwitch[@name="pcEditableConsentCellConsentSwitch"]')
+  }
+  
+  private get settingsIdTitle () {
+    return driver.isAndroid ? 
+      $(`id=dsid_title`) :
+      $(`id=Settings ID`)
+  }
+
+  private get settingsIdNumber () {
+    return driver.isAndroid ?
+      $(`id=dsid`) :
+      $(`//XCUIElementTypeCell[@name="pcDsIdCell"]/XCUIElementTypeStaticText[1]`)
+  };
+  
+  private get copyIdButton () {
+    return driver.isAndroid ? 
+      $(`id=text_copy`) :
+      $(`id=dsidCopyButton`)
+  };
+
+  private get preferencesList () {return $(`id=preferences_list`)};
   private get topScrollView () {return $(`android=new UiSelector().resourceId("${APP_NAME}:id/pc_layout").childSelector(new UiSelector().className("android.widget.ScrollView"))`)};
   private get footerLayout () {return $(`id=footer_layout`)};
-  private get settingsIdTitle () {return $(`id=dsid_title`)};
-  private get copyIdButton () {return $(`id=text_copy`)};
 
 
   async tapAllowAllButton () {

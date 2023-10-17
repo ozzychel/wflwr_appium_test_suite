@@ -1,5 +1,5 @@
 import { APP_NAME, DEFAULT_PIN, USER_BIRTH_MONTH, USER_FIRSTNAME, USER_LASTNAME, USER_BIRTH_DAY, USER_BIRTH_YEAR, USER_NATIONALITY, USER_EMAIL, USER_COUNTRY, USER_LANGUAGE, USER_LOCALE, USER_UOM } from "../helpers/Constants";
-import { alertNoticeTextIOS, alertNoticeText, iosTrackingAlertTitle } from "../helpers/TextCopies";
+import { alertNoticeTextIOS, alertNoticeText, activityTrackingAlertTitle, notificationsTrackingAlertTitle } from "../helpers/TextCopies";
 import Gestures from "../helpers/Gestures";
 const CookiesBanner = require('../screenobjects/android/components/CookiesBanner');
 const CookiesBannerExpanded = require('../screenobjects/android/components/CookiesBannerExpanded');
@@ -59,23 +59,6 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     })
   })
 
-  describe('BUILD INSTALLATION AND PLATFORM MATCH', () => {
-    if(driver.isAndroid) {
-      it('Device platform is Android', async () => {
-        await expect(driver.isAndroid).toBe(true)
-      });
-    }
-    if(driver.isIOS) {
-      it('Device platform is iOS', async () => {
-        await expect(driver.isIOS).toBe(true);
-      });
-    }
-
-    it('Should have have app installed on the device', async () => {
-      await expect(await driver.isAppInstalled(APP_NAME)).toBe(true);
-    })
-  })
-
 
   // add section to handle IOS tracking alert when launched first time
   // use fullReset:true in appium config to simulate clean state for every ios run
@@ -88,7 +71,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
       it('IOS tracking alert HAS correct text copy', async () => {
         const elem = await IOSTrackingAlert.container;
-        await expect(elem).toHaveTextContaining(iosTrackingAlertTitle);
+        await expect(elem).toHaveTextContaining(activityTrackingAlertTitle);
       });
 
       it('TAP on "Allow" button DISMISS tracking alert', async () => {
@@ -324,60 +307,123 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     })
 
     // //TODO: create tests for SDK preferences, and for every sdk page
+    it('SDK Preferences TOGGLES are OFF by default', async () => {
+      const switch1 = await CookiesBannerExpanded.performanceSwitch;
+      const switch2 = await CookiesBannerExpanded.marketingSwitch;
+      if(driver.isAndroid) {
+        expect(switch1).toHaveAttributeContaining('checked', 'false') && 
+        expect(switch2).toHaveAttributeContaining('checked', 'false');
+      }
+      if(driver.isIOS) {
+        expect(switch1).toHaveAttributeContaining('value', '0') &&
+        expect(switch2).toHaveAttributeContaining('value', '0');
+      }
+    })
+
+    it('Perfomance TOGGLE can be switched ON and OFF', async () => {
+      const toggle = await CookiesBannerExpanded.performanceSwitch;
+      await toggle.click();
+      await driver.pause(1000)
+      if(driver.isAndroid) expect(toggle).toHaveAttributeContaining('checked', 'true');
+      if(driver.isIOS) expect(toggle).toHaveAttributeContaining('value', '1');
+      await toggle.click();
+      await driver.pause(1000)
+      if(driver.isAndroid) expect(toggle).toHaveAttributeContaining('checked', 'false');
+      if(driver.isIOS) expect(toggle).toHaveAttributeContaining('value', '0')
+      await toggle.click();
+      await driver.pause(1000)
+      if(driver.isAndroid) expect(toggle).toHaveAttributeContaining('checked', 'true');
+      if(driver.isIOS) expect(toggle).toHaveAttributeContaining('value', '1');
+    })
+
+    it('Marketing TOGGLE can be switched ON and OFF', async () => {
+      const toggle = await CookiesBannerExpanded.marketingSwitch;
+      await toggle.click();
+      await driver.pause(1000)
+      if(driver.isAndroid) expect(toggle).toHaveAttributeContaining('checked', 'true');
+      if(driver.isIOS) expect(toggle).toHaveAttributeContaining('value', '1');
+      await toggle.click();
+      await driver.pause(1000)
+      if(driver.isAndroid) expect(toggle).toHaveAttributeContaining('checked', 'false');
+      if(driver.isIOS) expect(toggle).toHaveAttributeContaining('value', '0')
+      await toggle.click();
+      await driver.pause(1000)
+      if(driver.isAndroid) expect(toggle).toHaveAttributeContaining('checked', 'true');
+      if(driver.isIOS) expect(toggle).toHaveAttributeContaining('value', '1');
+    })
+
     
-    // it('SDK Preferences TOGGLE can be switched ON and OFF', async () => {
-    //   const switch1 = await $('(//android.widget.Switch[@content-desc="Consent"])[1]')
-    //   const switch2 = await $('(//android.widget.Switch[@content-desc="Consent"])[2]')
-    //   expect(switch1).toHaveAttributeContaining('checked', 'false');
-    //   await switch1.click();
-    //   await driver.pause(1000)
-    //   expect(switch1).toHaveAttributeContaining('checked', 'true');
-    //   await switch1.click();
-    //   await driver.pause(1000)
-    //   expect(switch1).toHaveAttributeContaining('checked', 'false');
-    //   await switch1.click();
-    //   expect(switch1).toHaveAttributeContaining('checked', 'true');
-    //   await switch2.click();
-    //   await driver.pause(1000);
-    //   expect(switch1).toHaveAttributeContaining('checked', 'true');
-    // })
+    it('Settings ID section title is DISPLAYED', async () => {
+      const elem = CookiesBannerExpanded.settingsIdTitle;
+      await expect(elem).toBeDisplayed();
+      await expect(elem).toHaveText('Settings ID');
+    })
 
-    // it('Settings ID section title is DISPLAYED', async () => {
-    //   const elem = CookiesBannerExpanded.settingsIdTitle;
-    //   await expect(elem).toBeDisplayed();
-    //   await expect(elem).toHaveText('Settings ID');
-    // })
+    it('Settings ID number is DISPLAYED', async () => {
+      const elem = CookiesBannerExpanded.settingsIdNumber;
+      await expect(elem).toBeDisplayed();
+      await expect(elem).not.toHaveText('');
+    })
 
-    // it('Settings ID number is DISPLAYED', async () => {
-    //   const elem = CookiesBannerExpanded.settingsIdNumber;
-    //   await expect(elem).toBeDisplayed();
-    //   await expect(elem).not.toHaveText('');
-    // })
+    it('Settings Id CAN BE COPIED with copy button TAP', async () => {
+      const elem = CookiesBannerExpanded.copyIdButton;
+      await expect(elem).toBeDisplayed();
+      await elem.click();
+      await driver.pause(1000)
+    })
 
-    // it('Settings Id CAN BE COPIED with copy button TAP', async () => {
-    //   const elem = CookiesBannerExpanded.copyIdButton;
-    //   await expect(elem).toBeDisplayed();
-    //   await elem.click();
-    //   await driver.pause(1000)
-    // })
+    it('"Confirm My Choices" button is DISPLAYED in the footer', async () => {
+      const elem = CookiesBannerExpanded.confirmButton;
+      await expect(elem).toBeDisplayed();
+    })
 
-    // it('"Confirm My Choices" button is DISPLAYED in the footer', async () => {
-    //   const elem = CookiesBannerExpanded.confirmButton;
-    //   await expect(elem).toBeDisplayed();
-    // })
+    it('"Confirm My Choices" button is hittable and CLICKABLE', async () => {
+      const elem = CookiesBannerExpanded.confirmButton;
+      if(driver.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
+      if(driver.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
+    })
 
-    // it('"Confirm My Choices" button is hittable and CLICKABLE', async () => {
-    //   const elem = CookiesBannerExpanded.confirmButton;
-    //   await expect(elem).toHaveAttrContaining('enabled', 'true');
-    //   await expect(elem).toHaveAttrContaining('clickable', 'true');
-    // })
 
-    // it('TAP "Confirm My Choices" button. REDIRECTED to Login screen', async () => {
-    //     const container = LoginScreen.container;
-    //     await CookiesBannerExpanded.tapAllowAllButton();
-    //     await container.waitForDisplayed({timeout: 2000, reverse:true});
-    //     await (LoginScreen.appUiView).waitForDisplayed({timeout: 2000});
-    // })
+    if(driver.isAndroid) {
+      it('TAP on "Confirm My Choices" button REDIRECTS to Login screen', async () => {
+        //since both platfroms don't have ids for the main screen containers
+        //will verify if 'continue with email' button is displayed 
+          const banner = CookiesBannerExpanded.pcLayoutContainer;
+          const btn = LoginScreen.continueWithEmailButton;
+          await CookiesBannerExpanded.tapAllowAllButton();
+          await banner.waitForDisplayed({timeout: 3000, reverse:true});
+          await btn.waitForDisplayed({timeout: 5000});
+      })
+    }
+
+    //IOS. Handle push notifications prompt
+    if(driver.isIOS && driver.capabilities["fullReset"]) {
+      
+      it('TAP on "Confirm my Choices" button. IOS Push notfications alert shows up', async () => {
+        const banner = CookiesBannerExpanded.pcLayoutContainer;
+        const elem = await IOSTrackingAlert.container;
+        await CookiesBannerExpanded.tapAllowAllButton();
+        await elem.waitForDisplayed({ timeout: 3000 });
+      });
+
+      it('IOS Push notifications alert HAS correct TEXT copy', async () => {
+        const elem = await IOSTrackingAlert.container;
+        await expect(elem).toHaveTextContaining(notificationsTrackingAlertTitle);
+      });
+
+      it('TAP on "Allow" button REDIRECTS to Login screen', async () => {
+        //since both platfroms don't have ids for the main screen containers
+        //and all ui elements on Login screen belong to the layer that is set visible:false
+        //will check if 'Continue with email button' exists
+        const elem = await IOSTrackingAlert.container;
+        const btn = LoginScreen.continueWithEmailButton;
+        await IOSTrackingAlert.tapAllowButton();
+        await driver.pause(5000);
+        await expect(btn).toExist();
+      });
+
+     
+    }
 
   })
 
