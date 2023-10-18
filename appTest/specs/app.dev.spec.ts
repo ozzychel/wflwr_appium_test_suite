@@ -399,7 +399,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     //IOS. Handle push notifications prompt
     if(driver.isIOS && driver.capabilities["fullReset"]) {
       
-      it('TAP on "Confirm my Choices" button. IOS Push notfications alert shows up', async () => {
+      it('TAP on "Confirm my Choices" button. Push notfications alert shows up', async () => {
         const banner = CookiesBannerExpanded.pcLayoutContainer;
         const elem = await IOSTrackingAlert.container;
         await CookiesBannerExpanded.tapAllowAllButton();

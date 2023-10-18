@@ -25,7 +25,7 @@ class CookiesBannerExpanded {
   private get buttonLayout () {
     return driver.isAndroid ? 
       $(`id=allow_all_layout`) :
-      $(`//XCUIElementTypeButton[@name="pcAllowAllButton"]/parent::*`)
+      $(`//XCUIElementTypeButton[@name="pcAllowAllButton"]`)
   };
 
   private get allowAllBtn  () {
@@ -42,19 +42,19 @@ class CookiesBannerExpanded {
 
   private get strictlyNecessaryCont () {
     return driver.isAndroid ?
-      $('') :
+      $('//android.widget.TextView[contains(@text, "Strictly Necessary")]/parent::*/parent::*') :
       $('id=pcStrictlyNecessaryCell')
   };
 
   private get performanceCont () {
     return driver.isAndroid ?
-      $('') :
+      $('//android.widget.TextView[contains(@text, "Performance")]/parent::*/parent::*') :  
       $('//XCUIElementTypeCell[@name="pcEditableConsentCell"][1]')
   };
 
   private get marketingCont () {
     return driver.isAndroid ?
-      $('') :
+      $('//android.widget.TextView[contains(@text, "Marketing")]/parent::*/parent::*') :  
       $('//XCUIElementTypeCell[@name="pcEditableConsentCell"][2]')
   };
 
@@ -66,13 +66,13 @@ class CookiesBannerExpanded {
   
   private get performanceSwitch () {
     return driver.isAndroid ?
-      $('//android.widget.Switch[@content-desc="Consent"][1]') :
+      $('(//android.widget.Switch[@content-desc="Consent"])[1]') :
       $('//XCUIElementTypeCell[@name="pcEditableConsentCell"][1]/XCUIElementTypeSwitch[@name="pcEditableConsentCellConsentSwitch"]')
   }
 
   private get marketingSwitch () {
     return driver.isAndroid ?
-      $('//android.widget.Switch[@content-desc="Consent"][2]') :
+      $('(//android.widget.Switch[@content-desc="Consent"])[2]') :
       $('//XCUIElementTypeCell[@name="pcEditableConsentCell"][2]/XCUIElementTypeSwitch[@name="pcEditableConsentCellConsentSwitch"]')
   }
   

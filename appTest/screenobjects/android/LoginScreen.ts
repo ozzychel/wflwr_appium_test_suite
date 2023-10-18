@@ -29,8 +29,8 @@ class LoginScreen {
     return driver.isAndroid ? 
       $('//android.widget.TextView[@text="CONTINUE WITH EMAIL"]') :
       $('-ios predicate string:label == "CONTINUE WITH EMAIL"')
-      // $('id=CONTINUE WITH EMAIL')
   };
+  
   private get emailAddressLabel () {return $('//android.widget.TextView[@text,"EMAIL ADDRESS"]')};
   private get emailInputField () {return $('//android.widget.EditText')}
   //find way to search for placeholder text > parent
