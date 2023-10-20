@@ -1,0 +1,33 @@
+{
+    "configurations": [
+        {
+            "name": "armv7",
+            "includePath": [
+                "/Users/apetunin/kepler/kepler-sdk/0.2.6557.0/kndk/platforms/0.2/armv7/usr/include/**",
+                "/Users/apetunin/kepler/kepler-sdk/0.2.6557.0/component-sdks/VegaUIReact/armv7/include/**",
+                "/Users/apetunin/Projects/wflwr_appium_test_suite/**"
+            ],
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ],
+            "intelliSenseMode": "macos-clang-x64"
+        },
+        {
+            "name": "x86_64",
+            "includePath": [
+                "/Users/apetunin/kepler/kepler-sdk/0.2.6557.0/kndk/platforms/0.2/x86_64/usr/include/**",
+                "/Users/apetunin/kepler/kepler-sdk/0.2.6557.0/component-sdks/VegaUIReact/x86_64/include/**",
+                "/Users/apetunin/Projects/wflwr_appium_test_suite/**"
+            ],
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "macFrameworkPath": [
+                "/System/Library/Frameworks",
+                "/Library/Frameworks"
+            ],
+            "intelliSenseMode": "macos-clang-x64"
+        }
+    ],
+    "version": 4
+}

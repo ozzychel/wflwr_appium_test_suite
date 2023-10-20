@@ -1,10 +1,10 @@
-import { DEFAULT_PIN } from '../../helpers/Constants';
-
 class Device {
 
     screenSize = null;
     screenWidth = null;
     screenHeight = null;
+    isAndroid = null;
+    isIOS = null;
     
     getScreenSize = async function () {
       let size = await driver.getWindowSize();
@@ -21,6 +21,19 @@ class Device {
                 driver.capabilities.platformVersion) as string) || '8',
             10,
         );
+    }
+
+    getPlatform = async function () {
+      if(driver.isAndroid) {
+        this.isAndroid = true;
+        this.isIOS = false;
+        return "android";
+      } 
+      if(driver.isIOS) {
+        this.isAndroid = false;
+        this.isIOS = true;
+        return "ios";
+      }
     }
 
     //Execute adb command

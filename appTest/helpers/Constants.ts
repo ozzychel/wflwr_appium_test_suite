@@ -1,4 +1,4 @@
-export const APP_NAME = 'com.redbull.wingsforlifeworldrun.debug';
+export const APP_NAME = driver.isAndroid ? 'com.redbull.wingsforlifeworldrun.debug' : 'com.redbull.WingsForLifeWorldRun.debug';
 export const DEFAULT_PIN = '0000';
 
 // Test User data (consider moving to JSON)

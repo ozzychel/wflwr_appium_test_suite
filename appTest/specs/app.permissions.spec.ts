@@ -17,6 +17,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   
   beforeAll(async () => {
     await Device.getScreenSize();
+    await Device.getPlatform();
     await driver.startRecordingScreen();
   })
 
