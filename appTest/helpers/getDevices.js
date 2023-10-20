@@ -2,7 +2,7 @@ const { exec } = require('child_process');
 
 function getConnectedAndroidDevices() {
   return new Promise((resolve, reject) => {
-    exec('adb devices', (error, stdout, stderr) => {
+    exec('adb devices', (error, stdout) => {
       if (error) {
         reject(error);
         return;
@@ -54,7 +54,7 @@ function getConnectedAndroidDevices() {
 
 function getDeviceProperty(udid, property) {
   return new Promise((resolve, reject) => {
-    exec(`adb -s ${udid} shell getprop ${property}`, (error, stdout, stderr) => {
+    exec(`adb -s ${udid} shell getprop ${property}`, (error, stdout) => {
       if (error) {
         reject(error);
         return;
@@ -66,7 +66,8 @@ function getDeviceProperty(udid, property) {
 
 async function test () {
   const devices = await getConnectedAndroidDevices();
-  console.log("WORKS:", devices)
+  console.log('WORKS:', devices);
 }
 
-test()
+//runs te test
+test();

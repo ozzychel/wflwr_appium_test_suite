@@ -12,5 +12,5 @@ export const USER_BIRTH_YEAR = '1986';
 export const USER_NATIONALITY = 'Albania';
 export const USER_COUNTRY = 'Albania';
 export const USER_LANGUAGE = 'English';
-export const USER_LOCALE = "United Kingdom";
-export const USER_UOM = "Metric"; //'km'
+export const USER_LOCALE = 'United Kingdom';
+export const USER_UOM = 'Metric'; //'km'

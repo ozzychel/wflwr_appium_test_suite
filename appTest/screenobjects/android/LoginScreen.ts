@@ -1,62 +1,61 @@
 class LoginScreen {
-  private get content () {return $('id=content')};
-  
-  private get container () {  
-    return driver.isAndroid ? 
-      $('id=container') : 
-      $('id=World Run')
-  };
+  private get content () {return $('id=content');}
+
+  private get container () {
+    return driver.isAndroid ?
+      $('id=container') :
+      $('id=World Run');
+  }
 
   private get touchOutside () {
-    return driver.isAndroid ? 
+    return driver.isAndroid ?
       $('id=touch_outside') :
-      $('//XCUIElementTypeApplication[@name="World Run"]/XCUIElementTypeWindow/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther')
-  };
+      $('//XCUIElementTypeApplication[@name="World Run"]/XCUIElementTypeWindow/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther');
+  }
 
   private get bannerLayoutContainer () {
     return driver.isAndroid ?
-      $('id=design_bottom_sheet') : 
-      $('//XCUIElementTypeTable/parent::*')
-  };
-  
-  private get iosTrackingAlert () {return $('-ios predicate string:type == "XCUIElementTypeAlert"')}
-  
-  private get logo () { return $('id=WFLWR Logo')}
-  private get appUiView () {return $('//androidx.compose.ui.platform.ComposeView')}
-  
+      $('id=design_bottom_sheet') :
+      $('//XCUIElementTypeTable/parent::*');
+  }
+
+  private get iosTrackingAlert () {return $('-ios predicate string:type == "XCUIElementTypeAlert"');}
+
+  private get logo () { return $('id=WFLWR Logo');}
+  private get appUiView () {return $('//androidx.compose.ui.platform.ComposeView');}
+
   //find better way to avoid xpath below and target Button class, not text
   private get continueWithEmailButton () {
-    return driver.isAndroid ? 
+    return driver.isAndroid ?
       $('//android.widget.TextView[@text="CONTINUE WITH EMAIL"]') :
-      $('-ios predicate string:label == "CONTINUE WITH EMAIL"')
-  };
-  
-  private get emailAddressLabel () {return $('//android.widget.TextView[@text,"EMAIL ADDRESS"]')};
-  private get emailInputField () {return $('//android.widget.EditText')}
+      $('-ios predicate string:label == "CONTINUE WITH EMAIL"');
+  }
+
+  private get emailAddressLabel () {return $('//android.widget.TextView[@text,"EMAIL ADDRESS"]');}
+  private get emailInputField () {return $('//android.widget.EditText');}
   //find way to search for placeholder text > parent
-  private get emailPlaceholderText () {return $(`android=new UiSelector().className("android.widget.EditText").childSelector(new UiSelector().className("android.widget.TextView"))`)};
-  
+  private get emailPlaceholderText () {return $('android=new UiSelector().className("android.widget.EditText").childSelector(new UiSelector().className("android.widget.TextView"))');}
+
   //very bad design, container not the button change 'enabled' prop + no id. Works for now, but unreliable
   //cannot use -uiautomator selector strategy,cause its a webview!
-  private get continueButton () {return $(`//android.widget.TextView[@text="CONTINUE"]`)};
-  private get dismissButton () {return $(`//android.widget.TextView[@text="DISMISS"]`)};
+  private get continueButton () {return $('//android.widget.TextView[@text="CONTINUE"]');}
+  private get dismissButton () {return $('//android.widget.TextView[@text="DISMISS"]');}
   //------------------------------------------------------------------------------------
-  private get forgotEmailLink () {return $(`android=new UiSelector().className("android.widget.TextView").text("Forgot Email Address?")`)}
-  private get invalidUsrMsg () {return $(`android=new UiSelector().className("android.widget.TextView").text("Invalid email address")`)}
+  private get forgotEmailLink () {return $('android=new UiSelector().className("android.widget.TextView").text("Forgot Email Address?")');}
+  private get invalidUsrMsg () {return $('android=new UiSelector().className("android.widget.TextView").text("Invalid email address")');}
 
   //Password screen
-  private get passwordInputField () {return $('//android.widget.EditText')};
-  private get passwordPlaceholderText () {return $(`android=new UiSelector().className("android.widget.EditText").childSelector(new UiSelector().className("android.widget.TextView"))`)};
-  private get showPasswordButton () {return $(`//android.widget.EditText/android.view.View[@clickable="true"]`)}
-  
-  private get welcomeBackLabel () {return $(`//android.widget.ScrollView/android.widget.TextView[1]`)};
-  private get userEmailLabel () {return $(`//android.widget.ScrollView/android.widget.TextView[2]`)}
-  private get forgotPassword () {return $(`android=new UiSelector().className("android.widget.TextView").text("Forgot Password?")`)}
+  private get passwordInputField () {return $('//android.widget.EditText');}
+  private get passwordPlaceholderText () {return $('android=new UiSelector().className("android.widget.EditText").childSelector(new UiSelector().className("android.widget.TextView"))');}
+  private get showPasswordButton () {return $('//android.widget.EditText/android.view.View[@clickable="true"]');}
 
-  private get errorMsgContainer () {return $(`//TODO`)}
-  private get errorMsgTitle () {return $(`//android.view.View/android.widget.TextView[@text="ERROR"]`)}
-  private get errorMsgText () {return $(`//android.view.View/android.widget.TextView[@text="Authentication failed – please check your username and password"]`)}
+  private get welcomeBackLabel () {return $('//android.widget.ScrollView/android.widget.TextView[1]');}
+  private get userEmailLabel () {return $('//android.widget.ScrollView/android.widget.TextView[2]');}
+  private get forgotPassword () {return $('android=new UiSelector().className("android.widget.TextView").text("Forgot Password?")');}
 
+  private get errorMsgContainer () {return $('//TODO');}
+  private get errorMsgTitle () {return $('//android.view.View/android.widget.TextView[@text="ERROR"]');}
+  private get errorMsgText () {return $('//android.view.View/android.widget.TextView[@text="Authentication failed – please check your username and password"]');}
 
   async tapContinueWithEmailButton () {
     await this.continueWithEmailButton.click();

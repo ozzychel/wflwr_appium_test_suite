@@ -2,7 +2,7 @@ export default class AppScreen {
   private selector: string;
 
   constructor (selector: string) {
-      this.selector = selector;
+    this.selector = selector;
   }
 
   /**
@@ -11,8 +11,8 @@ export default class AppScreen {
    * @param {boolean} isShown
    */
   async waitForIsShown (isShown = true): Promise<boolean | void> {
-      return $(this.selector).waitForDisplayed({
-          reverse: !isShown,
-      });
+    return $(this.selector).waitForDisplayed({
+      reverse: !isShown,
+    });
   }
 }

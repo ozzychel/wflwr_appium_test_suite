@@ -1,28 +1,27 @@
-import { USER_EMAIL } from "../../helpers/Constants";
+import { USER_EMAIL } from '../../helpers/Constants';
 class SignupScreen {
-  private get content () {return $('id=content')};
+  private get content () {return $('id=content');}
 
-  private get appUiView () {return $('//androidx.compose.ui.platform.ComposeView')};
-  private get screenTitle () {return $('//android.widget.TextView[@text="SIGN UP"]')};
-  private get userEmail () {return $(`//android.widget.TextView[@text="${USER_EMAIL.toUpperCase()}"]`)}; 
+  private get appUiView () {return $('//androidx.compose.ui.platform.ComposeView');}
+  private get screenTitle () {return $('//android.widget.TextView[@text="SIGN UP"]');}
+  private get userEmail () {return $(`//android.widget.TextView[@text="${USER_EMAIL.toUpperCase()}"]`);}
 
   //find way to search for placeholder text > parent
   //first name field
-  private get firstNameInput () {return $('//android.widget.ScrollView/android.widget.EditText[1]')}
+  private get firstNameInput () {return $('//android.widget.ScrollView/android.widget.EditText[1]');}
   // private get firstNameInputPlaceholderText () {return $(`android=new UiSelector().className("android.widget.ScrollView/android.widget.EditText[1]").childSelector(new UiSelector().className("android.widget.TextView"))`)};
-  
-  
-  private get firstNameInputPlaceholderText () {return $(`//android.widget.ScrollView/android.widget.EditText[1]/android.widget.TextView`)};
+
+  private get firstNameInputPlaceholderText () {return $('//android.widget.ScrollView/android.widget.EditText[1]/android.widget.TextView');}
   //last name field
-  private get lastNameInput () {return $('//android.widget.ScrollView/android.widget.EditText[2]')}
-  private get lastNameInputPlaceholderText () {return $(`//android.widget.ScrollView/android.widget.EditText[2]/android.widget.TextView`)};
+  private get lastNameInput () {return $('//android.widget.ScrollView/android.widget.EditText[2]');}
+  private get lastNameInputPlaceholderText () {return $('//android.widget.ScrollView/android.widget.EditText[2]/android.widget.TextView');}
   //Password field
-  private get passwordInput () {return $('//android.widget.ScrollView/android.widget.EditText[3]')}
-  private get passwordInputPlaceholderText () {return $(`//android.widget.ScrollView/android.widget.EditText[3]/android.widget.TextView`)};
-  private get showPasswordButton () {return $('//android.widget.ScrollView/android.widget.EditText[3]/android.view.View[2]/android.widget.Button')}
+  private get passwordInput () {return $('//android.widget.ScrollView/android.widget.EditText[3]');}
+  private get passwordInputPlaceholderText () {return $('//android.widget.ScrollView/android.widget.EditText[3]/android.widget.TextView');}
+  private get showPasswordButton () {return $('//android.widget.ScrollView/android.widget.EditText[3]/android.view.View[2]/android.widget.Button');}
   //app uses loginc when holding container is enabled not the button itself (enabled=true/false)
-  private get continueButton () {return $('//android.widget.ScrollView/android.view.View')};
-  private get continueButtonLabel () {return $('//android.widget.TextView[@text="AGREE & CONTINUE"]')};
+  private get continueButton () {return $('//android.widget.ScrollView/android.view.View');}
+  private get continueButtonLabel () {return $('//android.widget.TextView[@text="AGREE & CONTINUE"]');}
 
   async inputFirstName(name) {
     await this.firstNameInput.setValue(name);

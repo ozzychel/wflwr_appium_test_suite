@@ -347,7 +347,7 @@ export const config: Options.Testrunner = {
                     address: "localhost",
                     relaxedSecurity: true,
                     // Write the Appium logs to a file in the root of the directory
-                    log: "./appium.log",
+                    log: "./appTest/logs/appium.log",
                 },
             },
         ],
