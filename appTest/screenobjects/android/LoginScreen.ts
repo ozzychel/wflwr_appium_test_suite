@@ -19,18 +19,17 @@ class LoginScreen {
       $('//XCUIElementTypeTable/parent::*');
   }
 
-  private get iosTrackingAlert () {return $('-ios predicate string:type == "XCUIElementTypeAlert"');}
-
-  private get logo () { return $('id=WFLWR Logo');}
-  private get appUiView () {return $('//androidx.compose.ui.platform.ComposeView');}
-
-  //find better way to avoid xpath below and target Button class, not text
   private get continueWithEmailButton () {
     return driver.isAndroid ?
       $('//android.widget.TextView[@text="CONTINUE WITH EMAIL"]') :
       $('-ios predicate string:label == "CONTINUE WITH EMAIL"');
   }
 
+  private get iosTrackingAlert () {return $('-ios predicate string:type == "XCUIElementTypeAlert"');}
+  private get logo () { return $('id=WFLWR Logo');}
+  private get appUiView () {return $('//androidx.compose.ui.platform.ComposeView');}
+
+  //find better way to avoid xpath below and target Button class, not text
   private get emailAddressLabel () {return $('//android.widget.TextView[@text,"EMAIL ADDRESS"]');}
   private get emailInputField () {return $('//android.widget.EditText');}
   //find way to search for placeholder text > parent
