@@ -12,17 +12,25 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   beforeAll(async () => {
     await Device.getScreenSize();
     await Device.getPlatform();
+    await driver.startRecordingScreen();
+  })
+
+  beforeEach(async ()=> {
+    if(await driver.isLocked()) {
+      await driver.unlock();
+    }
   })
 
   afterAll(async () => {
+    const fileName = `${driver.capabilities["platformName"]}_${driver.isAndroid ? driver.capabilities["deviceManufacturer"] : "apple"}_${driver.isAndroid ? driver.capabilities["deviceModel"] : driver.capabilities["deviceName"]}_${driver.capabilities["udid"]}_${driver.config["suite"][0]}`
+    await driver.saveRecordingScreen(`./appTest/screenshots/video/${fileName}.mp4`);
     await driver.terminateApp(APP_NAME);
   })
 
   describe('BUILD INSTALLATION AND PLATFORM MATCH', () => {
     if(driver.isAndroid) {
       it('Device platform is Android', async () => {
-        await expect(driver.isAndroid).toBe(true)
-      });
+        await expect(driver.isAndroid).toBe(true)});
     }
     if(driver.isIOS) {
       it('Device platform is iOS', async () => {
@@ -39,18 +47,18 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   // add section to handle IOS tracking alert when launched first time
   // use fullReset:true in appium config to simulate clean state for every ios run
   if(driver.isIOS && driver.capabilities["fullReset"]) {
-    describe('IOS TRACKING ALERT', () => {
-      it('IOS tracking alert is displayed', async () => {
+    describe('(iOS only) IOS TRACKING ALERT', () => {
+      it('(iOS only) Tracking alert is DISPLAYED', async () => {
         const elem = await IOSTrackingAlert.container;
         await elem.waitForDisplayed({ timeout: 3000 });
       });
 
-      it('IOS tracking alert HAS correct text copy', async () => {
+      it('(iOS only) Tracking alert HAS correct text copy', async () => {
         const elem = await IOSTrackingAlert.container;
         await expect(elem).toHaveTextContaining(activityTrackingAlertTitle);
       });
 
-      it('TAP on "Allow" button DISMISS tracking alert', async () => {
+      it('(iOS only) TAP on "Allow" button DISMISS tracking alert', async () => {
         const elem = await IOSTrackingAlert.container;
         await IOSTrackingAlert.tapAllowButton();
         await elem.waitForDisplayed({ timeout: 3000 , reverse: true });
@@ -120,7 +128,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   })  
 
   describe('LOGIN SCREEN. COOKIES CONSENT BANNER.', () => {
-    it('Banner container NOT CLICKABLE and is NOT SCROLLABLE', async () => {
+    it('Banner container is NOT CLICKABLE and is NOT SCROLLABLE', async () => {
       const elem = await LoginScreen.bannerLayoutContainer;
       if(driver.isAndroid) {
         await expect(elem).toHaveAttrContaining('scrollable', 'false');
@@ -218,7 +226,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     //   await expect(footer).toBeDisplayed();
     // })
 
-    it('Screen HAS "Privacy Settings" TITLE', async () => {
+    it('Expandedn banner HAS "Privacy Settings" TITLE', async () => {
       const elem = CookiesBannerExpanded.title;
       await expect(elem).toHaveText('Privacy Settings');
     })
@@ -267,17 +275,17 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     //   await expect(elem).toHaveAttrContaining('scrollable', 'false');
     // })
 
-    it('"Strictly necessary" consent container is DISPLAYED', async () => {
+    it('"Strictly necessary" SDK container is DISPLAYED', async () => {
       const elem = CookiesBannerExpanded.strictlyNecessaryCont;
       await expect(elem).toBeDisplayed();
     })
 
-    it('"Performance" consent container is DISPLAYED', async () => {
+    it('"Performance" SDK container is DISPLAYED', async () => {
       const elem = CookiesBannerExpanded.performanceCont;
       await expect(elem).toBeDisplayed();
     })
 
-    it('"Marketing" consent container is DISPLAYED', async () => {
+    it('"Marketing" SDK container is DISPLAYED', async () => {
       const elem = CookiesBannerExpanded.marketingCont;
       await expect(elem).toBeDisplayed();
     })
@@ -296,7 +304,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       }
     })
 
-    it('Perfomance TOGGLE can be switched ON and OFF', async () => {
+    it('"Performance" SDK toggle can be switched ON and OFF', async () => {
       const toggle = await CookiesBannerExpanded.performanceSwitch;
       await toggle.click();
       await driver.pause(1000)
@@ -312,7 +320,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       if(driver.isIOS) expect(toggle).toHaveAttributeContaining('value', '1');
     })
 
-    it('Marketing TOGGLE can be switched ON and OFF', async () => {
+    it('"Marketing" SDK toggle can be switched ON and OFF', async () => {
       const toggle = await CookiesBannerExpanded.marketingSwitch;
       await toggle.click();
       await driver.pause(1000)
@@ -341,7 +349,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       await expect(elem).not.toHaveText('');
     })
 
-    it('Settings Id CAN BE COPIED with copy button TAP', async () => {
+    it('Settings Id CAN BE COPIED with TAP on copy button', async () => {
       const elem = CookiesBannerExpanded.copyIdButton;
       await expect(elem).toBeDisplayed();
       await elem.click();
@@ -353,12 +361,11 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       await expect(elem).toBeDisplayed();
     })
 
-    it('"Confirm My Choices" button is hittable and CLICKABLE', async () => {
+    it('"Confirm My Choices" button is CLICKABLE', async () => {
       const elem = CookiesBannerExpanded.confirmButton;
       if(driver.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
       if(driver.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
     })
-
 
     if(driver.isAndroid) {
       it('TAP on "Confirm My Choices" button REDIRECTS to Login screen', async () => {
@@ -375,19 +382,19 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     //IOS. Handle push notifications prompt
     if(driver.isIOS && driver.capabilities["fullReset"]) {
       
-      it('TAP on "Confirm my Choices" button. Push notfications alert shows up', async () => {
+      it('(iOS Only) TAP on "Confirm my Choices" button. Push notfications alert shows up', async () => {
         const banner = CookiesBannerExpanded.pcLayoutContainer;
         const elem = await IOSTrackingAlert.container;
         await CookiesBannerExpanded.tapAllowAllButton();
         await elem.waitForDisplayed({ timeout: 3000 });
       });
 
-      it('IOS Push notifications alert HAS correct TEXT copy', async () => {
+      it('(iOS only) Push notifications alert HAS correct TEXT copy', async () => {
         const elem = await IOSTrackingAlert.container;
         await expect(elem).toHaveTextContaining(notificationsTrackingAlertTitle);
       });
 
-      it('TAP on "Allow" button REDIRECTS to Login screen', async () => {
+      it('(iOS only) TAP on "Allow" button. REDIRECTED to Login screen', async () => {
         //since both platfroms don't have ids for the main screen containers
         //and all ui elements on Login screen belong to the layer that is set visible:false
         //will check if 'Continue with email button' exists
@@ -397,7 +404,6 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
         await driver.pause(5000);
         await expect(btn).toExist();
       });
-
      
     }
 
