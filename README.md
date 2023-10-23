@@ -1,5 +1,3 @@
-## REPO FOR TESTING README FILE CREATIONs
-
 # WFLWR End-to-End QA Automated Testing Project
 
 ## Table of Contents
