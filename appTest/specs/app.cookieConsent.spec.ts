@@ -144,12 +144,6 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       await expect(elem).toBeDisplayed();
     });
 
-    // it('Privacy Settings Text IS scrollable and is NOT CLICKABLE', async () => {
-    //   const elem = await CookiesBanner.textLayout;
-    //   await expect(elem).toHaveAttrContaining('scrollable', 'true');
-    //   await expect(elem).toHaveAttrContaining('clickable', 'false');
-    // })
-
     it('Privacy Settings Text HAS correct TITLE', async () => {
       const elem = await CookiesBanner.bannerTitle;
       await expect(elem).toHaveText('Privacy Settings');
@@ -165,11 +159,6 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       const elem = await CookiesBanner.buttonLayout;
       await expect(elem).toBeDisplayed();
     });
-
-    // it('Button layout is NOT SCROLLABLE', async () => {
-    //   const elem = await CookiesBanner.buttonLayout;
-    //   await expect(elem).toHaveAttrContaining('scrollable', 'false');
-    // })
 
     it('"Allow All" button IS displayed and HAS correct LABEL', async () => {
       const elem = await CookiesBanner.allowAllButton;
@@ -215,16 +204,6 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   });
 
   describe('LOGIN SCREEN. PRIVACY SETTINGS SDK PREFERENCES', () => {
-    //Privacy Settings Banner Expanded
-    // it('Expanded Cookies Banner main containers are DISPLAYED ', async () => {
-    //   const pcLayout = await CookiesBannerExpanded.pcLayoutContainer;
-    //   const topScrollView = CookiesBannerExpanded.topScrollView;
-    //   const footer = await CookiesBannerExpanded.footerLayout;
-    //   await expect(pcLayout).toBeDisplayed();
-    //   await expect(topScrollView).toBeDisplayed();
-    //   await expect(footer).toBeDisplayed();
-    // })
-
     it('Expandedn banner HAS "Privacy Settings" TITLE', async () => {
       const elem = CookiesBannerExpanded.title;
       await expect(elem).toHaveText('Privacy Settings');
@@ -265,14 +244,6 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       await expect(elem).toHaveText('Decline All');
     });
 
-    // //add button toggle here
-
-    // it('Preferences list is DISPLAYED', async () => {
-    //   const elem = CookiesBannerExpanded.preferencesList;
-    //   await expect(elem).toBeDisplayed();
-    //   await expect(elem).toHaveAttrContaining('scrollable', 'false');
-    // })
-
     it('"Strictly necessary" SDK container is DISPLAYED', async () => {
       const elem = CookiesBannerExpanded.strictlyNecessaryCont;
       await expect(elem).toBeDisplayed();
@@ -288,7 +259,6 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       await expect(elem).toBeDisplayed();
     });
 
-    // //TODO: create tests for SDK preferences, and for every sdk page
     it('SDK Preferences TOGGLES are OFF by default', async () => {
       const switch1 = await CookiesBannerExpanded.performanceSwitch;
       const switch2 = await CookiesBannerExpanded.marketingSwitch;
