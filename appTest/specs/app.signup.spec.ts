@@ -92,7 +92,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     });
 
     it('INPUT malformed email - "malformed2@redbull"."Continue" button inactive', async () => {
-    //rebuild for webview to check if button is not active
+      //rebuild for webview to check if button is not active
       // const elem = LoginScreen.continueButton;
       await LoginScreen.inputEmailAddress('malformed2@redbull');
     });

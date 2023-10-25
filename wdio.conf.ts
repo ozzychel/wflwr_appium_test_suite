@@ -133,24 +133,24 @@ export const config: Options.Testrunner = {
         // },
 
         // iPhone 13 mini
-        {
-            "appium:deviceName": "iPhone 13 mini",
-            "appium:udid": "00008110-001264901E04801E",
-            "appium:platformName": "IOS",
-            "appium:platformVersion": "16.0",
-            "appium:automationName": "XCUITest",
-            "appium:orientation": "PORTRAIT",
-            "appium:app": "/Users/apetunin/Projects/wflwr_appium_test_suite/apps/wflwr_debug.ipa",
-            "appium:bundleId": "com.redbull.WingsForLifeWorldRun.debug",
-            "appium:xcodeSigningId": "iPhone Developer",
-            "appium:xcodeOrgId": process.env.XCODE_ORG_ID,
-            "appium:newCommandTimeout": 240,
-            // "appium:noReset": true,
-            "appium:fullReset" : true,
-            "appium:prebuildWDA": true,
-            "appium:derivedDataPath": "/Users/apetunin/Library/Developer/Xcode/DerivedData",
-            "appium:systemPort": 6066
-        },
+        // {
+        //     "appium:deviceName": "iPhone 13 mini",
+        //     "appium:udid": "00008110-001264901E04801E",
+        //     "appium:platformName": "IOS",
+        //     "appium:platformVersion": "16.0",
+        //     "appium:automationName": "XCUITest",
+        //     "appium:orientation": "PORTRAIT",
+        //     "appium:app": "/Users/apetunin/Projects/wflwr_appium_test_suite/apps/wflwr_debug.ipa",
+        //     "appium:bundleId": "com.redbull.WingsForLifeWorldRun.debug",
+        //     "appium:xcodeSigningId": "iPhone Developer",
+        //     "appium:xcodeOrgId": process.env.XCODE_ORG_ID,
+        //     "appium:newCommandTimeout": 240,
+        //     // "appium:noReset": true,
+        //     "appium:fullReset" : true,
+        //     "appium:prebuildWDA": true,
+        //     "appium:derivedDataPath": "/Users/apetunin/Library/Developer/Xcode/DerivedData",
+        //     "appium:systemPort": 6066
+        // },
 
         // iPhone 14 Pro MAX
         // {
