@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import type { Options } from '@wdio/types';
 import { join } from 'path';
+import "@wdio/types;"
 
 export const config: Options.Testrunner = {
   //
@@ -8,7 +9,10 @@ export const config: Options.Testrunner = {
   // ====================
   // Runner Configuration
   // ====================
-  port: 4723,
+
+  
+  // port: 4723, //added
+
   // path: '/wd/hub',
   //
   // =====================
@@ -23,14 +27,14 @@ export const config: Options.Testrunner = {
   // environment variables for ts-node or use wdio config's autoCompileOpts section.
   //
 
-  autoCompileOpts: {
-    autoCompile: true,
-    // see https://github.com/TypeStrong/ts-node#cli-and-programmatic-options
-    // for all available options
-    tsNodeOpts: {
-      transpileOnly: true,
-      project: 'tsconfig.json'
-    }
+  // autoCompileOpts: {
+  //   autoCompile: true,
+  //   // see https://github.com/TypeStrong/ts-node#cli-and-programmatic-options
+  //   // for all available options
+  //   tsNodeOpts: {
+  //     transpileOnly: true,
+  //     project: 'tsconfig.json'
+  //   }  //added
     // tsconfig-paths is only used if "tsConfigPathsOpts" are provided, if you
     // do please make sure "tsconfig-paths" is installed as dependency
     // tsConfigPathsOpts: {
@@ -132,26 +136,6 @@ export const config: Options.Testrunner = {
     //     "appium:systemPort": 6055
     // },
 
-    // iPhone 13 mini
-    {
-        "appium:deviceName": "iPhone 13 mini",
-        "appium:udid": "00008110-001264901E04801E",
-        "appium:platformName": "IOS",
-        "appium:platformVersion": "16.0",
-        "appium:automationName": "XCUITest",
-        "appium:orientation": "PORTRAIT",
-        "appium:app": "/Users/apetunin/Projects/wflwr_appium_test_suite/apps/wflwr_debug.ipa",
-        "appium:bundleId": "com.redbull.WingsForLifeWorldRun.debug",
-        "appium:xcodeSigningId": "iPhone Developer",
-        "appium:xcodeOrgId": process.env.XCODE_ORG_ID,
-        "appium:newCommandTimeout": 240,
-        // "appium:noReset": true,
-        "appium:fullReset" : true,
-        "appium:prebuildWDA": true,
-        "appium:derivedDataPath": "/Users/apetunin/Library/Developer/Xcode/DerivedData",
-        "appium:systemPort": 6066
-    },
-
     // iPhone 14 Pro MAX
     // {
     //     "appium:deviceName": "iPhone 14 Pro Max",
@@ -171,26 +155,45 @@ export const config: Options.Testrunner = {
     //     "appium:derivedDataPath": "/Users/apetunin/Library/Developer/Xcode/DerivedData",
     //     "appium:systemPort": 6077
     // },
+    // iPhone 13 mini
+    {
+      "appium:deviceName": "iPhone 13 mini",
+      "appium:udid": "00008110-001264901E04801E",
+      "appium:platformName": "IOS",
+      "appium:platformVersion": "16.0",
+      "appium:automationName": "XCUITest",
+      "appium:orientation": "PORTRAIT",
+      "appium:app": "/Users/apetunin/Projects/wflwr_appium_test_suite/apps/wflwr_debug.ipa",
+      "appium:bundleId": "com.redbull.WingsForLifeWorldRun.debug",
+      "appium:xcodeSigningId": "iPhone Developer",
+      "appium:xcodeOrgId": process.env.XCODE_ORG_ID,
+      "appium:newCommandTimeout": 240,
+      // "appium:noReset": true,
+      "appium:fullReset" : true,
+      "appium:prebuildWDA": true,
+      "appium:derivedDataPath": "/Users/apetunin/Library/Developer/Xcode/DerivedData",
+      "appium:systemPort": 6066
+    },
 
-    // //Galaxy S20
-    // {
-    //   'appium:deviceName': 'SM-G986U1',
-    //   'appium:udid': 'R5CN20YDB5R',
-    //   'appium:platformName': 'Android',
-    //   'appium:platformVersion': '12',
-    //   'appium:automationName': 'UiAutomator2',
-    //   'appium:orientation': 'PORTRAIT',
-    //   'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
-    //   'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
-    //   'appium:app': join(
-    //     process.cwd(),
-    //     './apps/WFLWRQA6.6.0.11.apk'
-    //   ),
-    //   // "appium:noReset": true,
-    //   'appium:fullReset': true,
-    //   'appium:newCommandTimeout': 240,
-    //   'appium:systemPort': 6011
-    // },
+    //Galaxy S20
+    {
+      'appium:deviceName': 'SM-G986U1',
+      'appium:udid': 'R5CN20YDB5R',
+      'appium:platformName': 'Android',
+      'appium:platformVersion': '12',
+      'appium:automationName': 'UiAutomator2',
+      'appium:orientation': 'PORTRAIT',
+      'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
+      'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
+      'appium:app': join(
+        process.cwd(),
+        './apps/WFLWRQA6.6.0.11.apk'
+      ),
+      // "appium:noReset": true,
+      'appium:fullReset': true,
+      'appium:newCommandTimeout': 240,
+      'appium:systemPort': 6011
+    },
 
     //  //Pixel 6a
     // {
@@ -293,7 +296,7 @@ export const config: Options.Testrunner = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: 'info',
+  // logLevel: 'info', //added
   //
   // Set specific log levels per logger
   // loggers:
@@ -311,23 +314,23 @@ export const config: Options.Testrunner = {
   //
   // If you only want to run your tests until a specific amount of tests have failed use
   // bail (default is 0 - don't bail, run all tests).
-  bail: 0,
+  // bail: 0, //added
   //
   // Set a base URL in order to shorten url command calls. If your `url` parameter starts
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: 'http://localhost',
+  // baseUrl: 'http://localhost', //added
   //
   // Default timeout for all waitFor* commands.
-  waitforTimeout: 10000,
+  // waitforTimeout: 10000, //added
   //
   // Default timeout in milliseconds for request
   // if browser driver or grid doesn't send response
-  connectionRetryTimeout: 120000,
+  // connectionRetryTimeout: 120000, //added
   //
   // Default request retries count
-  connectionRetryCount: 3,
+  // connectionRetryCount: 3, //added
   //
   // Test runner services
   // Services take over a specific job you don't want to take care of. They enhance
@@ -357,7 +360,7 @@ export const config: Options.Testrunner = {
   //
   // Make sure you have the wdio adapter package for the specific framework installed
   // before running any tests.
-  framework: 'jasmine',
+  // framework: 'jasmine', //added
   //
   // The number of times to retry the entire specfile when it fails as a whole
   // specFileRetries: 1,
@@ -371,21 +374,21 @@ export const config: Options.Testrunner = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ['spec'],
+  // reporters: ['spec'], //added
 
   //
   // Options to be passed to Jasmine.
-  jasmineOpts: {
-    // Jasmine default timeout
-    defaultTimeoutInterval: 60000,
-    //
-    // The Jasmine framework allows interception of each assertion in order to log the state of the application
-    // or website depending on the result. For example, it is pretty handy to take a screenshot every time
-    // an assertion fails.
-    expectationResultHandler: function(passed, assertion) {
-      // do something
-    }
-  },
+  // jasmineOpts: {
+  //   // Jasmine default timeout
+  //   defaultTimeoutInterval: 60000,
+  //   //
+  //   // The Jasmine framework allows interception of each assertion in order to log the state of the application
+  //   // or website depending on the result. For example, it is pretty handy to take a screenshot every time
+  //   // an assertion fails.
+  //   expectationResultHandler: function(passed, assertion) {
+  //     // do something
+  //   }
+  // },  //added
 
   //
   // =====
@@ -482,11 +485,11 @@ export const config: Options.Testrunner = {
      * @param {Boolean} result.passed    true if test has passed, otherwise false
      * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-  afterTest: async function(test, context, { error, result, duration, passed, retries }) {
-    if (error){
-      await driver.saveScreenshot(`./appTest/screenshots/TC${test['id'].slice(4)}.${test['description'].split(' ').join('')}.png`);
-    }
-  },
+  // afterTest: async function(test, context, { error, result, duration, passed, retries }) {
+  //   if (error){
+  //     await driver.saveScreenshot(`./appTest/screenshots/TC${test['id'].slice(4)}.${test['description'].split(' ').join('')}.png`);
+  //   }
+  // }, //added
 
   /**
      * Hook that gets executed after the suite has ended
