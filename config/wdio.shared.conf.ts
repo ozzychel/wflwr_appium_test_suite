@@ -1,19 +1,20 @@
+import 'dotenv/config';
 export const config: WebdriverIO.Config = {
-   // ==============================================================================
-   // Runner Configuration 
-   // ==============================================================================
-   // WebdriverIO allows it to run your tests in arbitrary locations (e.g. locally or
-   // on a remote machine).
-   runner: 'local',
+  // ==============================================================================
+  // Runner Configuration
+  // ==============================================================================
+  // WebdriverIO allows it to run your tests in arbitrary locations (e.g. locally or
+  // on a remote machine).
+  runner: 'local',
 	 autoCompileOpts: {
-      autoCompile: true,
-      // see https://github.com/TypeStrong/ts-node#cli-and-programmatic-options
-      // for all available options
-      tsNodeOpts: {
+    autoCompile: true,
+    // see https://github.com/TypeStrong/ts-node#cli-and-programmatic-options
+    // for all available options
+    tsNodeOpts: {
       transpileOnly: true,
       project: 'tsconfig.json'
-      },
-   },
+    },
+  },
 
   // ==============================================================================
   // Specify Test Files
@@ -28,34 +29,34 @@ export const config: WebdriverIO.Config = {
    * NOTE: This is just a place holder and will be overwritten by each specific configuration
    */
   specs: [],
-  //possibly move suites to platform config 
+  //possibly move suites to platform config
   //in case we go with separate specs in the future
   suites: {
-   install: [
-     './appTest/specs/app.install.spec.ts'
-   ],
-   demo: [
-     './appTest/specs/app.demo.spec.ts'
-   ],
-   nav: [
-     './appTest/specs/app.navigation.spec.ts'
-   ],
-   dev: [
-     './appTest/specs/app.dev.spec.ts'
-   ],
-   registration: [
-     './appTest/specs/app.registration.spec.ts'
-   ],
-   signup: [
-     './appTest/specs/app.signup.spec.ts'
-   ],
-   consent: [
-     './appTest/specs/app.cookieConsent.spec.ts'
-   ],
-   permissions: [
-     './appTest/specs/app.permissions.spec.ts'
-   ]
- },
+    install: [
+      './appTest/specs/app.install.spec.ts'
+    ],
+    demo: [
+      './appTest/specs/app.demo.spec.ts'
+    ],
+    nav: [
+      './appTest/specs/app.navigation.spec.ts'
+    ],
+    dev: [
+      './appTest/specs/app.dev.spec.ts'
+    ],
+    registration: [
+      './appTest/specs/app.registration.spec.ts'
+    ],
+    signup: [
+      './appTest/specs/app.signup.spec.ts'
+    ],
+    consent: [
+      './appTest/specs/app.cookieConsent.spec.ts'
+    ],
+    permissions: [
+      './appTest/specs/app.permissions.spec.ts'
+    ]
+  },
   //
   // ============
   // Capabilities
@@ -69,7 +70,7 @@ export const config: WebdriverIO.Config = {
   /**
    * NOTE: This is just a place holder and will be overwritten by each specific configuration
    */
-	exclude: [
+  exclude: [
     // 'path/to/excluded/files'
   ],
   capabilities: [],
