@@ -336,23 +336,23 @@ export const config: Options.Testrunner = {
   // Services take over a specific job you don't want to take care of. They enhance
   // your test setup with almost no effort. Unlike plugins, they don't add new
   // commands. Instead, they hook themselves up into the test process.
-  services: [
-    [
-      'appium',
-      {
-        // This will use the globally installed version of Appium
-        command: 'appium',
-        args: {
-          // This is needed to tell Appium that we can execute local ADB commands
-          // and to automatically download the latest version of ChromeDriver
-          address: 'localhost',
-          relaxedSecurity: true,
-          // Write the Appium logs to a file in the root of the directory
-          log: './appTest/logs/appium.log',
-        },
-      },
-    ],
-  ],
+  // services: [
+  //   [
+  //     'appium',
+  //     {
+  //       // This will use the globally installed version of Appium
+  //       command: 'appium',
+  //       args: {
+  //         // This is needed to tell Appium that we can execute local ADB commands
+  //         // and to automatically download the latest version of ChromeDriver
+  //         address: 'localhost',
+  //         relaxedSecurity: true,
+  //         // Write the Appium logs to a file in the root of the directory
+  //         log: './appTest/logs/appium.log',
+  //       },
+  //     },
+  //   ],
+  // ], //added
 
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber

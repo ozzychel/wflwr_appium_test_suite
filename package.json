@@ -15,6 +15,7 @@
     "homepage": "https://github.com/ozzychel/wflwr_appium_test_suite#readme",
     "eslintIgnore": ["/config/*.ts", "wdio.conf.ts"],
     "scripts": {
+        "ios.app": "wdio config/wdio.ios.app.conf.ts --suite consent",
         "install": "wdio run wdio.conf.ts --suite install",
         "demo": "wdio run wdio.conf.ts --suite consent --suite signup --suite nav",
         "dev": "wdio run wdio.conf.ts --suite dev",
