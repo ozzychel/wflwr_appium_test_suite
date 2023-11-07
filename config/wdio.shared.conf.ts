@@ -28,6 +28,8 @@ export const config: WebdriverIO.Config = {
    * NOTE: This is just a place holder and will be overwritten by each specific configuration
    */
   specs: [],
+  //possibly move suites to platform config 
+  //in case we go with separate specs in the future
   suites: {
    install: [
      './appTest/specs/app.install.spec.ts'
