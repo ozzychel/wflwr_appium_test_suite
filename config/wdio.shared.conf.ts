@@ -51,7 +51,7 @@ export const config: WebdriverIO.Config = {
       './appTest/specs/app.signup.spec.ts'
     ],
     consent: [
-      './appTest/specs/app.cookieConsent.spec.ts'
+      './appTest/specs/app.bs.cookieConsent.spec.ts'
     ],
     permissions: [
       './appTest/specs/app.permissions.spec.ts'
@@ -281,7 +281,7 @@ export const config: WebdriverIO.Config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that ran
      */
-  // after: function (result, capabilities, specs) {
+  // after: async function (result, capabilities, specs) {
   // },
   /**
      * Gets executed right after terminating the webdriver session.

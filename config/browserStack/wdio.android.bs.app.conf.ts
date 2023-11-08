@@ -43,10 +43,12 @@ config.commonCapabilities = {
   'bstack:options': {
     projectName : process.env.PROJECT_NAME,
     buildName : `Android_${process.env.ANDROID_BUILD_NUMBER}`,
+    appiumVersion: "2.0.1",
     sessionName : 'Build validation test',
     acceptInsecureCerts : 'true',
     debug : true,
     networkLogs : true,
+    idleTimeout: 180
   },
 };
 
@@ -54,7 +56,7 @@ config.commonCapabilities = {
 config.capabilities = [...androidDevicesBS];
 
 //define number of simultaneously running instances
-config.maxInstances = 10;
+config.maxInstances = 1;
 
 //merge common capabilities to main capabilities
 config.capabilities.forEach((cap) => {

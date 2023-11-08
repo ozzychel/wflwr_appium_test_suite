@@ -245,12 +245,12 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
     const switch1 = await CookiesBannerExpanded.performanceSwitch;
     const switch2 = await CookiesBannerExpanded.marketingSwitch;
     if (driver.isAndroid) {
-      expect(switch1).toHaveAttributeContaining('checked', 'false') &&
-      expect(switch2).toHaveAttributeContaining('checked', 'false');
+      await expect(switch1).toHaveAttributeContaining('checked', 'false') &&
+      await expect(switch2).toHaveAttributeContaining('checked', 'false');
     }
     if (driver.isIOS) {
-      expect(switch1).toHaveAttributeContaining('value', '0') &&
-      expect(switch2).toHaveAttributeContaining('value', '0');
+      await expect(switch1).toHaveAttributeContaining('value', '0') &&
+      await expect(switch2).toHaveAttributeContaining('value', '0');
     }
   });
 
