@@ -39,8 +39,7 @@ config.services = [
   ['browserstack', {
     app: `bs://${process.env.BROWSERSTACK_APP_ID}`,
     browserstackLocal: true,
-    // buildIdentifier: `${process.env.ANDROID_BUILD_NUMBER}`,
-    buildIdentifier: `_Debug_BuildValidation`,
+    buildIdentifier: `${process.env.BUILD_NUMBER}`,
     buildName: 'Android Debug',
     debug: true,
     // networkLogs: true,
@@ -48,57 +47,55 @@ config.services = [
     testObservabilityOptions: {
       user: process.env.BROWSERSTACK_USERNAME,
       key: process.env.BROWSERSTACK_ACCESS_KEY,
-      projectName: process.env.PROJECT_NAME,
-      buildName: `Android_WFLWRQA_${process.env.ANDROID_BUILD_NUMBER}`,
-      buildTag: `${process.env.ANDROID_BUILD_NUMBER}`
+      projectName: 'Wings For Life World Run',
+      buildName: 'Android_WFLWRQA',
+      buildTag: `${process.env.BUILD_NUMBER}`
     }
   }]
 ],
 
-//capabilities to pick test devices
 config.capabilities = [
   // { 'bstack:options': {
   //   deviceName: 'Google Pixel 8',
   //   platformVersion: '14.0',
   //   platformName: 'android',
   // } },
-  { 'bstack:options': {
-    deviceName: 'OnePlus 11R',
-    platformVersion: '13.0',
-    platformName: 'android',
-  } },
-  { 'bstack:options': {
-    deviceName: 'Samsung Galaxy S21',
-    platformVersion: '12.0',
-    platformName: 'android',
-  } }
   // { 'bstack:options': {
-  //   deviceName: 'Samsung Galaxy S23 Ultra',
+  //   deviceName: 'OnePlus 11R',
   //   platformVersion: '13.0',
   //   platformName: 'android',
   // } },
-];
-
-// capabilities that all selected devices will share
-config.commonCapabilities = {
-  'bstack:options': {
-    projectName : process.env.PROJECT_NAME,
-		buildName : `Android_${process.env.ANDROID_BUILD_NUMBER}`,
+  // { 'bstack:options': {
+  //   deviceName: 'Samsung Galaxy S21',
+  //   platformVersion: '12.0',
+  //   platformName: 'android',
+  // } }
+  { 'bstack:options': {
+    deviceName: 'Samsung Galaxy S23 Ultra',
+    platformVersion: '13.0',
+    platformName: 'android',
+    projectName : "Wings For Life World Run",
+		buildName : "Build 6.6.0.11",
 		sessionName : "Build validation test",
     acceptInsecureCerts : "true",
 		debug : true,
 		networkLogs : true,
-  },
-};
+		// timezone : "Los Angeles",
+		// geoLocation : "Us",
+  } },
+];
+
+// config.commonCapabilities = {
+//   'bstack:options': {
+//     // projectName: 'WFLWorldRun',
+//     buildName: 'browserstack build',
+//     sessionName: 'BS Parallel execution - Android',
+//     debug: true,
+//     networkLogs: true
+//   },
+//   // 'acceptInsecureCerts': 'true'
+// };
 
 config.maxInstances = 10;
-
-config.capabilities.forEach((cap) => {
-  // Here we merge the 'bstack:options' of the common capabilities
-  cap['bstack:options'] = {
-    ...(cap['bstack:options'] || {}),
-    ...config.commonCapabilities['bstack:options']
-  };
-});
 
 exports.config = config;
