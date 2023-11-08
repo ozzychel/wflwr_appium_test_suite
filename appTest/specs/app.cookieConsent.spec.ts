@@ -204,7 +204,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   });
 
   describe('LOGIN SCREEN. PRIVACY SETTINGS SDK PREFERENCES', () => {
-    it('Expandedn banner HAS "Privacy Settings" TITLE', async () => {
+    it('Expanded banner HAS "Privacy Settings" TITLE', async () => {
       const elem = CookiesBannerExpanded.title;
       await expect(elem).toHaveText('Privacy Settings');
     });

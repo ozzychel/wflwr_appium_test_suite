@@ -16,16 +16,18 @@ afterAll(async () => {
   await driver.terminateApp(driver.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME);
 });
 
-describe('1. BUILD INSTALLATION AND PLATFORM MATCH', () => {
+describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
+  //===============================================================
+  // APP IS INSTALLED AND HAS CORRECT NAME
+  //===============================================================
   it('Should have have app installed on the device', async () => {
     await expect(await driver.isAppInstalled(driver.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME)).toBe(true);
   });
-});
 
-// add section to handle IOS tracking alert when launched first time
-// use fullReset:true in appium config to simulate clean state for every ios run
-if (driver.isIOS && driver.capabilities['fullReset']) {
-  describe('(iOS only) IOS TRACKING ALERT', () => {
+  //===============================================================
+  // IOS TRACKING ALERT
+  //===============================================================
+  if (driver.isIOS && driver.capabilities['fullReset']) {
     it('(iOS only) Tracking alert is DISPLAYED', async () => {
       const elem = await IOSTrackingAlert.container;
       await elem.waitForDisplayed({ timeout: 3000 });
@@ -41,10 +43,11 @@ if (driver.isIOS && driver.capabilities['fullReset']) {
       await IOSTrackingAlert.tapAllowButton();
       await elem.waitForDisplayed({ timeout: 3000, reverse: true });
     });
-  });
-}
+  }
 
-describe('2. LOGIN SCREEN. CONTAINERS AND LAYOUT', () => {
+  //===============================================================
+  // LOGIN SCREEN. CONTAINERS AND LAYOUT
+  //===============================================================
   it('Main App container EXISTS and DISPLAYED. App launched', async () => {
     const elem = await LoginScreen.container;
     await elem.waitForDisplayed({ timeout: 3000 });
@@ -102,9 +105,9 @@ describe('2. LOGIN SCREEN. CONTAINERS AND LAYOUT', () => {
     await expect(elem).toBeDisplayed();
   });
 
-});
-
-describe('3. LOGIN SCREEN. COOKIES CONSENT BANNER.', () => {
+  //===============================================================
+  // LOGIN SCREEN. COOKIES CONSENT BANNER.
+  //===============================================================
   it('Banner container is NOT CLICKABLE and is NOT SCROLLABLE', async () => {
     const elem = await LoginScreen.bannerLayoutContainer;
     if (driver.isAndroid) {
@@ -179,10 +182,11 @@ describe('3. LOGIN SCREEN. COOKIES CONSENT BANNER.', () => {
     await driver.pause(2000);
     await CookiesBannerExpanded.pcLayoutContainer.waitForDisplayed({ timeout: 2000 });
   });
-});
 
-describe('4. LOGIN SCREEN. PRIVACY SETTINGS SDK PREFERENCES', () => {
-  it('Expandedn banner HAS "Privacy Settings" TITLE', async () => {
+  //===============================================================
+  // LOGIN SCREEN. PRIVACY SETTINGS SDK PREFERENCES
+  //===============================================================
+  it('Expanded banner HAS "Privacy Settings" TITLE', async () => {
     const elem = CookiesBannerExpanded.title;
     await expect(elem).toHaveText('Privacy Settings');
   });
@@ -324,7 +328,9 @@ describe('4. LOGIN SCREEN. PRIVACY SETTINGS SDK PREFERENCES', () => {
     });
   }
 
-  //IOS. Handle push notifications prompt
+  //===============================================================
+  // IOS PUSH NOTIFICATIONS ALERT
+  //===============================================================
   if (driver.isIOS && driver.capabilities['fullReset']) {
 
     it('(iOS Only) TAP on "Confirm my Choices" button. Push notfications alert shows up', async () => {
