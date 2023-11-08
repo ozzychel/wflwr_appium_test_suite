@@ -1,4 +1,4 @@
-import { APP_NAME } from '../helpers/Constants';
+import { ANDROID_APP_NAME, IOS_APP_NAME } from '../helpers/Constants';
 import { alertNoticeTextIOS, alertNoticeText, activityTrackingAlertTitle, notificationsTrackingAlertTitle } from '../helpers/TextCopies';
 import Gestures from '../helpers/Gestures';
 const CookiesBanner = require('../screenobjects/android/components/CookiesBanner');
@@ -24,7 +24,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   afterAll(async () => {
     const fileName = `${driver.capabilities['platformName']}_${driver.isAndroid ? driver.capabilities['deviceManufacturer'] : 'apple'}_${driver.isAndroid ? driver.capabilities['deviceModel'] : driver.capabilities['deviceName']}_${driver.capabilities['udid']}_${driver.config['suite'][0]}`;
     await driver.saveRecordingScreen(`./appTest/screenshots/video/${fileName}.mp4`);
-    await driver.terminateApp(APP_NAME);
+    await driver.terminateApp(driver.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME);
   });
 
   describe('BUILD INSTALLATION AND PLATFORM MATCH', () => {
@@ -40,7 +40,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     }
 
     it('Should have have app installed on the device', async () => {
-      await expect(await driver.isAppInstalled(APP_NAME)).toBe(true);
+      await expect(await driver.isAppInstalled(driver.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME)).toBe(true);
     });
   });
 

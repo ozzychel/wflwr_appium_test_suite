@@ -1,4 +1,4 @@
-import { APP_NAME, DEFAULT_PIN, USER_UOM } from '../helpers/Constants';
+import { ANDROID_APP_NAME, IOS_APP_NAME, DEFAULT_PIN, USER_UOM } from '../helpers/Constants';
 import Gestures from '../helpers/Gestures';
 const HomeScreen = require('../screenobjects/android/HomeScreen');
 const NavBar = require('../screenobjects/android/components/NavBar');
@@ -34,7 +34,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   afterAll(async () => {
     const fileName = `${driver.capabilities['deviceManufacturer']}_${driver.capabilities['deviceModel']}_${driver.capabilities['udid']}_${driver.config['suite'][0]}`;
     await driver.saveRecordingScreen(`./appTest/screenshots/video/${fileName}.mp4`);
-    await driver.closeApp();
+    await driver.terminateApp(driver.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME);
   });
 
   describe('Get race ready. Confirm location services', () => {

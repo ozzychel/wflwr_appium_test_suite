@@ -1,10 +1,17 @@
-import { join } from 'path';
+// import { join } from 'path';
 import { config } from '../wdio.shared.conf';
 
-config.specs = [`${join(
-  process.cwd(),
-  './appTest/specs/app.dev.spec.ts'
-)}`];
+// config.specs = [`${join(
+//   process.cwd(),
+//   './appTest/specs/app.bs.cookieConsent.spec.ts'
+// )}`];
+config.specs = [];
+
+config.suites = {
+  consent: [
+    './appTest/specs/app.bs.cookieConsent.spec.ts'
+  ]
+};
 
 config.exclude = [];
 
@@ -27,26 +34,21 @@ config.services = [
 ];
 
 config.capabilities = [
-  {
-  'bstack:options': {
+  { 'bstack:options': {
     deviceName: 'Google Pixel 8 Pro',
     platformVersion: '14.0',
     platformName: 'android',
-  }
-}, 
-// {
-//   'bstack:options': {
-//     deviceName: 'OnePlus 11R',
-//     platformVersion: '13.0',
-//     platformName: 'android',
-//   } }, 
-//   {
-//   'bstack:options': {
-//     deviceName: 'Samsung Galaxy S21',
-//     platformVersion: '12.0',
-//     platformName: 'android',
-//   }
-// }
+  } },
+  { 'bstack:options': {
+    deviceName: 'OnePlus 11R',
+    platformVersion: '13.0',
+    platformName: 'android',
+  } },
+  { 'bstack:options': {
+    deviceName: 'Samsung Galaxy S21',
+    platformVersion: '12.0',
+    platformName: 'android',
+  } }
 ];
 
 config.commonCapabilities = {
