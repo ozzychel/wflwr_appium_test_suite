@@ -22,7 +22,8 @@
         "android.consent": "wdio run config/wdio.android.conf.ts --suite consent",
         "ios.consent": "wdio run config/wdio.ios.conf.ts --suite consent",
         "ios.dev": "wdio run config/wdio.ios.conf.ts --suite dev",
-        
+        "android.dev": "wdio run config/wdio.android.conf.ts --suite dev",
+
         "install": "wdio run wdio.conf.ts --suite install",
         "demo": "wdio run wdio.conf.ts --suite consent --suite signup --suite nav",
         "dev": "wdio run wdio.conf.ts --suite dev",

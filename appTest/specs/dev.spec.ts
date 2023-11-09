@@ -23,36 +23,36 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   });
 
   afterAll(async () => {
-    const fileName = `${driver.capabilities['platformName']}_${driver.isAndroid ? driver.capabilities['deviceManufacturer'] : 'apple'}_${driver.isAndroid ? driver.capabilities['deviceModel'] : driver.capabilities['deviceName']}_${driver.capabilities['udid']}_${driver.config['suite'][0]}`;
+    const fileName = `${driver.capabilities['platformName']}_${Device.isAndroid ? driver.capabilities['deviceManufacturer'] : 'apple'}_${Device.isAndroid ? driver.capabilities['deviceModel'] : driver.capabilities['deviceName']}_${driver.capabilities['udid']}_${driver.config['suite'][0]}`;
     await driver.saveRecordingScreen(`./appTest/screenshots/video/${fileName}.mp4`);
-    await driver.terminateApp(driver.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME);
+    await driver.terminateApp(Device.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME);
   });
 
-  console.log("============= DEVICE isOS =============", Device.isIOS);
-  console.log("============= DEVICE isBrowserStack =============", Device.isBrowserStack);
+  
+  
+  console.log("============AFTER DEVICE==============", Device)
   console.log("============SCREENSIZE==============", Device.screenSize)
-  if (driver.isAndroid) {
+  if (Device.isAndroid) {
     it('Device platform is Android', async () => {
-      await expect(driver.isAndroid).toBe(true);
+      await expect(Device.isAndroid).toBe(true);
     });
   }
-  if (driver.isIOS) {
+  if (Device.isIOS) {
     it('Device platform is iOS', async () => {
-      await console.log("============= INSIDE IF-IT. DEVICE isOS =============", Device.isIOS);
-      await console.log("============= BEFORE-DEVICE isBrowserStack =============", Device.isBrowserStack);
-      await console.log("============SCREENSIZE==============", Device.screenSize)
-      await expect(driver.isIOS).toBe(true);
+      console.log("============IN IT DEVICE==============", Device)
+      console.log("============IN IT SCREENSIZE==============", Device.screenSize)
+      await expect(Device.isIOS).toBe(true);
     });
   }
 
   it('Should have have app installed on the device', async () => {
-    await expect(await driver.isAppInstalled(driver.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME)).toBe(true);
+    await expect(await driver.isAppInstalled(Device.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME)).toBe(true);
   });
 
 
   // add section to handle IOS tracking alert when launched first time
   // use fullReset:true in appium config to simulate clean state for every ios run
-  if (driver.isIOS && driver.capabilities['fullReset']) {
+  if (Device.isIOS && driver.capabilities['fullReset']) {
     it('(iOS only) Tracking alert is DISPLAYED', async () => {
       const elem = await IOSTrackingAlert.container;
       await elem.waitForDisplayed({ timeout: 3000 });
@@ -76,11 +76,11 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   });
 
   it('Main App container is NOT SCROLLABLE', async () => {
-    if (driver.isAndroid) {
+    if (Device.isAndroid) {
       const elem = await LoginScreen.touchOutside;
       await expect(elem).toHaveAttrContaining('scrollable', 'false');
     }
-    if (driver.isIOS) {
+    if (Device.isIOS) {
       //since XCUI elements doesn't have scrollable attribute
       //will use background logo coordinates to check scroll
       const elem = await LoginScreen.logo;
@@ -100,11 +100,11 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   });
 
   it('Touch_outside container is NOT SCROLLABLE', async () => {
-    if (driver.isAndroid) {
+    if (Device.isAndroid) {
       const elem = await LoginScreen.touchOutside;
       await expect(elem).toHaveAttrContaining('scrollable', 'false');
     }
-    if (driver.isIOS) {
+    if (Device.isIOS) {
       //since XCUI elements doesn't have scrollable attribute
       //will use background logo coordinates to check scroll
       const elem = await LoginScreen.logo;
