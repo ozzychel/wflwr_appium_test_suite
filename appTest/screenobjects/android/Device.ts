@@ -5,6 +5,7 @@ class Device {
   screenHeight = null;
   isAndroid = null;
   isIOS = null;
+  isBrowserStack = null;
 
   getScreenSize = async function () {
     let size = await driver.getWindowSize();
@@ -24,15 +25,29 @@ class Device {
   }
 
   getPlatform = async function () {
-    if (driver.isAndroid) {
-      this.isAndroid = true;
-      this.isIOS = false;
-      return 'android';
-    }
-    if (driver.isIOS) {
-      this.isAndroid = false;
-      this.isIOS = true;
-      return 'ios';
+    if (driver.capabilities['bstack:options']) {
+      this.isBrowserStack = true;
+      if (driver.capabilities['bstack:options'].platformName.toLowerCase() === 'android') {
+        this.isAndroid = true;
+        this.isIOS = false;
+        return 'android';
+      }
+      if (driver.capabilities['bstack:options'].platformName.toLowerCase() === 'ios') {
+        this.isAndroid = false;
+        this.isIOS = true;
+        return 'ios';
+      }
+    } else {
+      if (driver.isAndroid) {
+        this.isAndroid = true;
+        this.isIOS = false;
+        return 'android';
+      }
+      if (driver.isIOS) {
+        this.isAndroid = false;
+        this.isIOS = true;
+        return 'ios';
+      }
     }
   };
 

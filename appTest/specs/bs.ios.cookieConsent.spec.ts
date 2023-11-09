@@ -9,9 +9,9 @@ const IOSTrackingAlert = require('../screenobjects/android/os_components/IOSTrac
 
 // currently BS uses its own capabilities and isIOS and isAndroid don't work (known bug)
 // possibly fixed in WDIO v8. In the mean time will use custom vars.
-const isIOS = driver.capabilities['bstack:options'].platformName.toLowerCase() === 'ios' ? true : false;
-const isAndroid = driver.capabilities['bstack:options'].platformName.toLowerCase() === 'android' ? true : false;
-const isBS = driver.capabilities['bstack:options'] ? true : false;
+// const isIOS = driver.capabilities['bstack:options'].platformName.toLowerCase() === 'ios' ? true : false;
+// const isAndroid = driver.capabilities['bstack:options'].platformName.toLowerCase() === 'android' ? true : false;
+// const isBS = driver.capabilities['bstack:options'] ? true : false;
 
 beforeAll(async () => {
   await Device.getScreenSize();
@@ -33,7 +33,7 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
   //===============================================================
   // IOS TRACKING ALERT driver.capabilities['bstack:options'].platformName == 'ios'
   //===============================================================
-  if (isIOS) {
+  if (Device.isIOS) {
     it('(iOS only) Tracking alert is DISPLAYED', async () => {
       const elem = await IOSTrackingAlert.container;
       await elem.waitForDisplayed({ timeout: 5000 });

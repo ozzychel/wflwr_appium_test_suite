@@ -17,8 +17,8 @@
         "/config/**/*.ts"
     ],
     "scripts": {
-        "android.app.consent": "wdio config/wdio.android.app.conf.ts --suite consent",
-        "ios.app.consent": "wdio config/wdio.ios.app.conf.ts --suite consent",
+        "android.app.consent": "wdio config/wdio.android.conf.ts --suite consent",
+        "ios.app.consent": "wdio config/wdio.ios.conf.ts --suite consent",
         "bs.android.consent": "wdio config/browserstack/wdio.bs.android.conf.ts --suite consent",
         "bs.ios.consent": "wdio run config/browserstack/wdio.bs.ios.conf.ts --suite consent",
         
