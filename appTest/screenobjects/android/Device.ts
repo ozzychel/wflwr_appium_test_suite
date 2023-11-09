@@ -1,20 +1,27 @@
 class Device {
 
-  screenSize = null;
-  screenWidth = null;
-  screenHeight = null;
-  isAndroid = null;
-  isIOS = null;
-  isBrowserStack = null;
+  private screenSize = null;
+  private screenWidth = null;
+  private screenHeight = null;
 
-  getScreenSize = async function () {
+  private get isBrowserStack () {return driver.capabilities['bstack:options'] !== undefined;}
+  private get isIOS () {
+    if (this.isBrowserStack && driver.capabilities['bstack:options'].platformName.toLowerCase() === 'ios') {return true;}
+    return driver.isIOS;
+  }
+  private get isAndroid () {
+    if (this.isBrowserStack && driver.capabilities['bstack:options'].platformName.toLowerCase() === 'android') {return true;}
+    return driver.isAndroid;
+  }
+
+  async getScreenSize () {
     let size = await driver.getWindowSize();
     this.screenSize = size;
     this.screenWidth = size.width;
     this.screenHeight = size.height;
     return size;
-  };
-
+  }
+ 
   //Get the platform version
   private get platformVersion (): number {
     return parseInt(
@@ -23,33 +30,6 @@ class Device {
       10,
     );
   }
-
-  getPlatform = async function () {
-    if (driver.capabilities['bstack:options']) {
-      this.isBrowserStack = true;
-      if (driver.capabilities['bstack:options'].platformName.toLowerCase() === 'android') {
-        this.isAndroid = true;
-        this.isIOS = false;
-        return 'android';
-      }
-      if (driver.capabilities['bstack:options'].platformName.toLowerCase() === 'ios') {
-        this.isAndroid = false;
-        this.isIOS = true;
-        return 'ios';
-      }
-    } else {
-      if (driver.isAndroid) {
-        this.isAndroid = true;
-        this.isIOS = false;
-        return 'android';
-      }
-      if (driver.isIOS) {
-        this.isAndroid = false;
-        this.isIOS = true;
-        return 'ios';
-      }
-    }
-  };
 
   //Execute adb command
   async executeAdbCommand(adbCommand: string) {
@@ -65,4 +45,5 @@ class Device {
 
 }
 
-module.exports = new Device();
+export default new Device();
+// module.exports = new Device();

@@ -33,28 +33,28 @@ export const config: WebdriverIO.Config = {
   //in case we go with separate specs in the future
   suites: {
     install: [
-      './appTest/specs/app.install.spec.ts'
+      './appTest/specs/install.spec.ts'
     ],
     demo: [
-      './appTest/specs/app.demo.spec.ts'
+      './appTest/specs/demo.spec.ts'
     ],
     nav: [
-      './appTest/specs/app.navigation.spec.ts'
+      './appTest/specs/navigation.spec.ts'
     ],
     dev: [
-      './appTest/specs/app.dev.spec.ts'
+      './appTest/specs/dev.spec.ts'
     ],
     registration: [
-      './appTest/specs/app.registration.spec.ts'
+      './appTest/specs/registration.spec.ts'
     ],
     signup: [
-      './appTest/specs/app.signup.spec.ts'
+      './appTest/specs/signup.spec.ts'
     ],
     consent: [
-      './appTest/specs/app.bs.cookieConsent.spec.ts'
+      './appTest/specs/cookieConsent.spec.ts'
     ],
     permissions: [
-      './appTest/specs/app.permissions.spec.ts'
+      './appTest/specs/permissions.spec.ts'
     ]
   },
   //
