@@ -1,5 +1,5 @@
 import { config } from '../wdio.shared.conf';
-const { androidDevicesBS } = require('../../appTest/devices/bs.androidDevices');
+const { iosDevicesBS } = require('../../appTest/devices/bs.iosDevices');
 
 config.specs = [];
 
@@ -20,19 +20,19 @@ config.hostname ='hub.browserstack.com';
 
 config.services = [
   ['browserstack', {
-    app: `bs://${process.env.BROWSERSTACK_ANDROID_APP_ID}`,
+    app: `bs://${process.env.BROWSERSTACK_IOS_APP_ID}`,
     browserstackLocal: true,
-    // buildIdentifier: `${process.env.ANDROID_BUILD_NUMBER}`,
+    // buildIdentifier: `${process.env.IOS_BUILD_NUMBER}`,
     buildIdentifier: '_Debug_BuildValidation',
-    buildName: 'Android Debug',
+    buildName: 'IOS Debug',
     debug: true,
     testObservability: true,
     testObservabilityOptions: {
       user: process.env.BROWSERSTACK_USERNAME,
       key: process.env.BROWSERSTACK_ACCESS_KEY,
       projectName: process.env.PROJECT_NAME,
-      buildName: `Android_WFLWRQA_${process.env.ANDROID_BUILD_NUMBER}`,
-      buildTag: `${process.env.ANDROID_BUILD_NUMBER}`
+      buildName: `IOS_WFLWRQA_${process.env.IOS_BUILD_NUMBER}`,
+      buildTag: `${process.env.IOS_BUILD_NUMBER}`
     }
   }]
 ];
@@ -41,7 +41,7 @@ config.services = [
 config.commonCapabilities = {
   'bstack:options': {
     projectName : process.env.PROJECT_NAME,
-    buildName : `Android_${process.env.ANDROID_BUILD_NUMBER}`,
+    buildName : `IOS_${process.env.IOS_BUILD_NUMBER}`,
     appiumVersion: "2.0.1",
     sessionName : 'Build validation test',
     acceptInsecureCerts : 'true',
@@ -52,7 +52,7 @@ config.commonCapabilities = {
 };
 
 //capabilities to pick test devices
-config.capabilities = [...androidDevicesBS];
+config.capabilities = [...iosDevicesBS];
 
 //define number of simultaneously running instances
 config.maxInstances = 1;

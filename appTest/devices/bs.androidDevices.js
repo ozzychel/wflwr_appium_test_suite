@@ -1,7 +1,7 @@
-//==== NOTE ========================================
-// Currently or browserstack account supports only 
+//==== NOTE =======================================
+// Currently or browserstack account supports only
 // 5 simultaneously running test devices
-//==================================================
+//=================================================
 const androidDevicesBS = [
   //----------------------------------------------
   //Android 14.0
@@ -19,11 +19,11 @@ const androidDevicesBS = [
   //----------------------------------------------
   //Android 13.0
   //----------------------------------------------
-  { 'bstack:options': {
-    deviceName: 'Google Pixel 7',
-    platformVersion: '13.0',
-    platformName: 'android',
-  } },
+  // { 'bstack:options': {
+  //   deviceName: 'Google Pixel 7',
+  //   platformVersion: '13.0',
+  //   platformName: 'android',
+  // } },
   // { 'bstack:options': {
   //   deviceName: 'Samsung Galaxy S23 Ultra',
   //   platformVersion: '13.0',
@@ -38,11 +38,11 @@ const androidDevicesBS = [
   // ----------------------------------------------
   // Android 12.0
   // ----------------------------------------------
-  { 'bstack:options': {
-    deviceName: 'Samsung Galaxy S22 Plus',
-    platformVersion: '12.0',
-    platformName: 'android',
-  } },
+  // { 'bstack:options': {
+  //   deviceName: 'Samsung Galaxy S22 Plus',
+  //   platformVersion: '12.0',
+  //   platformName: 'android',
+  // } },
   // { 'bstack:options': {
   //   deviceName: 'Google Pixel 5',
   //   platformVersion: '12.0',
@@ -56,11 +56,11 @@ const androidDevicesBS = [
   // ----------------------------------------------
   // Android 11.0
   // ----------------------------------------------
-  { 'bstack:options': {
-    deviceName: 'Google Pixel 4',
-    platformVersion: '11.0',
-    platformName: 'android',
-  } },
+  // { 'bstack:options': {
+  //   deviceName: 'Google Pixel 4',
+  //   platformVersion: '11.0',
+  //   platformName: 'android',
+  // } },
   // { 'bstack:options': {
   //   deviceName: 'Samsung Galaxy A52',
   //   platformVersion: '11.0',
@@ -94,11 +94,11 @@ const androidDevicesBS = [
   // ----------------------------------------------
   // Android 10.0
   // ----------------------------------------------
-  { 'bstack:options': {
-    deviceName: 'Samsung Galaxy Note 20',
-    platformVersion: '10.0',
-    platformName: 'android',
-  } },
+  // { 'bstack:options': {
+  //   deviceName: 'Samsung Galaxy Note 20',
+  //   platformVersion: '10.0',
+  //   platformName: 'android',
+  // } },
   // { 'bstack:options': {
   //   deviceName: 'Samsung Galaxy A11',
   //   platformVersion: '10.0',
