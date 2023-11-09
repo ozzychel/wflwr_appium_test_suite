@@ -1,4 +1,4 @@
-import { APP_NAME, DEFAULT_PIN } from '../helpers/Constants';
+import { DEFAULT_PIN } from '../helpers/Constants';
 import { alertNoticeText } from '../helpers/TextCopies';
 import Gestures from '../helpers/Gestures';
 const CookiesBanner = require('../screenobjects/android/components/CookiesBanner');

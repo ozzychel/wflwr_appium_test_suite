@@ -1,4 +1,4 @@
-import { APP_NAME, DEFAULT_PIN } from '../helpers/Constants';
+import { ANDROID_APP_NAME, IOS_APP_NAME, DEFAULT_PIN } from '../helpers/Constants';
 const Device = require('../screenobjects/android/Device');
 
 // beforeAll(async () => {
@@ -21,7 +21,7 @@ afterAll(async () => {
 
 describe('BUILD APP INSTALLATION', () => {
   it('Should have have app installed on the device', async () => {
-    return driver.isAppInstalled(APP_NAME);
+    return driver.isAppInstalled(driver.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME);
   });
 });
 

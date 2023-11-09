@@ -1,4 +1,4 @@
-import { USER_EMAIL, USER_FIRSTNAME, USER_LASTNAME, USER_PASSWORD, DEFAULT_PIN } from '../helpers/Constants';
+import { USER_EMAIL, USER_FIRSTNAME, USER_LASTNAME, USER_PASSWORD, DEFAULT_PIN, ANDROID_APP_NAME, IOS_APP_NAME } from '../helpers/Constants';
 import Gestures from '../helpers/Gestures';
 const LoginScreen = require('../screenobjects/android/LoginScreen');
 const SignupScreen = require('../screenobjects/android/SignupScreen');
@@ -27,7 +27,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   afterAll(async () => {
     const fileName = `${driver.capabilities['deviceManufacturer']}_${driver.capabilities['deviceModel']}_${driver.capabilities['udid']}_${driver.config['suite'][0]}`;
     await driver.saveRecordingScreen(`./appTest/screenshots/video/${fileName}.mp4`);
-    await driver.closeApp();
+    await driver.terminateApp(driver.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME);
   });
 
   describe('LOGIN SCREEN. EMAIL FLOW. SIGN UP AS A NEW USER', () => {
