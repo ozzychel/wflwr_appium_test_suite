@@ -1,4 +1,4 @@
-import { APP_NAME, DEFAULT_PIN } from '../helpers/Constants';
+import { ANDROID_APP_NAME, DEFAULT_PIN } from '../helpers/Constants';
 import { alertNoticeText } from '../helpers/TextCopies';
 const CookiesBanner = require('../screenobjects/android/components/CookiesBanner');
 const CookiesBannerExpanded = require('../screenobjects/android/components/CookiesBannerExpanded');
@@ -31,7 +31,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
   describe('BUILD APP INSTALLATION', () => {
     it('Should have have app installed on the device', async () => {
-      return driver.isAppInstalled(APP_NAME);
+      return driver.isAppInstalled(ANDROID_APP_NAME);
     });
   });
 

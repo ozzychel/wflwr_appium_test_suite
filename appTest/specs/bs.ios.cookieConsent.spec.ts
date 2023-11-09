@@ -33,7 +33,7 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
   //===============================================================
   // IOS TRACKING ALERT driver.capabilities['bstack:options'].platformName == 'ios'
   //===============================================================
-  if (driver.isIOS && driver.capabilities['fullReset']) {
+  if (isIOS) {
     it('(iOS only) Tracking alert is DISPLAYED', async () => {
       const elem = await IOSTrackingAlert.container;
       await elem.waitForDisplayed({ timeout: 5000 });
