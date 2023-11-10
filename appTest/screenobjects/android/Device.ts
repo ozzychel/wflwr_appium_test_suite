@@ -1,19 +1,30 @@
 class Device {
 
-  private screenSize = null;
-  private screenWidth = null;
-  private screenHeight = null;
-
-  private get isBrowserStack () {return driver.capabilities['bstack:options'] !== undefined;}
-  private get isIOS () {
-    if (this.isBrowserStack && driver.capabilities['bstack:options'].platformName.toLowerCase() === 'ios') {return true;}
+  public screenSize = null;
+  public screenWidth = null;
+  public screenHeight = null;
+  public get isBrowserStack () {
+    // console.log(">>>>>>>>>>>>>>>>>DRIVER >>>>>>>>>>>>>>>>>>>>>", driver.capabilities['bstack:options']['platformName'])
+    return driver.capabilities['bstack:options'] !== undefined;
+  }
+  public get isIOS () {
+    if (this.isBrowserStack && driver.capabilities['bstack:options']['platformName'] === 'ios') {return true;}
     return driver.isIOS;
   }
-  private get isAndroid () {
-    if (this.isBrowserStack && driver.capabilities['bstack:options'].platformName.toLowerCase() === 'android') {return true;}
+  public get isAndroid () {
+    if (this.isBrowserStack && driver.capabilities['bstack:options']['platformName'] === 'android') {return true;}
     return driver.isAndroid;
   }
 
+  public get log () {
+    console.log("=================LOG=========================")
+    console.log("================isIOS===========", this.isIOS)
+    console.log("================isIOS===========", this.isAndroid)
+    console.log("=================LOG=========================")
+    return true;
+  }
+
+  // get screen size
   async getScreenSize () {
     let size = await driver.getWindowSize();
     this.screenSize = size;
@@ -46,4 +57,3 @@ class Device {
 }
 
 export default new Device();
-// module.exports = new Device();

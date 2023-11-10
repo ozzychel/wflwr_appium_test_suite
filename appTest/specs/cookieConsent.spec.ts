@@ -10,6 +10,7 @@ const IOSTrackingAlert = require('../screenobjects/android/os_components/IOSTrac
 describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
   beforeAll(async () => {
+    await Device.getScreenSize();
     await driver.startRecordingScreen();
   });
 
@@ -38,27 +39,26 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     it('Should have have app installed on the device', async () => {
       await expect(await driver.isAppInstalled(Device.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME)).toBe(true);
     });
+
+    if (Device.isIOS && driver.capabilities['fullReset']) {
+      it('(iOS only) Tracking alert is DISPLAYED', async () => {
+        const elem = await IOSTrackingAlert.container;
+        await elem.waitForDisplayed({ timeout: 3000 });
+      });
+      it('(iOS only) Tracking alert HAS correct text copy', async () => {
+        const elem = await IOSTrackingAlert.container;
+        await expect(elem).toHaveTextContaining(activityTrackingAlertTitle);
+      });
+      it('(iOS only) TAP on "Allow" button DISMISS tracking alert', async () => {
+        const elem = await IOSTrackingAlert.container;
+        await IOSTrackingAlert.tapAllowButton();
+        await elem.waitForDisplayed({ timeout: 3000, reverse: true });
+      });
+    }
   });
 
   // add section to handle IOS tracking alert when launched first time
   // use fullReset:true in appium config to simulate clean state for every ios run
-  if (Device.isIOS && driver.capabilities['fullReset']) {
-    it('(iOS only) Tracking alert is DISPLAYED', async () => {
-      const elem = await IOSTrackingAlert.container;
-      await elem.waitForDisplayed({ timeout: 3000 });
-    });
-
-    it('(iOS only) Tracking alert HAS correct text copy', async () => {
-      const elem = await IOSTrackingAlert.container;
-      await expect(elem).toHaveTextContaining(activityTrackingAlertTitle);
-    });
-
-    it('(iOS only) TAP on "Allow" button DISMISS tracking alert', async () => {
-      const elem = await IOSTrackingAlert.container;
-      await IOSTrackingAlert.tapAllowButton();
-      await elem.waitForDisplayed({ timeout: 3000, reverse: true });
-    });
-  }
 
   describe('LOGIN SCREEN. CONTAINERS AND LAYOUT', () => {
     it('Main App container EXISTS and DISPLAYED. App launched', async () => {

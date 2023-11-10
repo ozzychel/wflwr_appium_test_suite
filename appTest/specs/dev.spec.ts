@@ -9,7 +9,7 @@ const IOSTrackingAlert = require('../screenobjects/android/os_components/IOSTrac
 import Device from '../screenobjects/android/Device';
 
 describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
- 
+
   beforeAll(async () => {
     await Device.getScreenSize();
     await console.log("============BEFOREALL===DEVICE====", Device)
