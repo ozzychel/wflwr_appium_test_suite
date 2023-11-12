@@ -5,7 +5,7 @@ config.specs = [];
 
 config.suites = {
   consent: [
-    './appTest/specs/bs.android.cookieConsent.spec.ts'
+    './appTest/specs/bs.cookieConsent.spec.ts'
   ]
 };
 

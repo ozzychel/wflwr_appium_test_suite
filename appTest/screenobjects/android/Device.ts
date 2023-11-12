@@ -1,18 +1,28 @@
 class Device {
 
-  screenSize = null;
-  screenWidth = null;
-  screenHeight = null;
-  isAndroid = null;
-  isIOS = null;
+  public screenSize = null;
+  public screenWidth = null;
+  public screenHeight = null;
+  public get isBrowserStack () {
+    return driver.capabilities['bstack:options'] !== undefined;
+  }
+  public get isIOS () {
+    if (this.isBrowserStack && driver.capabilities['bstack:options']['platformName'] === 'ios') {return true;}
+    return driver.isIOS;
+  }
+  public get isAndroid () {
+    if (this.isBrowserStack && driver.capabilities['bstack:options']['platformName'] === 'android') {return true;}
+    return driver.isAndroid;
+  }
 
-  getScreenSize = async function () {
+  // get screen size
+  async getScreenSize () {
     let size = await driver.getWindowSize();
     this.screenSize = size;
     this.screenWidth = size.width;
     this.screenHeight = size.height;
     return size;
-  };
+  }
 
   //Get the platform version
   private get platformVersion (): number {
@@ -22,19 +32,6 @@ class Device {
       10,
     );
   }
-
-  getPlatform = async function () {
-    if (driver.isAndroid) {
-      this.isAndroid = true;
-      this.isIOS = false;
-      return 'android';
-    }
-    if (driver.isIOS) {
-      this.isAndroid = false;
-      this.isIOS = true;
-      return 'ios';
-    }
-  };
 
   //Execute adb command
   async executeAdbCommand(adbCommand: string) {
@@ -50,4 +47,4 @@ class Device {
 
 }
 
-module.exports = new Device();
+export default new Device();

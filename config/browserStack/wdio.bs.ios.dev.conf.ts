@@ -4,8 +4,8 @@ const { iosDevicesBS } = require('../../appTest/devices/bs.iosDevices');
 config.specs = [];
 
 config.suites = {
-  consent: [
-    './appTest/specs/app.bs.cookieConsent.spec.ts'
+  dev: [
+    './appTest/specs/dev.spec.ts'
   ]
 };
 
@@ -23,15 +23,15 @@ config.services = [
     app: `bs://${process.env.BROWSERSTACK_IOS_APP_ID}`,
     browserstackLocal: true,
     // buildIdentifier: `${process.env.IOS_BUILD_NUMBER}`,
-    buildIdentifier: '_Debug_BuildValidation',
-    buildName: 'IOS Debug',
+    buildIdentifier: '_DevTest',
+    buildName: 'IOS Debug DEV',
     debug: true,
     testObservability: true,
     testObservabilityOptions: {
       user: process.env.BROWSERSTACK_USERNAME,
       key: process.env.BROWSERSTACK_ACCESS_KEY,
       projectName: process.env.PROJECT_NAME,
-      buildName: `IOS_WFLWRQA_${process.env.IOS_BUILD_NUMBER}`,
+      buildName: `DEV_IOS_WFLWRQA_${process.env.IOS_BUILD_NUMBER}`,
       buildTag: `${process.env.IOS_BUILD_NUMBER}`
     }
   }]
@@ -41,13 +41,13 @@ config.services = [
 config.commonCapabilities = {
   'bstack:options': {
     projectName : process.env.PROJECT_NAME,
-    buildName : `IOS_${process.env.IOS_BUILD_NUMBER}`,
+    buildName : `DEV_IOS_${process.env.IOS_BUILD_NUMBER}`,
     appiumVersion: "2.0.1",
-    sessionName : 'Build validation test',
+    sessionName : 'DEV test',
     acceptInsecureCerts : 'true',
     debug : true,
     networkLogs : true,
-    idleTimeout: 180
+    idleTimeout: 180,
   },
 };
 
