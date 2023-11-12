@@ -25,6 +25,12 @@ class LoginScreen {
       $('-ios predicate string:label == "CONTINUE WITH EMAIL"');
   }
 
+  private get continueButton () {
+    return driver.isAndroid ?
+      $('//android.widget.TextView[@text="CONTINUE"]') :
+      $('-ios predicate string:label == "CONTINUE"');
+  }
+
   private get iosTrackingAlert () {return $('-ios predicate string:type == "XCUIElementTypeAlert"');}
   private get logo () { return $('id=WFLWR Logo');}
   private get appUiView () {return $('//androidx.compose.ui.platform.ComposeView');}
@@ -37,7 +43,7 @@ class LoginScreen {
 
   //very bad design, container not the button change 'enabled' prop + no id. Works for now, but unreliable
   //cannot use -uiautomator selector strategy,cause its a webview!
-  private get continueButton () {return $('//android.widget.TextView[@text="CONTINUE"]');}
+
   private get dismissButton () {return $('//android.widget.TextView[@text="DISMISS"]');}
   //------------------------------------------------------------------------------------
   private get forgotEmailLink () {return $('android=new UiSelector().className("android.widget.TextView").text("Forgot Email Address?")');}

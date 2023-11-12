@@ -4,7 +4,6 @@ class Device {
   public screenWidth = null;
   public screenHeight = null;
   public get isBrowserStack () {
-    // console.log(">>>>>>>>>>>>>>>>>DRIVER >>>>>>>>>>>>>>>>>>>>>", driver.capabilities['bstack:options']['platformName'])
     return driver.capabilities['bstack:options'] !== undefined;
   }
   public get isIOS () {
@@ -16,14 +15,6 @@ class Device {
     return driver.isAndroid;
   }
 
-  public get log () {
-    console.log("=================LOG=========================")
-    console.log("================isIOS===========", this.isIOS)
-    console.log("================isIOS===========", this.isAndroid)
-    console.log("=================LOG=========================")
-    return true;
-  }
-
   // get screen size
   async getScreenSize () {
     let size = await driver.getWindowSize();
@@ -32,7 +23,7 @@ class Device {
     this.screenHeight = size.height;
     return size;
   }
- 
+
   //Get the platform version
   private get platformVersion (): number {
     return parseInt(

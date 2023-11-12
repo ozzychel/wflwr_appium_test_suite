@@ -19,14 +19,7 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
   //===============================================================
   // APP IS INSTALLED AND HAS CORRECT NAME
   //===============================================================
-  console.log("============BEFOREALL===DEVICE====", Device)
-  console.log("============BEFOREALLE=====isBrowserStack=========", Device.isBrowserstack)
-  console.log("============BEFOREALLE=====isIOS=========", Device.isIOS)
-  console.log("============BEFOREALLE=====isAndroid=========", Device.isAndroid)
   it('Should have have app installed on the device', async () => {
-    await console.log("============BEFOREALL===DEVICE====", Device)
-    await console.log("============BEFOREALLE=====isIOS=========", Device.isIOS)
-    await console.log("============BEFOREALLE=====isAndroid=========", Device.isAndroid)
     await expect(await driver.isAppInstalled(Device.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME)).toBe(true);
   });
 
@@ -121,7 +114,7 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
       await expect(elem).toHaveAttrContaining('clickable', 'false');
     }
     if (Device.isIOS) {
-      //TODO (tried hittable - didn't work)
+      //TODO (tried enabled - didn't work)
     }
   });
 
@@ -153,10 +146,10 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
     await expect(elem).toHaveText('Allow All');
   });
 
-  it('"Allow All" button is CLICKABLE', async () => {
+  it('"Allow All" button is CLICKABLE/ENABLED', async () => {
     const elem = await CookiesBanner.allowAllButton;
     if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-    if (Device.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
+    if (Device.isIOS) await expect(elem).toHaveAttrContaining('enabled', 'true');
   });
 
   it('"Decline All" button is DISPLAYED and HAS correct LABEL', async () => {
@@ -165,10 +158,10 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
     await expect(elem).toHaveText('Decline All');
   });
 
-  it('"Decline All" button is CLICKABLE', async () => {
+  it('"Decline All" button is CLICKABLE/ENABLED', async () => {
     const elem = await CookiesBanner.declineAllButton;
     if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-    if (Device.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
+    if (Device.isIOS) await expect(elem).toHaveAttrContaining('enabled', 'true');
   });
 
   it('"Go to Settings" button is DISPLAYED and HAS correct LABEL', async () => {
@@ -177,10 +170,10 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
     await expect(elem).toHaveText('Go to Settings');
   });
 
-  it('"Go to Settings" button is CLICKABLE', async () => {
+  it('"Go to Settings" button is CLICKABLE/ENABLED', async () => {
     const elem = await CookiesBanner.goToSettingsButton;
     if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-    if (Device.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
+    if (Device.isIOS) await expect(elem).toHaveAttrContaining('enabled', 'true');
   });
 
   it('TAP on "Go to Settings" button REDIRECTS to expanded cookie banner', async () => {
@@ -208,11 +201,11 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
     await expect(elem).toBeDisplayed();
   });
 
-  it('"Allow All" button is DISPLAYED and CLICKABLE', async () => {
+  it('"Allow All" button is DISPLAYED and CLICKABLE/ENABLED', async () => {
     const elem = CookiesBannerExpanded.allowAllBtn;
     await expect(elem).toBeDisplayed();
     if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-    if (Device.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
+    if (Device.isIOS) await expect(elem).toHaveAttrContaining('enabled', 'true');
   });
 
   it('"Allow All" button HAS correct LABEL', async () => {
@@ -220,11 +213,11 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
     await expect(elem).toHaveText('Allow All');
   });
 
-  it('"Decline All" button is DISPLAYED and CLICKABLE', async () => {
+  it('"Decline All" button is DISPLAYED and CLICKABLE/ENABLED', async () => {
     const elem = CookiesBannerExpanded.declineAllBtn;
     await expect(elem).toBeDisplayed();
     if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-    if (Device.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
+    if (Device.isIOS) await expect(elem).toHaveAttrContaining('enabled', 'true');
   });
 
   it('"Decline All" button HAS correct LABEL', async () => {
@@ -316,10 +309,10 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
     await expect(elem).toBeDisplayed();
   });
 
-  it('"Confirm My Choices" button is CLICKABLE', async () => {
+  it('"Confirm My Choices" button is CLICKABLE/ENABLED', async () => {
     const elem = CookiesBannerExpanded.confirmButton;
     if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-    if (Device.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
+    if (Device.isIOS) await expect(elem).toHaveAttrContaining('enabled', 'true');
   });
 
   if (Device.isAndroid) {

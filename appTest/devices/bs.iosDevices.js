@@ -2,16 +2,16 @@ const iosDevicesBS = [
   //----------------------------------------------
   //IOS 17.0
   //----------------------------------------------
-  { 'bstack:options': {
-    deviceName: 'iPhone 15 Pro Max',
-    platformVersion: '17',
-    platformName: 'ios',
-  } },
   // { 'bstack:options': {
-  //   deviceName: 'iPhone 15 Plus',
+  //   deviceName: 'iPhone 15 Pro Max',
   //   platformVersion: '17',
   //   platformName: 'ios',
   // } },
+  { 'bstack:options': {
+    deviceName: 'iPhone 15 Plus',
+    platformVersion: '17',
+    platformName: 'ios',
+  } },
   // { 'bstack:options': {
   //   deviceName: 'iPhone 13',
   //   platformVersion: '17',
@@ -27,7 +27,7 @@ const iosDevicesBS = [
   //   platformVersion: '17',
   //   platformName: 'ios',
   // } },
- 
+
 ];
 
 module.exports = {

@@ -19,6 +19,7 @@
     "scripts": {
         "bs.android.consent": "wdio run config/browserstack/wdio.bs.android.conf.ts --suite consent",
         "bs.ios.consent": "wdio run config/browserstack/wdio.bs.ios.conf.ts --suite consent",
+        "bs.ios.dev": "wdio run config/browserstack/wdio.bs.ios.dev.conf.ts --suite dev",
         "android.consent": "wdio run config/wdio.android.conf.ts --suite consent",
         "ios.consent": "wdio run config/wdio.ios.conf.ts --suite consent",
         "ios.dev": "wdio run config/wdio.ios.conf.ts --suite dev",
