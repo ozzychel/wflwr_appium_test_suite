@@ -48,7 +48,7 @@ config.commonCapabilities = {
     debug : true,
     networkLogs : true,
     idleTimeout: 180,
-  },
+  }
 };
 
 //capabilities to pick test devices

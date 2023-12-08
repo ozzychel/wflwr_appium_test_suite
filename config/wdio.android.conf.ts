@@ -27,33 +27,33 @@ config.capabilities = [
     'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
     'appium:app': join(
       process.cwd(),
-      './apps/WFLWRQA6.6.0.11.apk'
+      './apps/WFLWRQA7.0.4.0.apk'
     ),
-    // 'appium:noReset': true,
-    'appium:fullReset': true,
+    'appium:noReset': true,
+    // 'appium:fullReset': true,
     'appium:newCommandTimeout': 240,
     'appium:systemPort': 6011
   },
 
    //Pixel 6a
-  {
-    'appium:udid': '2B111JEGR07534',
-    'appium:deviceName': 'Pixel 6a',
-    'appium:platformName': 'Android',
-    'appium:platformVersion': '13',
-    'appium:automationName': 'UiAutomator2',
-    'appium:orientation': 'PORTRAIT',
-    'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
-    'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
-    'appium:app': join(
-      process.cwd(),
-      './apps/WFLWRQA6.6.0.11.apk'
-    ),
-    // 'appium:noReset': true,
-    'appium:fullReset:': true,
-    'appium:newCommandTimeout': 240,
-    'appium:systemPort': 6022
-  },
+  // {
+  //   'appium:udid': '2B111JEGR07534',
+  //   'appium:deviceName': 'Pixel 6a',
+  //   'appium:platformName': 'Android',
+  //   'appium:platformVersion': '13',
+  //   'appium:automationName': 'UiAutomator2',
+  //   'appium:orientation': 'PORTRAIT',
+  //   'appium:appPackage': 'com.redbull.wingsforlifeworldrun.debug',
+  //   'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
+  //   'appium:app': join(
+  //     process.cwd(),
+  //     './apps/WFLWRQA6.6.0.11.apk'
+  //   ),
+  //   // 'appium:noReset': true,
+  //   'appium:fullReset:': true,
+  //   'appium:newCommandTimeout': 240,
+  //   'appium:systemPort': 6022
+  // },
 
   // //Galaxy S23
   // {

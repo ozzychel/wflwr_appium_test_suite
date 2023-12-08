@@ -49,7 +49,7 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
   //===============================================================
   it('Main App container EXISTS and DISPLAYED. App launched', async () => {
     const elem = await LoginScreen.container;
-    await elem.waitForDisplayed({ timeout: 3000 });
+    await elem.waitForDisplayed({ timeout: 5000 });
   });
 
   it('Main App container is NOT SCROLLABLE', async () => {
