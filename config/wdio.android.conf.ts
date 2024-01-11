@@ -29,8 +29,8 @@ config.capabilities = [
       process.cwd(),
       './apps/WFLWRQA7.0.4.0.apk'
     ),
-    'appium:noReset': true,
-    // 'appium:fullReset': true,
+    // 'appium:noReset': true,
+    'appium:fullReset': true,
     'appium:newCommandTimeout': 240,
     'appium:systemPort': 6011
   },
