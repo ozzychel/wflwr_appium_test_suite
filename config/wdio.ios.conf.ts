@@ -20,12 +20,12 @@ config.capabilities = [
     'appium:deviceName': 'iPhone 13 mini',
     'appium:udid': '00008110-001264901E04801E',
     'appium:platformName': 'IOS',
-    'appium:platformVersion': '16.0',
+    'appium:platformVersion': '16.1',
     'appium:automationName': 'XCUITest',
     'appium:orientation': 'PORTRAIT',
     // 'appium:app': '/Users/apetunin/Projects/wflwr_appium_test_suite/apps/WFLWRQA7.0.1.ipa',
     'appium:app': join(
-      process.cwd(), './apps/WFLWRQA7.0.1.ipa'
+      process.cwd(), './apps/WFLWRQA7.0.5.ipa'
     ),
     'appium:bundleId': 'com.redbull.WingsForLifeWorldRun.debug',
     'appium:xcodeSigningId': 'iPhone Developer',
@@ -33,7 +33,7 @@ config.capabilities = [
     'appium:newCommandTimeout': 240,
     // 'appium:noReset': true,
     'appium:fullReset' : true,
-    'appium:prebuildWDA': true,
+    // 'appium:prebuildWDA': true,
     'appium:derivedDataPath': '/Users/apetunin/Library/Developer/Xcode/DerivedData',
     'appium:systemPort': 6066
   },
@@ -61,26 +61,26 @@ config.capabilities = [
   // },
 
   // iPhone Xr
-  {
-    'appium:deviceName': 'iPhone Xr',
-    'appium:udid': '00008020-001A4CD40E68002E',
-    'appium:platformName': 'IOS',
-    'appium:platformVersion': '16.6.1',
-    'appium:automationName': 'XCUITest',
-    'appium:orientation': 'PORTRAIT',
-    'appium:app': join(
-      process.cwd(), './apps/WFLWRQA7.0.1.ipa'
-    ),
-    'appium:bundleId': 'com.redbull.WingsForLifeWorldRun.debug',
-    'appium:xcodeSigningId': 'iPhone Developer',
-    'appium:xcodeOrgId': process.env.XCODE_ORG_ID,
-    'appium:newCommandTimeout': 240,
-    // 'appium:noReset': true,
-    'appium:fullReset' : true,
-    'appium:prebuildWDA': true,
-    'appium:derivedDataPath': '/Users/apetunin/Library/Developer/Xcode/DerivedData',
-    'appium:systemPort': 6055
-  },
+  // {
+  //   'appium:deviceName': 'iPhone Xr',
+  //   'appium:udid': '00008020-001A4CD40E68002E',
+  //   'appium:platformName': 'IOS',
+  //   'appium:platformVersion': '16.6.1',
+  //   'appium:automationName': 'XCUITest',
+  //   'appium:orientation': 'PORTRAIT',
+  //   'appium:app': join(
+  //     process.cwd(), './apps/WFLWRQA7.0.1.ipa'
+  //   ),
+  //   'appium:bundleId': 'com.redbull.WingsForLifeWorldRun.debug',
+  //   'appium:xcodeSigningId': 'iPhone Developer',
+  //   'appium:xcodeOrgId': process.env.XCODE_ORG_ID,
+  //   'appium:newCommandTimeout': 240,
+  //   // 'appium:noReset': true,
+  //   'appium:fullReset' : true,
+  //   'appium:prebuildWDA': true,
+  //   'appium:derivedDataPath': '/Users/apetunin/Library/Developer/Xcode/DerivedData',
+  //   'appium:systemPort': 6055
+  // },
 
   // iPad Pro 12.9"
   // {

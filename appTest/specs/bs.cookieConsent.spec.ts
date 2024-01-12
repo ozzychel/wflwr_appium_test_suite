@@ -315,45 +315,55 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
     if (Device.isIOS) await expect(elem).toHaveAttrContaining('enabled', 'true');
   });
 
-  if (Device.isAndroid) {
-    it('TAP on "Confirm My Choices" button REDIRECTS to Login screen', async () => {
-      //since both platfroms don't have ids for the main screen containers
-      //will verify if 'continue with email' button is displayed
-      const banner = CookiesBannerExpanded.pcLayoutContainer;
-      const btn = LoginScreen.continueWithEmailButton;
+  it('"TAP on "Confirm My Choices" button REDIRECTS to Login screen', async () => {
+    const banner = CookiesBannerExpanded.pcLayoutContainer;
+      const btn = LoginScreen.startYourJourneyButton;
       await CookiesBannerExpanded.tapAllowAllButton();
       await banner.waitForDisplayed({ timeout: 3000, reverse:true });
       await btn.waitForDisplayed({ timeout: 5000 });
-    });
-  }
+  });
+
+  // if (Device.isAndroid) {
+  //   it('TAP on "Confirm My Choices" button REDIRECTS to Login screen', async () => {
+  //     //since both platfroms don't have ids for the main screen containers
+  //     //will verify if 'continue with email' button is displayed
+  //     const banner = CookiesBannerExpanded.pcLayoutContainer;
+  //     const btn = LoginScreen.continueWithEmailButton;
+  //     await CookiesBannerExpanded.tapAllowAllButton();
+  //     await banner.waitForDisplayed({ timeout: 3000, reverse:true });
+  //     await btn.waitForDisplayed({ timeout: 5000 });
+  //   });
+  // }
 
   //===============================================================
   // IOS PUSH NOTIFICATIONS ALERT
   //===============================================================
-  if (Device.isIOS) {
+  // *** WAS MOVED INTO THE PERMISSIONS SETUP EXPERIENCE
+  
+  // if (Device.isIOS) {
 
-    it('(iOS Only) TAP on "Confirm my Choices" button. Push notfications alert shows up', async () => {
-      const elem = await IOSTrackingAlert.container;
-      await CookiesBannerExpanded.tapAllowAllButton();
-      await elem.waitForDisplayed({ timeout: 3000 });
-    });
+  //   it('(iOS Only) TAP on "Confirm my Choices" button. Push notfications alert shows up', async () => {
+  //     const elem = await IOSTrackingAlert.container;
+  //     await CookiesBannerExpanded.tapAllowAllButton();
+  //     await elem.waitForDisplayed({ timeout: 3000 });
+  //   });
 
-    it('(iOS only) Push notifications alert HAS correct TEXT copy', async () => {
-      const elem = await IOSTrackingAlert.container;
-      await expect(elem).toHaveTextContaining(notificationsTrackingAlertTitle);
-    });
+  //   it('(iOS only) Push notifications alert HAS correct TEXT copy', async () => {
+  //     const elem = await IOSTrackingAlert.container;
+  //     await expect(elem).toHaveTextContaining(notificationsTrackingAlertTitle);
+  //   });
 
-    it('(iOS only) TAP on "Allow" button. REDIRECTED to Login screen', async () => {
-      //since both platfroms don't have ids for the main screen containers
-      //and all ui elements on Login screen belong to the layer that is set visible:false
-      //will check if 'Continue with email button' exists
-      const btn = LoginScreen.continueWithEmailButton;
-      await IOSTrackingAlert.tapAllowButton();
-      await driver.pause(5000);
-      await expect(btn).toExist();
-    });
+  //   it('(iOS only) TAP on "Allow" button. REDIRECTED to Login screen', async () => {
+  //     //since both platfroms don't have ids for the main screen containers
+  //     //and all ui elements on Login screen belong to the layer that is set visible:false
+  //     //will check if 'Continue with email button' exists
+  //     const btn = LoginScreen.continueWithEmailButton;
+  //     await IOSTrackingAlert.tapAllowButton();
+  //     await driver.pause(5000);
+  //     await expect(btn).toExist();
+  //   });
 
-  }
+  // }
 
 });
 

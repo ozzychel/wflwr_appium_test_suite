@@ -6,16 +6,16 @@ const androidDevicesBS = [
   //----------------------------------------------
   //Android 14.0
   //----------------------------------------------
-  // { 'bstack:options': {
-  //   deviceName: 'Google Pixel 6 Pro',
-  //   platformVersion: '14.0',
-  //   platformName: 'android',
-  // } },
-  // { 'bstack:options': {
-  //   deviceName: 'Google Pixel 8',
-  //   platformVersion: '14.0',
-  //   platformName: 'android',
-  // } },
+  { 'bstack:options': {
+    deviceName: 'Google Pixel 6 Pro',
+    platformVersion: '14.0',
+    platformName: 'android',
+  } },
+  { 'bstack:options': {
+    deviceName: 'Google Pixel 8',
+    platformVersion: '14.0',
+    platformName: 'android',
+  } },
   //----------------------------------------------
   //Android 13.0
   //----------------------------------------------
@@ -99,11 +99,11 @@ const androidDevicesBS = [
   //   platformVersion: '10.0',
   //   platformName: 'android',
   // } },
-  { 'bstack:options': {
-    deviceName: 'Samsung Galaxy A11',
-    platformVersion: '10.0',
-    platformName: 'android',
-  } },
+  // { 'bstack:options': {
+  //   deviceName: 'Samsung Galaxy A11',
+  //   platformVersion: '10.0',
+  //   platformName: 'android',
+  // } },
   // { 'bstack:options': {
   //   deviceName: 'Google Pixel 4 XL',
   //   platformVersion: '10.0',

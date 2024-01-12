@@ -25,6 +25,12 @@ class LoginScreen {
       $('-ios predicate string:label == "CONTINUE WITH EMAIL"');
   }
 
+  private get startYourJourneyButton () {
+    return driver.isAndroid ?
+      $('//android.widget.TextView[@text="START YOUR JOURNEY"]') :
+      $('//XCUIElementTypeButton[@name="Start your journey"]');
+  }
+
   private get continueButton () {
     return driver.isAndroid ?
       $('//android.widget.TextView[@text="CONTINUE"]') :
