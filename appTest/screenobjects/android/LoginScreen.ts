@@ -107,6 +107,10 @@ class LoginScreen {
   async tapDismissButton () {
     await this.dismissButton.click();
   }
+
+  async tapStartYourJourneyButton () {
+    await this.startYourJourneyButton.click();
+  }
 }
 
 module.exports =  new LoginScreen();
