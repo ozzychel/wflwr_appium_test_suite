@@ -25,12 +25,13 @@ class Device {
   }
 
   //Get the platform version
-  private get platformVersion (): number {
-    return parseInt(
-      (('platformVersion' in driver.capabilities &&
-                driver.capabilities.platformVersion) as string) || '8',
-      10,
-    );
+  private get platformVersion(): number {
+    const platformVersion = 'platformVersion' in driver.capabilities ? driver.capabilities.platformVersion : null;
+    if (typeof platformVersion === 'string') {
+      return parseInt(platformVersion, 10);
+    } else {
+      return 8;
+    }
   }
 
   //Execute adb command

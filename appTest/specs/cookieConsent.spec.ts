@@ -19,8 +19,8 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   });
 
   afterAll(async () => {
-    const fileName = `${driver.capabilities['platformName']}_${Device.isAndroid ? driver.capabilities['deviceManufacturer'] : 'apple'}_${Device.isAndroid ? driver.capabilities['deviceModel'] : driver.capabilities['deviceName']}_${driver.capabilities['udid']}_${driver.config['suite'][0]}`;
-    await driver.saveRecordingScreen(`./appTest/screenshots/video/${fileName}.mp4`);
+    // const fileName = `${driver.capabilities['platformName']}_${Device.isAndroid ? driver.capabilities['deviceManufacturer'] : 'apple'}_${Device.isAndroid ? driver.capabilities['deviceModel'] : driver.capabilities['deviceName']}_${driver.capabilities['udid']}_${driver.config['suite'][0]}`;
+    // await driver.saveRecordingScreen(`./appTest/screenshots/video/${fileName}.mp4`);
     await driver.terminateApp(Device.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME);
   });
 
