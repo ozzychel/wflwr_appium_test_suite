@@ -30,7 +30,7 @@ config.capabilities = [
       './apps/WFLWRQA7.0.5.0.apk'
     ),
     // 'appium:noReset': true,
-    'appium:fullReset': true,
+    'appium:fullReset': false,
     'appium:newCommandTimeout': 240,
     'appium:systemPort': 6011
   },

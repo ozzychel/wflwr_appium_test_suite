@@ -11,11 +11,11 @@ const androidDevicesBS = [
     platformVersion: '14.0',
     platformName: 'android',
   } },
-  { 'bstack:options': {
-    deviceName: 'Google Pixel 8',
-    platformVersion: '14.0',
-    platformName: 'android',
-  } },
+  // { 'bstack:options': {
+  //   deviceName: 'Google Pixel 8',
+  //   platformVersion: '14.0',
+  //   platformName: 'android',
+  // } },
   //----------------------------------------------
   //Android 13.0
   //----------------------------------------------

@@ -17,13 +17,14 @@
         "/config/**/*.ts"
     ],
     "scripts": {
-        "bs.android.consent": "wdio run config/browserstack/wdio.bs.android.conf.ts --suite consent",
-        "bs.ios.consent": "wdio run config/browserstack/wdio.bs.ios.conf.ts --suite consent",
-        "bs.ios.dev": "wdio run config/browserstack/wdio.bs.ios.dev.conf.ts --suite dev",
         "android.consent": "wdio run config/wdio.android.conf.ts --suite consent",
         "ios.consent": "wdio run config/wdio.ios.conf.ts --suite consent",
-        "ios.dev": "wdio run config/wdio.ios.conf.ts --suite dev",
-        "android.dev": "wdio run config/wdio.android.conf.ts --suite dev",
+        
+        "bs.android.consent": "wdio run config/browserstack/wdio.bs.android.conf.ts --suite consent",
+        "bs.android.dev": "wdio run config/browserstack/wdio.bs.android.conf.ts --suite dev",
+        "bs.ios.consent": "wdio run config/browserstack/wdio.bs.ios.conf.ts --suite consent",
+        "bs.ios.dev": "wdio run config/browserstack/wdio.bs.ios.dev.conf.ts --suite dev",
+       
         "dev": "wdio run config/wdio.android.conf.ts --spec ./appTest/specs/dev.spec.ts",
         "install": "wdio run wdio.conf.ts --suite install",
         "lint": "eslint appTest",

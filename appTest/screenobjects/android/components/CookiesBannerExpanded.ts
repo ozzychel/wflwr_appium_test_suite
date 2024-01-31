@@ -1,4 +1,4 @@
-import { APP_NAME } from '../../../helpers/Constants';
+import { ANDROID_APP_NAME } from '../../../helpers/Constants';
 
 class CookiesBannerExpanded {
 
@@ -93,7 +93,7 @@ class CookiesBannerExpanded {
   }
 
   private get preferencesList () {return $('id=preferences_list');}
-  private get topScrollView () {return $(`android=new UiSelector().resourceId("${APP_NAME}:id/pc_layout").childSelector(new UiSelector().className("android.widget.ScrollView"))`);}
+  private get topScrollView () {return $(`android=new UiSelector().resourceId("${ANDROID_APP_NAME}:id/pc_layout").childSelector(new UiSelector().className("android.widget.ScrollView"))`);}
   private get footerLayout () {return $('id=footer_layout');}
 
   async tapAllowAllButton () {
