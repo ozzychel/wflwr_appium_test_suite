@@ -27,10 +27,10 @@ config.capabilities = [
     'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
     'appium:app': join(
       process.cwd(),
-      './apps/WFLWRQA7.0.5.0.apk'
+      './apps/WFLWRQA7.0.5.3.apk'
     ),
     // 'appium:noReset': true,
-    'appium:fullReset': false,
+    'appium:fullReset': true,
     'appium:newCommandTimeout': 240,
     'appium:systemPort': 6011
   },

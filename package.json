@@ -25,7 +25,7 @@
         "bs.ios.consent": "wdio run config/browserstack/wdio.bs.ios.conf.ts --suite consent",
         "bs.ios.dev": "wdio run config/browserstack/wdio.bs.ios.dev.conf.ts --suite dev",
        
-        "dev": "wdio run config/wdio.android.conf.ts --spec ./appTest/specs/dev.spec.ts",
+        "dev": "wdio run config/wdio.android.conf.ts --suite dev",
         "install": "wdio run wdio.conf.ts --suite install",
         "lint": "eslint appTest",
         "lint-fix": "eslint appTest --fix"
