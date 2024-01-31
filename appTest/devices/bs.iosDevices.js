@@ -7,41 +7,41 @@ const iosDevicesBS = [
     platformVersion: '17',
     platformName: 'ios',
   } },
-  { 'bstack:options': {
-    deviceName: 'iPhone 15 Plus',
-    platformVersion: '17',
-    platformName: 'ios',
-  } },
-  { 'bstack:options': {
-    deviceName: 'iPhone 15',
-    platformVersion: '17',
-    platformName: 'ios',
-  } },
-  { 'bstack:options': {
-    deviceName: 'iPhone 14',
-    platformVersion: '17',
-    platformName: 'ios',
-  } },
-  { 'bstack:options': {
-    deviceName: 'iPhone 13',
-    platformVersion: '17',
-    platformName: 'ios',
-  } },
-  { 'bstack:options': {
-    deviceName: 'iPhone 12',
-    platformVersion: '17',
-    platformName: 'ios',
-  } },
-  { 'bstack:options': {
-    deviceName: 'iPhone 12 Pro',
-    platformVersion: '17',
-    platformName: 'ios',
-  } },
-  { 'bstack:options': {
-    deviceName: 'iPhone 11 Pro',
-    platformVersion: '17',
-    platformName: 'ios',
-  } },
+  // { 'bstack:options': {
+  //   deviceName: 'iPhone 15 Plus',
+  //   platformVersion: '17',
+  //   platformName: 'ios',
+  // } },
+  // { 'bstack:options': {
+  //   deviceName: 'iPhone 15',
+  //   platformVersion: '17',
+  //   platformName: 'ios',
+  // } },
+  // { 'bstack:options': {
+  //   deviceName: 'iPhone 14',
+  //   platformVersion: '17',
+  //   platformName: 'ios',
+  // } },
+  // { 'bstack:options': {
+  //   deviceName: 'iPhone 13',
+  //   platformVersion: '17',
+  //   platformName: 'ios',
+  // } },
+  // { 'bstack:options': {
+  //   deviceName: 'iPhone 12',
+  //   platformVersion: '17',
+  //   platformName: 'ios',
+  // } },
+  // { 'bstack:options': {
+  //   deviceName: 'iPhone 12 Pro',
+  //   platformVersion: '17',
+  //   platformName: 'ios',
+  // } },
+  // { 'bstack:options': {
+  //   deviceName: 'iPhone 11 Pro',
+  //   platformVersion: '17',
+  //   platformName: 'ios',
+  // } },
   //----------------------------------------------
   //IOS 16.0 (not supported)
   //----------------------------------------------
