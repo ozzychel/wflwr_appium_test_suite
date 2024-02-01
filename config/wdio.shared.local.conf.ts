@@ -15,7 +15,7 @@ config.services = (config.services ? config.services : []).concat([
         relaxedSecurity: true,
         address: 'localhost',
         // Write the Appium logs to a file in the root of the directory
-        log: '../appium.log',
+        log: '../logs/appium.log',
       },
     },
   ],
