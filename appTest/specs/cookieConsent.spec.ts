@@ -1,5 +1,5 @@
 import { ANDROID_APP_NAME, IOS_APP_NAME } from '../helpers/Constants';
-import { alertNoticeTextIOS, alertNoticeText, activityTrackingAlertTitle, notificationsTrackingAlertTitle } from '../helpers/TextCopies';
+import { alertNoticeTextIOS, alertNoticeText, activityTrackingAlertTitle } from '../helpers/TextCopies';
 import Gestures from '../helpers/Gestures';
 import Device from '../screenobjects/android/Device';
 const CookiesBanner = require('../screenobjects/android/components/CookiesBanner');
@@ -330,10 +330,10 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     it('"TAP on "Confirm My Choices" button REDIRECTS to Login screen', async () => {
       const banner = CookiesBannerExpanded.pcLayoutContainer;
-        const btn = LoginScreen.startYourJourneyButton;
-        await CookiesBannerExpanded.tapAllowAllButton();
-        await banner.waitForDisplayed({ timeout: 3000, reverse:true });
-        await btn.waitForDisplayed({ timeout: 5000 });
+      const btn = LoginScreen.startYourJourneyButton;
+      await CookiesBannerExpanded.tapAllowAllButton();
+      await banner.waitForDisplayed({ timeout: 3000, reverse:true });
+      await btn.waitForDisplayed({ timeout: 5000 });
     });
 
     // if (Device.isAndroid) {

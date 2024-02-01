@@ -29,9 +29,9 @@ class Device {
     const platformVersion = 'platformVersion' in driver.capabilities ? driver.capabilities.platformVersion : null;
     if (typeof platformVersion === 'string') {
       return parseInt(platformVersion, 10);
-    } else {
-      return 8;
     }
+    return 8;
+
   }
 
   //Execute adb command
