@@ -47,7 +47,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       });
       it('(iOS only) Tracking alert HAS correct text copy', async () => {
         const elem = await IOSTrackingAlert.container;
-        await expect(elem).toHaveTextContaining(activityTrackingAlertTitle);
+        await expect(elem).toHaveText(activityTrackingAlertTitle);
       });
       it('(iOS only) TAP on "Allow" button DISMISS tracking alert', async () => {
         const elem = await IOSTrackingAlert.container;
@@ -361,7 +361,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     //   it('(iOS only) Push notifications alert HAS correct TEXT copy', async () => {
     //     const elem = await IOSTrackingAlert.container;
-    //     await expect(elem).toHaveTextContaining(notificationsTrackingAlertTitle);
+    //     await expect(elem).toHaveText(notificationsTrackingAlertTitle);
     //   });
 
     //   it('(iOS only) TAP on "Allow" button. REDIRECTED to Login screen', async () => {
