@@ -58,9 +58,36 @@ The WFLWR Mobile App End-to-End QA Automated Testing Suite is Appium based autom
     npm install
     ```
 
-4. run demo script:
+4. create .env file in root and fill in:
+
     ```
-    npm run demo
+    PROJECT_NAME = "Wings For Life World Run"
+    ANDROID_BUILD_NUMBER="<build number>"
+    IOS_BUILD_NUMBER="<build number>"
+
+    BROWSERSTACK_ANDROID_APP_ID = "<browserstack_android_app_id>"
+    BROWSERSTACK_IOS_APP_ID= "<browserstack_android_ios_id>"
+    BROWSERSTACK_USERNAME = "<browserstack_username>" 
+    BROWSERSTACK_ACCESS_KEY = "<browserstack_access_key>"
+    XCODE_ORG_ID = "<apple_dev_team_id>"
+    ```
+
+5. for local run: copy app build to ./apps folder
+
+6. for local run: update device capabilities and app build name in
+
+    ```
+    ./config/wdio.android.conf.ts
+    ./config/wdio.ios.conf.ts
+    ```
+
+7. run consent script locally or in the cloud:
+    
+    ```
+    npm run android.consent - local android device
+    npm run ios.consent - local android device
+    npm run bs.android.consent - browserStack android device
+    npm run bs.ios.consent - browserStack iOS device
     ```
 
 ## Scope and Coverage

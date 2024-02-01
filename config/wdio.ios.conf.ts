@@ -6,7 +6,7 @@ import config from './wdio.shared.local.conf';
 // ==============================================================================
 
 config.specs = [
-  '../appTest/specs/*.ts'
+  './appTest/specs/*.ts'
 ],
 
 // ==============================================================================
@@ -25,7 +25,7 @@ config.capabilities = [
     'appium:orientation': 'PORTRAIT',
     // 'appium:app': '/Users/apetunin/Projects/wflwr_appium_test_suite/apps/WFLWRQA7.0.1.ipa',
     'appium:app': join(
-      process.cwd(), './apps/WFLWRQA7.0.5.ipa'
+      process.cwd(), './apps/WFLWRQA7.0.6.0.ipa'
     ),
     'appium:bundleId': 'com.redbull.WingsForLifeWorldRun.debug',
     'appium:xcodeSigningId': 'iPhone Developer',

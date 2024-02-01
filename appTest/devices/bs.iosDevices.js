@@ -45,31 +45,32 @@ const iosDevicesBS = [
   //----------------------------------------------
   //IOS 16.0 (not supported)
   //----------------------------------------------
-  // { 'bstack:options': {
-  //   deviceName: 'iPhone 14 Pro',
-  //   platformVersion: '16',
-  //   platformName: 'ios',
-  // } },
-  // { 'bstack:options': {
-  //   deviceName: 'iPhone 14 Plus',
-  //   platformVersion: '16',
-  //   platformName: 'ios',
-  // } },
-  // { 'bstack:options': {
-  //   deviceName: 'iPhone 12 Mini',
-  //   platformVersion: '16',
-  //   platformName: 'ios',
-  // } },
-  // { 'bstack:options': {
-  //   deviceName: 'iPhone SE 2020',
-  //   platformVersion: '16',
-  //   platformName: 'ios',
-  // } },
-  // { 'bstack:options': {
-  //   deviceName: 'iPhone 11 Pro Max',
-  //   platformVersion: '16',
-  //   platformName: 'ios',
-  // } },
+  //   { 'bstack:options': {
+  //     deviceName: 'iPhone 14 Pro',
+  //     platformVersion: '16',
+  //     platformName: 'ios',
+  //   } },
+  //   { 'bstack:options': {
+  //     deviceName: 'iPhone 14 Plus',
+  //     platformVersion: '16',
+  //     platformName: 'ios',
+  //   } },
+  //   { 'bstack:options': {
+  //     deviceName: 'iPhone 12 Mini',
+  //     platformVersion: '16',
+  //     platformName: 'ios',
+  //   } },
+  //   { 'bstack:options': {
+  //     deviceName: 'iPhone SE 2020',
+  //     platformVersion: '16',
+  //     platformName: 'ios',
+  //   } },
+  //   { 'bstack:options': {
+  //     deviceName: 'iPhone 11 Pro Max',
+  //     platformVersion: '16',
+  //     platformName: 'ios',
+  //   } },
+
 ];
 
 module.exports = {

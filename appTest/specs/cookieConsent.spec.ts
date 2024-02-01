@@ -1,5 +1,5 @@
 import { ANDROID_APP_NAME, IOS_APP_NAME } from '../helpers/Constants';
-import { alertNoticeTextIOS, alertNoticeText, activityTrackingAlertTitle, notificationsTrackingAlertTitle } from '../helpers/TextCopies';
+import { alertNoticeTextIOS, alertNoticeText, activityTrackingAlertTitle } from '../helpers/TextCopies';
 import Gestures from '../helpers/Gestures';
 import Device from '../screenobjects/android/Device';
 const CookiesBanner = require('../screenobjects/android/components/CookiesBanner');
@@ -19,8 +19,8 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
   });
 
   afterAll(async () => {
-    const fileName = `${driver.capabilities['platformName']}_${Device.isAndroid ? driver.capabilities['deviceManufacturer'] : 'apple'}_${Device.isAndroid ? driver.capabilities['deviceModel'] : driver.capabilities['deviceName']}_${driver.capabilities['udid']}_${driver.config['suite'][0]}`;
-    await driver.saveRecordingScreen(`./appTest/screenshots/video/${fileName}.mp4`);
+    // const fileName = `${driver.capabilities['platformName']}_${Device.isAndroid ? driver.capabilities['deviceManufacturer'] : 'apple'}_${Device.isAndroid ? driver.capabilities['deviceModel'] : driver.capabilities['deviceName']}_${driver.capabilities['udid']}_${driver.config['suite'][0]}`;
+    // await driver.saveRecordingScreen(`./appTest/screenshots/video/${fileName}.mp4`);
     await driver.terminateApp(Device.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME);
   });
 
@@ -47,7 +47,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       });
       it('(iOS only) Tracking alert HAS correct text copy', async () => {
         const elem = await IOSTrackingAlert.container;
-        await expect(elem).toHaveTextContaining(activityTrackingAlertTitle);
+        await expect(elem).toHaveText(activityTrackingAlertTitle);
       });
       it('(iOS only) TAP on "Allow" button DISMISS tracking alert', async () => {
         const elem = await IOSTrackingAlert.container;
@@ -69,7 +69,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     it('Main App container is NOT SCROLLABLE', async () => {
       if (Device.isAndroid) {
         const elem = await LoginScreen.touchOutside;
-        await expect(elem).toHaveAttrContaining('scrollable', 'false');
+        await expect(elem).toHaveAttribute('scrollable', 'false');
       }
       if (Device.isIOS) {
         //since XCUI elements doesn't have scrollable attribute
@@ -93,7 +93,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     it('Touch_outside container is NOT SCROLLABLE', async () => {
       if (Device.isAndroid) {
         const elem = await LoginScreen.touchOutside;
-        await expect(elem).toHaveAttrContaining('scrollable', 'false');
+        await expect(elem).toHaveAttribute('scrollable', 'false');
       }
       if (Device.isIOS) {
         //since XCUI elements doesn't have scrollable attribute
@@ -124,8 +124,8 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     it('Banner container is NOT CLICKABLE and is NOT SCROLLABLE', async () => {
       const elem = await LoginScreen.bannerLayoutContainer;
       if (Device.isAndroid) {
-        await expect(elem).toHaveAttrContaining('scrollable', 'false');
-        await expect(elem).toHaveAttrContaining('clickable', 'false');
+        await expect(elem).toHaveAttribute('scrollable', 'false');
+        await expect(elem).toHaveAttribute('clickable', 'false');
       }
       if (Device.isIOS) {
         //TODO (tried hittable - didn't work)
@@ -162,8 +162,8 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     it('"Allow All" button is CLICKABLE', async () => {
       const elem = await CookiesBanner.allowAllButton;
-      if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-      if (Device.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
+      if (Device.isAndroid) await expect(elem).toHaveAttribute('clickable', 'true');
+      if (Device.isIOS) await expect(elem).toHaveAttribute('hittable', 'true');
     });
 
     it('"Decline All" button is DISPLAYED and HAS correct LABEL', async () => {
@@ -174,8 +174,8 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     it('"Decline All" button is CLICKABLE', async () => {
       const elem = await CookiesBanner.declineAllButton;
-      if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-      if (Device.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
+      if (Device.isAndroid) await expect(elem).toHaveAttribute('clickable', 'true');
+      if (Device.isIOS) await expect(elem).toHaveAttribute('hittable', 'true');
     });
 
     it('"Go to Settings" button is DISPLAYED and HAS correct LABEL', async () => {
@@ -186,8 +186,8 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     it('"Go to Settings" button is CLICKABLE', async () => {
       const elem = await CookiesBanner.goToSettingsButton;
-      if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-      if (Device.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
+      if (Device.isAndroid) await expect(elem).toHaveAttribute('clickable', 'true');
+      if (Device.isIOS) await expect(elem).toHaveAttribute('hittable', 'true');
     });
 
     it('TAP on "Go to Settings" button REDIRECTS to expanded cookie banner', async () => {
@@ -206,7 +206,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     it('Main Info text is DISPLAYED and NOT SCROLLABLE', async () => {
       const elem = CookiesBannerExpanded.mainText;
       await expect(elem).toHaveText(await Device.isAndroid ? alertNoticeText : alertNoticeTextIOS);
-      // await expect(elem).toHaveAttrContaining('scrollable', 'false');
+      // await expect(elem).toHaveAttribute('scrollable', 'false');
     });
 
     it('Button layout container is DISPLAYED', async () => {
@@ -217,8 +217,8 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     it('"Allow All" button is DISPLAYED and CLICKABLE', async () => {
       const elem = CookiesBannerExpanded.allowAllBtn;
       await expect(elem).toBeDisplayed();
-      if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-      if (Device.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
+      if (Device.isAndroid) await expect(elem).toHaveAttribute('clickable', 'true');
+      if (Device.isIOS) await expect(elem).toHaveAttribute('hittable', 'true');
     });
 
     it('"Allow All" button HAS correct LABEL', async () => {
@@ -229,8 +229,8 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
     it('"Decline All" button is DISPLAYED and CLICKABLE', async () => {
       const elem = CookiesBannerExpanded.declineAllBtn;
       await expect(elem).toBeDisplayed();
-      if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-      if (Device.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
+      if (Device.isAndroid) await expect(elem).toHaveAttribute('clickable', 'true');
+      if (Device.isIOS) await expect(elem).toHaveAttribute('hittable', 'true');
     });
 
     it('"Decline All" button HAS correct LABEL', async () => {
@@ -324,16 +324,16 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     it('"Confirm My Choices" button is CLICKABLE', async () => {
       const elem = CookiesBannerExpanded.confirmButton;
-      if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-      if (Device.isIOS) await expect(elem).toHaveAttrContaining('hittable', 'true');
+      if (Device.isAndroid) await expect(elem).toHaveAttribute('clickable', 'true');
+      if (Device.isIOS) await expect(elem).toHaveAttribute('hittable', 'true');
     });
 
     it('"TAP on "Confirm My Choices" button REDIRECTS to Login screen', async () => {
       const banner = CookiesBannerExpanded.pcLayoutContainer;
-        const btn = LoginScreen.startYourJourneyButton;
-        await CookiesBannerExpanded.tapAllowAllButton();
-        await banner.waitForDisplayed({ timeout: 3000, reverse:true });
-        await btn.waitForDisplayed({ timeout: 5000 });
+      const btn = LoginScreen.startYourJourneyButton;
+      await CookiesBannerExpanded.tapAllowAllButton();
+      await banner.waitForDisplayed({ timeout: 3000, reverse:true });
+      await btn.waitForDisplayed({ timeout: 5000 });
     });
 
     // if (Device.isAndroid) {
@@ -361,7 +361,7 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
 
     //   it('(iOS only) Push notifications alert HAS correct TEXT copy', async () => {
     //     const elem = await IOSTrackingAlert.container;
-    //     await expect(elem).toHaveTextContaining(notificationsTrackingAlertTitle);
+    //     await expect(elem).toHaveText(notificationsTrackingAlertTitle);
     //   });
 
     //   it('(iOS only) TAP on "Allow" button. REDIRECTED to Login screen', async () => {

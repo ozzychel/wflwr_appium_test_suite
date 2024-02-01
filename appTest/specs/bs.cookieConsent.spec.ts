@@ -1,5 +1,5 @@
 import { ANDROID_APP_NAME, IOS_APP_NAME } from '../helpers/Constants';
-import { alertNoticeTextIOS, alertNoticeText, activityTrackingAlertTitle, notificationsTrackingAlertTitle } from '../helpers/TextCopies';
+import { alertNoticeTextIOS, alertNoticeText, activityTrackingAlertTitle } from '../helpers/TextCopies';
 import Gestures from '../helpers/Gestures';
 import Device from '../screenobjects/android/Device';
 const CookiesBanner = require('../screenobjects/android/components/CookiesBanner');
@@ -34,7 +34,7 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
 
     it('(iOS only) Tracking alert HAS correct text copy', async () => {
       const elem = await IOSTrackingAlert.container;
-      await expect(elem).toHaveTextContaining(activityTrackingAlertTitle);
+      await expect(elem).toHaveText(activityTrackingAlertTitle);
     });
 
     it('(iOS only) TAP on "Allow" button DISMISS tracking alert', async () => {
@@ -55,7 +55,7 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
   it('Main App container is NOT SCROLLABLE', async () => {
     if (Device.isAndroid) {
       const elem = await LoginScreen.touchOutside;
-      await expect(elem).toHaveAttrContaining('scrollable', 'false');
+      await expect(elem).toHaveAttribute('scrollable', 'false');
     }
     if (Device.isIOS) {
       //since XCUI elements doesn't have scrollable attribute
@@ -79,7 +79,7 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
   it('Touch_outside container is NOT SCROLLABLE', async () => {
     if (Device.isAndroid) {
       const elem = await LoginScreen.touchOutside;
-      await expect(elem).toHaveAttrContaining('scrollable', 'false');
+      await expect(elem).toHaveAttribute('scrollable', 'false');
     }
     if (Device.isIOS) {
       //since XCUI elements doesn't have scrollable attribute
@@ -110,8 +110,8 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
   it('Banner container is NOT CLICKABLE and is NOT SCROLLABLE', async () => {
     const elem = await LoginScreen.bannerLayoutContainer;
     if (Device.isAndroid) {
-      await expect(elem).toHaveAttrContaining('scrollable', 'false');
-      await expect(elem).toHaveAttrContaining('clickable', 'false');
+      await expect(elem).toHaveAttribute('scrollable', 'false');
+      await expect(elem).toHaveAttribute('clickable', 'false');
     }
     if (Device.isIOS) {
       //TODO (tried enabled - didn't work)
@@ -148,8 +148,8 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
 
   it('"Allow All" button is CLICKABLE/ENABLED', async () => {
     const elem = await CookiesBanner.allowAllButton;
-    if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-    if (Device.isIOS) await expect(elem).toHaveAttrContaining('enabled', 'true');
+    if (Device.isAndroid) await expect(elem).toHaveAttribute('clickable', 'true');
+    if (Device.isIOS) await expect(elem).toHaveAttribute('enabled', 'true');
   });
 
   it('"Decline All" button is DISPLAYED and HAS correct LABEL', async () => {
@@ -160,8 +160,8 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
 
   it('"Decline All" button is CLICKABLE/ENABLED', async () => {
     const elem = await CookiesBanner.declineAllButton;
-    if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-    if (Device.isIOS) await expect(elem).toHaveAttrContaining('enabled', 'true');
+    if (Device.isAndroid) await expect(elem).toHaveAttribute('clickable', 'true');
+    if (Device.isIOS) await expect(elem).toHaveAttribute('enabled', 'true');
   });
 
   it('"Go to Settings" button is DISPLAYED and HAS correct LABEL', async () => {
@@ -172,8 +172,8 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
 
   it('"Go to Settings" button is CLICKABLE/ENABLED', async () => {
     const elem = await CookiesBanner.goToSettingsButton;
-    if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-    if (Device.isIOS) await expect(elem).toHaveAttrContaining('enabled', 'true');
+    if (Device.isAndroid) await expect(elem).toHaveAttribute('clickable', 'true');
+    if (Device.isIOS) await expect(elem).toHaveAttribute('enabled', 'true');
   });
 
   it('TAP on "Go to Settings" button REDIRECTS to expanded cookie banner', async () => {
@@ -193,7 +193,7 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
   it('Main Info text is DISPLAYED and NOT SCROLLABLE', async () => {
     const elem = CookiesBannerExpanded.mainText;
     await expect(elem).toHaveText(await Device.isAndroid ? alertNoticeText : alertNoticeTextIOS);
-    // await expect(elem).toHaveAttrContaining('scrollable', 'false');
+    // await expect(elem).toHaveAttribute('scrollable', 'false');
   });
 
   it('Button layout container is DISPLAYED', async () => {
@@ -204,8 +204,8 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
   it('"Allow All" button is DISPLAYED and CLICKABLE/ENABLED', async () => {
     const elem = CookiesBannerExpanded.allowAllBtn;
     await expect(elem).toBeDisplayed();
-    if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-    if (Device.isIOS) await expect(elem).toHaveAttrContaining('enabled', 'true');
+    if (Device.isAndroid) await expect(elem).toHaveAttribute('clickable', 'true');
+    if (Device.isIOS) await expect(elem).toHaveAttribute('enabled', 'true');
   });
 
   it('"Allow All" button HAS correct LABEL', async () => {
@@ -216,8 +216,8 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
   it('"Decline All" button is DISPLAYED and CLICKABLE/ENABLED', async () => {
     const elem = CookiesBannerExpanded.declineAllBtn;
     await expect(elem).toBeDisplayed();
-    if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-    if (Device.isIOS) await expect(elem).toHaveAttrContaining('enabled', 'true');
+    if (Device.isAndroid) await expect(elem).toHaveAttribute('clickable', 'true');
+    if (Device.isIOS) await expect(elem).toHaveAttribute('enabled', 'true');
   });
 
   it('"Decline All" button HAS correct LABEL', async () => {
@@ -243,13 +243,15 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
   it('SDK Preferences TOGGLES are OFF by default', async () => {
     const switch1 = await CookiesBannerExpanded.performanceSwitch;
     const switch2 = await CookiesBannerExpanded.marketingSwitch;
+
     if (Device.isAndroid) {
-      await expect(switch1).toHaveAttributeContaining('checked', 'false') &&
-      await expect(switch2).toHaveAttributeContaining('checked', 'false');
+      await expect(switch1).toHaveAttribute('checked', 'false');
+      await expect(switch2).toHaveAttribute('checked', 'false');
     }
+
     if (Device.isIOS) {
-      await expect(switch1).toHaveAttributeContaining('value', '0') &&
-      await expect(switch2).toHaveAttributeContaining('value', '0');
+      await expect(switch1).toHaveAttribute('value', '0');
+      await expect(switch2).toHaveAttribute('value', '0');
     }
   });
 
@@ -257,32 +259,32 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
     const toggle = await CookiesBannerExpanded.performanceSwitch;
     await toggle.click();
     await driver.pause(1000);
-    if (Device.isAndroid) await expect(toggle).toHaveAttributeContaining('checked', 'true');
-    if (Device.isIOS) await expect(toggle).toHaveAttributeContaining('value', '1');
+    if (Device.isAndroid) await expect(toggle).toHaveAttribute('checked', 'true');
+    if (Device.isIOS) await expect(toggle).toHaveAttribute('value', '1');
     await toggle.click();
     await driver.pause(1000);
-    if (Device.isAndroid) await expect(toggle).toHaveAttributeContaining('checked', 'false');
-    if (Device.isIOS) await expect(toggle).toHaveAttributeContaining('value', '0');
+    if (Device.isAndroid) await expect(toggle).toHaveAttribute('checked', 'false');
+    if (Device.isIOS) await expect(toggle).toHaveAttribute('value', '0');
     await toggle.click();
     await driver.pause(1000);
-    if (Device.isAndroid) await expect(toggle).toHaveAttributeContaining('checked', 'true');
-    if (Device.isIOS) await expect(toggle).toHaveAttributeContaining('value', '1');
+    if (Device.isAndroid) await expect(toggle).toHaveAttribute('checked', 'true');
+    if (Device.isIOS) await expect(toggle).toHaveAttribute('value', '1');
   });
 
   it('"Marketing" SDK toggle can be switched ON and OFF', async () => {
     const toggle = await CookiesBannerExpanded.marketingSwitch;
     await toggle.click();
     await driver.pause(1000);
-    if (Device.isAndroid) await expect(toggle).toHaveAttributeContaining('checked', 'true');
-    if (Device.isIOS) await expect(toggle).toHaveAttributeContaining('value', '1');
+    if (Device.isAndroid) await expect(toggle).toHaveAttribute('checked', 'true');
+    if (Device.isIOS) await expect(toggle).toHaveAttribute('value', '1');
     await toggle.click();
     await driver.pause(1000);
-    if (Device.isAndroid) await expect(toggle).toHaveAttributeContaining('checked', 'false');
-    if (Device.isIOS) await expect(toggle).toHaveAttributeContaining('value', '0');
+    if (Device.isAndroid) await expect(toggle).toHaveAttribute('checked', 'false');
+    if (Device.isIOS) await expect(toggle).toHaveAttribute('value', '0');
     await toggle.click();
     await driver.pause(1000);
-    if (Device.isAndroid) await expect(toggle).toHaveAttributeContaining('checked', 'true');
-    if (Device.isIOS) await expect(toggle).toHaveAttributeContaining('value', '1');
+    if (Device.isAndroid) await expect(toggle).toHaveAttribute('checked', 'true');
+    if (Device.isIOS) await expect(toggle).toHaveAttribute('value', '1');
   });
 
   it('Settings ID section title is DISPLAYED', async () => {
@@ -311,16 +313,16 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
 
   it('"Confirm My Choices" button is CLICKABLE/ENABLED', async () => {
     const elem = CookiesBannerExpanded.confirmButton;
-    if (Device.isAndroid) await expect(elem).toHaveAttrContaining('clickable', 'true');
-    if (Device.isIOS) await expect(elem).toHaveAttrContaining('enabled', 'true');
+    if (Device.isAndroid) await expect(elem).toHaveAttribute('clickable', 'true');
+    if (Device.isIOS) await expect(elem).toHaveAttribute('enabled', 'true');
   });
 
   it('"TAP on "Confirm My Choices" button REDIRECTS to Login screen', async () => {
     const banner = CookiesBannerExpanded.pcLayoutContainer;
-      const btn = LoginScreen.startYourJourneyButton;
-      await CookiesBannerExpanded.tapAllowAllButton();
-      await banner.waitForDisplayed({ timeout: 3000, reverse:true });
-      await btn.waitForDisplayed({ timeout: 5000 });
+    const btn = LoginScreen.startYourJourneyButton;
+    await CookiesBannerExpanded.tapAllowAllButton();
+    await banner.waitForDisplayed({ timeout: 3000, reverse:true });
+    await btn.waitForDisplayed({ timeout: 5000 });
   });
 
   // if (Device.isAndroid) {
@@ -339,7 +341,7 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
   // IOS PUSH NOTIFICATIONS ALERT
   //===============================================================
   // *** WAS MOVED INTO THE PERMISSIONS SETUP EXPERIENCE
-  
+
   // if (Device.isIOS) {
 
   //   it('(iOS Only) TAP on "Confirm my Choices" button. Push notfications alert shows up', async () => {
@@ -350,7 +352,7 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
 
   //   it('(iOS only) Push notifications alert HAS correct TEXT copy', async () => {
   //     const elem = await IOSTrackingAlert.container;
-  //     await expect(elem).toHaveTextContaining(notificationsTrackingAlertTitle);
+  //     await expect(elem).toHaveText(notificationsTrackingAlertTitle);
   //   });
 
   //   it('(iOS only) TAP on "Allow" button. REDIRECTED to Login screen', async () => {

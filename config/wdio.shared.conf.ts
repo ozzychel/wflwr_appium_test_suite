@@ -1,5 +1,7 @@
 import 'dotenv/config';
-export const config: WebdriverIO.Config = {
+import { Options } from '@wdio/types';
+
+export const config: Options.Testrunner = {
   // ==============================================================================
   // Runner Configuration
   // ==============================================================================
@@ -33,28 +35,28 @@ export const config: WebdriverIO.Config = {
   //in case we go with separate specs in the future
   suites: {
     install: [
-      './appTest/specs/install.spec.ts'
+      '../appTest/specs/install.spec.ts'
     ],
     demo: [
-      './appTest/specs/demo.spec.ts'
+      '../appTest/specs/demo.spec.ts'
     ],
     nav: [
-      './appTest/specs/navigation.spec.ts'
+      '../appTest/specs/navigation.spec.ts'
     ],
     dev: [
-      './appTest/specs/dev.spec.ts'
+      '../appTest/specs/dev.spec.ts'
     ],
     registration: [
-      './appTest/specs/registration.spec.ts'
+      '../appTest/specs/registration.spec.ts'
     ],
     signup: [
-      './appTest/specs/signup.spec.ts'
-    ],
-    consent: [
-      './appTest/specs/cookieConsent.spec.ts'
+      '../appTest/specs/signup.spec.ts'
     ],
     permissions: [
-      './appTest/specs/permissions.spec.ts'
+      '../appTest/specs/permissions.spec.ts'
+    ],
+    consent: [
+      '../appTest/specs/cookieConsent.spec.ts'
     ]
   },
   //
