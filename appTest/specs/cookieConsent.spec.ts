@@ -40,21 +40,21 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       await expect(await driver.isAppInstalled(Device.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME)).toBe(true);
     });
 
-    if (Device.isIOS && driver.capabilities['fullReset']) {
-      it('(iOS only) Tracking alert is DISPLAYED', async () => {
-        const elem = await IOSTrackingAlert.container;
-        await elem.waitForDisplayed({ timeout: 3000 });
-      });
-      it('(iOS only) Tracking alert HAS correct text copy', async () => {
-        const elem = await IOSTrackingAlert.container;
-        await expect(elem).toHaveText(activityTrackingAlertTitle);
-      });
-      it('(iOS only) TAP on "Allow" button DISMISS tracking alert', async () => {
-        const elem = await IOSTrackingAlert.container;
-        await IOSTrackingAlert.tapAllowButton();
-        await elem.waitForDisplayed({ timeout: 3000, reverse: true });
-      });
-    }
+    // if (Device.isIOS && driver.capabilities['fullReset']) {
+    //   it('(iOS only) Tracking alert is DISPLAYED', async () => {
+    //     const elem = await IOSTrackingAlert.container;
+    //     await elem.waitForDisplayed({ timeout: 3000 });
+    //   });
+    //   it('(iOS only) Tracking alert HAS correct text copy', async () => {
+    //     const elem = await IOSTrackingAlert.container;
+    //     await expect(elem).toHaveText(activityTrackingAlertTitle);
+    //   });
+    //   it('(iOS only) TAP on "Allow" button DISMISS tracking alert', async () => {
+    //     const elem = await IOSTrackingAlert.container;
+    //     await IOSTrackingAlert.tapAllowButton();
+    //     await elem.waitForDisplayed({ timeout: 3000, reverse: true });
+    //   });
+    // }
   });
 
   // add section to handle IOS tracking alert when launched first time
@@ -328,26 +328,33 @@ describe('WFLWR E2E AUTOMATION TEST RUNNER', () => {
       if (Device.isIOS) await expect(elem).toHaveAttribute('hittable', 'true');
     });
 
-    it('"TAP on "Confirm My Choices" button REDIRECTS to Login screen', async () => {
+    it('"TAP on "Confirm My Choices" button DISMISS banner', async () => {
       const banner = CookiesBannerExpanded.pcLayoutContainer;
       const btn = LoginScreen.startYourJourneyButton;
       await CookiesBannerExpanded.tapAllowAllButton();
       await banner.waitForDisplayed({ timeout: 3000, reverse:true });
-      await btn.waitForDisplayed({ timeout: 5000 });
     });
 
-    // if (Device.isAndroid) {
-    //   it('TAP on "Confirm My Choices" button REDIRECTS to Login screen', async () => {
-    //     //since both platfroms don't have ids for the main screen containers
-    //     //will verify if 'continue with email' button is displayed
-    //     const banner = CookiesBannerExpanded.pcLayoutContainer;
-    //     const btn = LoginScreen.startYourJourneyButton;
-    //     await CookiesBannerExpanded.tapAllowAllButton();
-    //     await banner.waitForDisplayed({ timeout: 3000, reverse:true });
-    //     await expect(btn).toHaveText('test')
-    //     await btn.waitForDisplayed({ timeout: 5000 });
-    //   });
-    // }
+    if (Device.isIOS && driver.capabilities['fullReset']) {
+      it('(iOS only) Tracking alert is DISPLAYED', async () => {
+        const elem = await IOSTrackingAlert.container;
+        await elem.waitForDisplayed({ timeout: 3000 });
+      });
+      it('(iOS only) Tracking alert HAS correct text copy', async () => {
+        const elem = await IOSTrackingAlert.container;
+        await expect(elem).toHaveText(activityTrackingAlertTitle);
+      });
+      it('(iOS only) TAP on "Allow" button DISMISS tracking alert', async () => {
+        const elem = await IOSTrackingAlert.container;
+        await IOSTrackingAlert.tapAllowButton();
+        await elem.waitForDisplayed({ timeout: 3000, reverse: true });
+      });
+    }
+
+    it('REDIRECTED to main login screen, "Start your Journey" button DISPLAYED', async () => {
+      const btn = LoginScreen.startYourJourneyButton;
+      await btn.waitForDisplayed({ timeout: 5000 });
+    });
 
     // *** WAS MOVED INTO THE PERMISSIONS SETUP EXPERIENCE
     //IOS. Handle push notifications prompt

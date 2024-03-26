@@ -6,34 +6,39 @@ const androidDevicesBS = [
   //----------------------------------------------
   //Android 14.0
   //----------------------------------------------
-  { 'bstack:options': {
-    deviceName: 'Google Pixel 6 Pro',
-    platformVersion: '14.0',
-    platformName: 'android',
-  } },
-  { 'bstack:options': {
-    deviceName: 'Google Pixel 8',
-    platformVersion: '14.0',
-    platformName: 'android',
-  } },
+  // { 'bstack:options': {
+  //   deviceName: 'Samsung Galaxy S24 Ultra',
+  //   platformVersion: '14.0',
+  //   platformName: 'android',
+  // } },
+  // { 'bstack:options': {
+  //   deviceName: 'Samsung Galaxy S24',
+  //   platformVersion: '14.0',
+  //   platformName: 'android',
+  // } },
+  // { 'bstack:options': {
+  //   deviceName: 'Google Pixel 8',
+  //   platformVersion: '14.0',
+  //   platformName: 'android',
+  // } },
   //----------------------------------------------
   //Android 13.0
   //----------------------------------------------
-  { 'bstack:options': {
-    deviceName: 'Google Pixel 7',
-    platformVersion: '13.0',
-    platformName: 'android',
-  } },
-  { 'bstack:options': {
-    deviceName: 'Samsung Galaxy S23 Ultra',
-    platformVersion: '13.0',
-    platformName: 'android',
-  } },
-  { 'bstack:options': {
-    deviceName: 'OnePlus 11R',
-    platformVersion: '13.0',
-    platformName: 'android',
-  } },
+  // { 'bstack:options': {
+  //   deviceName: 'Google Pixel 7',
+  //   platformVersion: '13.0',
+  //   platformName: 'android',
+  // } },
+  // { 'bstack:options': {
+  //   deviceName: 'Samsung Galaxy S23 Ultra',
+  //   platformVersion: '13.0',
+  //   platformName: 'android',
+  // } },
+  // { 'bstack:options': {
+  //   deviceName: 'OnePlus 11R',
+  //   platformVersion: '13.0',
+  //   platformName: 'android',
+  // } },
 
   // ----------------------------------------------
   // Android 12.0

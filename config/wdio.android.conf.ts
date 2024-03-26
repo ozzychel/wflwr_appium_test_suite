@@ -6,7 +6,7 @@ import config from './wdio.shared.local.conf';
 // ==============================================================================
 
 config.specs = [
-  './appTest/specs/*.ts'
+  '../appTest/specs/*.ts'
 ],
 
 // ==============================================================================
@@ -27,7 +27,7 @@ config.capabilities = [
     'appium:appWaitActivity': 'com.redbull.wingsforlifeworldrun.*',
     'appium:app': join(
       process.cwd(),
-      './apps/WFLWRQA7.0.5.3.apk'
+      './apps/WFLWRQA7.3.0.1.apk'
     ),
     // 'appium:noReset': true,
     'appium:fullReset': true,

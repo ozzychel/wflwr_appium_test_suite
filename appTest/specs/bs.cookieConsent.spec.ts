@@ -23,27 +23,7 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
     await expect(await driver.isAppInstalled(Device.isAndroid ? ANDROID_APP_NAME : IOS_APP_NAME)).toBe(true);
   });
 
-  //===============================================================
-  // IOS TRACKING ALERT
-  //===============================================================
-  if (Device.isIOS) {
-    it('(iOS only) Tracking alert is DISPLAYED', async () => {
-      const elem = await IOSTrackingAlert.container;
-      await elem.waitForDisplayed({ timeout: 3000 });
-    });
-
-    it('(iOS only) Tracking alert HAS correct text copy', async () => {
-      const elem = await IOSTrackingAlert.container;
-      await expect(elem).toHaveText(activityTrackingAlertTitle);
-    });
-
-    it('(iOS only) TAP on "Allow" button DISMISS tracking alert', async () => {
-      const elem = await IOSTrackingAlert.container;
-      await IOSTrackingAlert.tapAllowButton();
-      await elem.waitForDisplayed({ timeout: 3000, reverse: true });
-    });
-  }
-
+  
   //===============================================================
   // LOGIN SCREEN. CONTAINERS AND LAYOUT
   //===============================================================
@@ -317,13 +297,39 @@ describe('BUILD VALIDATION AND COOKIE CONSENT', () => {
     if (Device.isIOS) await expect(elem).toHaveAttribute('enabled', 'true');
   });
 
-  it('"TAP on "Confirm My Choices" button REDIRECTS to Login screen', async () => {
+  it('"TAP on "Confirm My Choices" button DISMISS banner', async () => {
     const banner = CookiesBannerExpanded.pcLayoutContainer;
     const btn = LoginScreen.startYourJourneyButton;
     await CookiesBannerExpanded.tapAllowAllButton();
     await banner.waitForDisplayed({ timeout: 3000, reverse:true });
+  });
+
+  //===============================================================
+  // IOS TRACKING ALERT
+  //===============================================================
+  if (Device.isIOS) {
+    it('(iOS only) Tracking alert is DISPLAYED', async () => {
+      const elem = await IOSTrackingAlert.container;
+      await elem.waitForDisplayed({ timeout: 3000 });
+    });
+
+    it('(iOS only) Tracking alert HAS correct text copy', async () => {
+      const elem = await IOSTrackingAlert.container;
+      await expect(elem).toHaveText(activityTrackingAlertTitle);
+    });
+
+    it('(iOS only) TAP on "Allow" button DISMISS tracking alert', async () => {
+      const elem = await IOSTrackingAlert.container;
+      await IOSTrackingAlert.tapAllowButton();
+      await elem.waitForDisplayed({ timeout: 3000, reverse: true });
+    });
+  }
+
+  it('REDIRECTED to main login screen, "Start your Journey" button DISPLAYED', async () => {
+    const btn = LoginScreen.startYourJourneyButton;
     await btn.waitForDisplayed({ timeout: 5000 });
   });
+
 
   // if (Device.isAndroid) {
   //   it('TAP on "Confirm My Choices" button REDIRECTS to Login screen', async () => {

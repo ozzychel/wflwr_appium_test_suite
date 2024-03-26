@@ -28,7 +28,7 @@ class LoginScreen {
   private get startYourJourneyButton () {
     return driver.isAndroid ?
       $('//android.widget.TextView[@text="START YOUR JOURNEY"]') :
-      $('//XCUIElementTypeButton[@name="Start your journey"]');
+      $('-ios predicate string:name == "Start your journey"');
   }
 
   private get continueButton () {
